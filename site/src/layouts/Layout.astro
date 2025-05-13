@@ -1,0 +1,113 @@
+---
+import '../styles/theme.css';
+import ThemeSwitcher from '../components/ThemeSwitcher';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const navItems = [
+  { name: 'home', path: '/' },
+  { name: 'notebook', path: '/notebook' },
+  { name: 'motion', path: '/motion' },
+  { name: 'matcha', path: '/matcha' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <!-- Prevent theme flash -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="max-w-2xl mx-auto px-6">
+      <header class="mb-16 mt-12">
+        <nav>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-1">
+              {navItems.map((item, index) => (
+                <>
+                  <a
+                    href={item.path}
+                    class="text-secondary hover:text-accent transition-all py-2 px-3 text-sm"
+                  >
+                    {item.name}
+                  </a>
+                  {index < navItems.length - 1 && (
+                    <span class="text-muted">/</span>
+                  )}
+                </>
+              ))}
+            </div>
+            <ThemeSwitcher client:only="react" />
+          </div>
+        </nav>
+      </header>
+      
+      <main>
+        <slot />
+      </main>
+
+      <footer class="mt-32 border-t border-muted">
+        <div class="py-12 flex justify-between items-center">
+          <div class="text-secondary text-sm">
+            © {new Date().getFullYear()} Jadden Picardal
+          </div>
+          <div class="flex gap-4">
+            <a href="https://github.com/jadenpicardal" class="text-secondary hover:text-accent transition-all">
+              github
+            </a>
+            <a href="https://linkedin.com/in/jadenpicardal" class="text-secondary hover:text-accent transition-all">
+              linkedin
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+  }
+
+  main {
+    flex: 1;
+    position: relative;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style> 

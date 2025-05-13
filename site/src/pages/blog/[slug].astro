@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AnimatedName from '../../components/AnimatedName';
+import { posts } from '../../data/posts';
+
+export async function getStaticPaths() {
+  // Generate a path for each published post
+  return posts
+    .filter(post => post.published)
+    .map(post => {
+      // Extract slug from the link (e.g., "/blog/recommendations" -> "recommendations")
+      const slug = post.link.split('/').pop();
+      return {
+        params: { slug },
+        props: { post }
+      };
+    });
+}
+
+const { post } = Astro.props;
+
+// No need for finding post or 404 redirect since getStaticPaths handles that
+---
+
+<Layout title={`${post.title} · Notebook`}>
+  <article class="mb-32">
+    <header class="mb-16">
+      <div class="text-sm text-accent mb-4">
+        {post.date}
+      </div>
+      <h1 class="mb-8">
+        <AnimatedName text={post.title} size="5xl" client:load />
+      </h1>
+      <p class="text-secondary text-lg">
+        {post.description}
+      </p>
+    </header>
+
+    <div class="prose prose-xl text-secondary max-w-none mb-16">
+      <slot />
+    </div>
+
+    <footer class="border-t border-muted pt-8">
+      <a 
+        href="/notebook" 
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2"
+      >
+        <span>←</span>
+        <span>Back to notebook</span>
+      </a>
+    </footer>
+  </article>
+</Layout> 

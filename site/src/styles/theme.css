@@ -1,0 +1,248 @@
+/* Font faces */
+@font-face {
+  font-family: 'Redaction-10';
+  src: url('/fonts/Redaction_10-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redaction-20';
+  src: url('/fonts/Redaction_20-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redaction-35';
+  src: url('/fonts/Redaction_35-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redaction-50';
+  src: url('/fonts/Redaction_50-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redaction-70';
+  src: url('/fonts/Redaction_70-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redaction-100';
+  src: url('/fonts/Redaction_100-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Base theme variables */
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Redaction', var(--font-sans);
+
+  /* Light theme (default) */
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --accent: #0000ff;
+  --accent-transparent: rgba(0, 0, 255, 0.1);
+  --secondary: #2D2D2D;
+  --muted: #E5E5E5;
+  --card-bg: rgba(245, 245, 245, 0.8);
+  --tag-bg: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --accent: #ff00ff;
+  --accent-transparent: rgba(255, 0, 255, 0.1);
+  --secondary: #CCCCCC;
+  --muted: #2D2D2D;
+  --card-bg: rgba(45, 45, 45, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Blue theme */
+[data-theme="blue"] {
+  --background: #113bb1;
+  --foreground: #ffffff;
+  --accent: #ffffff;
+  --accent-transparent: rgba(255, 255, 255, 0.1);
+  --secondary: #7dd3fc;
+  --muted: #1e293b;
+  --card-bg: rgba(30, 41, 59, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Green theme */
+[data-theme="green"] {
+  --background: #022c22;
+  --foreground: #f0fdf4;
+  --accent: #4ade80;
+  --accent-transparent: rgba(74, 222, 128, 0.1);
+  --secondary: #86efac;
+  --muted: #064e3b;
+  --card-bg: rgba(6, 78, 59, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Pink theme */
+[data-theme="pink"] {
+  --background: #2d1b22;
+  --foreground: #fdf2f8;
+  --accent: #ec4899;
+  --accent-transparent: rgba(236, 72, 153, 0.1);
+  --secondary: #f472b6;
+  --muted: #831843;
+  --card-bg: rgba(131, 24, 67, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Orange theme */
+[data-theme="orange"] {
+  --background: #2e1907;
+  --foreground: #fff7ed;
+  --accent: #fb923c;
+  --accent-transparent: rgba(251, 146, 60, 0.1);
+  --secondary: #fdba74;
+  --muted: #9a3412;
+  --card-bg: rgba(154, 52, 18, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Purple theme */
+[data-theme="purple"] {
+  --background: #1e1b4b;
+  --foreground: #f5f3ff;
+  --accent: #a855f7;
+  --accent-transparent: rgba(168, 85, 247, 0.1);
+  --secondary: #c084fc;
+  --muted: #4c1d95;
+  --card-bg: rgba(76, 29, 149, 0.8);
+  --tag-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Global styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography scale */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+}
+
+/* Animation utilities */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Typography */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-variation-settings: "BLDA" 10;
+  transition: font-variation-settings 0.3s ease;
+}
+
+.font-display:hover {
+  font-variation-settings: "BLDA" 50;
+}
+
+.prose {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Project cards */
+.project-card {
+  border: 1px solid var(--muted);
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+/* Project tags */
+.project-tag {
+  background-color: var(--tag-bg);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-xs);
+  color: var(--secondary);
+  transition: all 0.2s ease;
+}
+
+.project-tag:hover {
+  color: var(--accent);
+}
+
+/* Button styles */
+button, .button {
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+button:hover, .button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes noise {
+  0%, 100% { transform: translateX(0) translateY(0) translateZ(0); }
+  10% { transform: translate3d(-2px, 2px, 0); }
+  20% { transform: translate3d(2px, -2px, 0); }
+  30% { transform: translate3d(-2px, -2px, 0); }
+  40% { transform: translate3d(2px, 2px, 0); }
+  50% { transform: translate3d(-2px, 2px, 0); }
+  60% { transform: translate3d(2px, -2px, 0); }
+  70% { transform: translate3d(-2px, -2px, 0); }
+  80% { transform: translate3d(2px, 2px, 0); }
+  90% { transform: translate3d(-2px, 2px, 0); }
+} 

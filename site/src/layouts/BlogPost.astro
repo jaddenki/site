@@ -1,0 +1,116 @@
+---
+import Layout from './Layout.astro';
+import AnimatedName from '../components/AnimatedName';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} · Notebook`}>
+  <article class="mb-32">
+    <header class="mb-16">
+      <div class="text-sm text-accent mb-4 font-['Redaction-10']">
+        {frontmatter.date}
+      </div>
+      <h1 class="mb-8">
+        <AnimatedName text={frontmatter.title} size="4xl" client:load />
+      </h1>
+      <p class="text-secondary text-base font-['Redaction-10']">
+        {frontmatter.description}
+      </p>
+    </header>
+
+    <div class="prose text-secondary max-w-none mb-16">
+      <slot />
+    </div>
+
+    <footer class="border-t border-muted pt-8">
+      <a 
+        href="/notebook" 
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
+      >
+        <span>←</span>
+        <span>Back to notebook</span>
+      </a>
+    </footer>
+  </article>
+</Layout>
+
+<style is:global>
+  /* Style adjustments for markdown content */
+  .prose {
+    font-family: 'Redaction-10';
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  .prose h2 {
+    font-family: 'Redaction-50';
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+  }
+
+  .prose h3 {
+    font-family: 'Redaction-35';
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Redaction-10';
+  }
+
+  .prose a:hover {
+    text-decoration: underline;
+  }
+
+  .prose ul {
+    list-style-type: none;
+    padding-left: 1rem;
+  }
+
+  .prose li {
+    position: relative;
+    margin-bottom: 0.75rem;
+    font-family: 'Redaction-10';
+  }
+
+  .prose li::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0.75rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--muted);
+  }
+
+  .prose li:hover::before {
+    background-color: var(--accent);
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--muted);
+    margin: 2rem 0;
+  }
+
+  .prose em {
+    color: var(--secondary);
+    font-style: italic;
+    font-family: 'Redaction-10';
+  }
+
+  .prose strong {
+    color: var(--foreground);
+    font-weight: 500;
+    font-family: 'Redaction-10';
+  }
+</style> 

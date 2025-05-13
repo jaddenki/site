@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AnimatedName from '../components/AnimatedName';
+import { posts } from '../data/posts';
+
+// Sort posts by date, newest first
+const sortedPosts = [...posts].sort((a, b) => 
+  new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<Layout title="Notebook · Jadden Picardal">
+  <div class="mb-16">
+    <AnimatedName text="Notebook" size="7xl" client:load />
+    <p class="text-secondary mt-8 text-lg font-['Redaction-10']">
+      A collection of thoughts, experiments, and learnings.
+    </p>
+  </div>
+
+  <div class="space-y-16">
+    {sortedPosts.map(post => (
+      <article class="group">
+        <a href={post.link} class="block">
+          <header class="mb-4">
+            <h2 class="font-['Redaction-10'] text-2xl group-hover:text-accent transition-colors">
+              {post.title}
+            </h2>
+            <div class="text-sm text-secondary mt-2 font-['Redaction-10']">
+              {post.date}
+            </div>
+          </header>
+          <p class="text-secondary font-['Redaction-10']">
+            {post.description}
+          </p>
+        </a>
+      </article>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  article {
+    position: relative;
+  }
+  
+  article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    width: 2px;
+    height: 2rem;
+    background: var(--muted);
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 0.2s ease;
+  }
+  
+  article:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+    background: var(--accent);
+  }
+</style> 

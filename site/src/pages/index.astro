@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AnimatedText from '../components/AnimatedText';
+import AnimatedName from '../components/AnimatedName';
+import ResetButton from '../components/ResetButton';
+
+const projects = [
+  {
+    title: 'BURST',
+    description: 'A showcase of student-made creative technical projects by Purdue Hackers.',
+    tags: ['frontend', 'react', 'typescript'],
+    link: 'https://burst.purduehackers.com',
+    image: '/projects/burst.png'
+  },
+  {
+    title: 'ETea',
+    description: 'A video game about an alien bobarista.',
+    tags: ['unity', 'game-dev', 'c#'],
+    link: 'https://github.com/jadenpicardal/etea',
+    image: '/projects/etea.png'
+  },
+  {
+    title: 'Game Dev NPC AI Sim',
+    description: 'AI-driven NPC simulations in Unreal Engine for architectural design testing.',
+    tags: ['unreal', 'game-dev', 'ai'],
+    link: '#',
+    image: '/projects/npc-sim.png'
+  },
+  {
+    title: 'Venture n\' Vision',
+    description: 'Meta Quest 3 VR app where you pitch to robot investors.',
+    tags: ['unity', 'vr', 'ai'],
+    link: '#',
+    image: '/projects/vnv.png'
+  }
+];
+
+const experiences = [
+  {
+    role: 'Software Developer',
+    company: 'Envision Center',
+    period: '2024 - Present',
+    description: 'Working on immersive VR/AR experiences and visualization tools.'
+  },
+  {
+    role: 'Student Lab Manager',
+    company: 'Computing for Community Collaboratory',
+    period: '2024 - Present',
+    description: 'Managing student projects and lab operations.'
+  },
+  {
+    role: 'Game Dev Marketing Intern',
+    company: 'DreamWorld',
+    period: '2023 - 2024',
+    description: 'Created marketing materials and game development tools.'
+  }
+];
+
+const bioText = [
+  "i'm a second year studying computer engineering at purdue university with an interest in web dev, visual computing, and hardware. i enjoy working at the crossroads of engineering and artistic expression-- combined, they reshape how we learn, play, and connect.",
+  //"currently pushing purdue's culture of creative tinkering as the head of communications at purdue hackers & making software for the envision center.",
+  "feel free to contact me at jaddenpicardal [at] gmail [dot] com!"
+];
+---
+
+<Layout title="Jadden Picardal">
+  <section class="mb-32">
+    <div class="mb-16">
+      <AnimatedName text="Jadden Picardal" size="7xl" showAsterisk={true} client:load />
+    </div>
+    <div class="prose prose-xl text-secondary max-w-none text-lg">
+      {bioText.map((text) => (
+        <p class="mb-6">
+          <AnimatedText text={text} client:load />
+        </p>
+      ))}
+      <div class="text-right text-sm text-secondary/60 hover:text-accent transition-colors">
+        <ResetButton client:load />
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-32">
+    <h2 class="mb-12">
+      <AnimatedName text="Projects" size="3xl" client:load />
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {projects.map(project => (
+        <a
+          href={project.link}
+          class="project-card p-6 block transition-all hover:scale-[1.02]"
+        >
+          {project.image && (
+            <div class="aspect-video mb-6 bg-muted rounded-lg overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
+          <h3 class="font-display text-xl mb-3 text-foreground group-hover:text-accent transition-colors">
+            {project.title}
+          </h3>
+          <p class="text-secondary mb-6 text-sm">
+            {project.description}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map(tag => (
+              <span class="project-tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-32">
+    <h2 class="mb-8">
+      <AnimatedName text="Experience" size="3xl" client:load />
+    </h2>
+    <ul class="space-y-4">
+      {experiences.map(exp => (
+        <li class="group flex items-baseline gap-2">
+          <span class="w-1 h-1 rounded-full bg-muted group-hover:bg-accent shrink-0 mt-2"></span>
+          <div>
+            <div class="font-display text-lg group-hover:text-accent transition-colors">{exp.role}</div>
+            <div class="text-sm">
+              <span class="text-accent">{exp.company}</span>
+              <span class="text-muted mx-2">·</span>
+              <span class="text-secondary">{exp.period}</span>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mb-32">
+    <h2 class="mb-12">
+      <AnimatedName text="Writing" size="3xl" client:load />
+    </h2>
+    <div class="space-y-8">
+      {[
+        {
+          title: "Coming soon...",
+          description: "I'll be sharing my thoughts on tech, design, and creative coding here.",
+          date: "2024",
+          link: "#"
+        }
+      ].map(post => (
+        <a 
+          href={post.link}
+          class="block group"
+        >
+          <div class="flex items-start justify-between gap-8">
+            <div>
+              <h3 class="font-display text-xl mb-2 group-hover:text-accent transition-colors">
+                {post.title}
+              </h3>
+              <p class="text-secondary text-sm">{post.description}</p>
+            </div>
+            <div class="text-sm text-muted shrink-0">
+              {post.date}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
