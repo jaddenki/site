@@ -34,7 +34,6 @@ export default function ThemeSwitcher() {
       if (theme !== storedTheme) {
         setTheme(storedTheme);
         document.documentElement.setAttribute('data-theme', storedTheme);
-        updateFavicon(storedTheme);
       }
     } else {
       // Check system preference
@@ -42,7 +41,6 @@ export default function ThemeSwitcher() {
       const systemTheme = prefersDark ? 'dark' : 'light';
       setTheme(systemTheme);
       document.documentElement.setAttribute('data-theme', systemTheme);
-      updateFavicon(systemTheme);
     }
     
     // Listen for system preference changes
@@ -53,7 +51,6 @@ export default function ThemeSwitcher() {
         const newTheme = e.matches ? 'dark' : 'light';
         setTheme(newTheme);
         document.documentElement.setAttribute('data-theme', newTheme);
-        updateFavicon(newTheme);
       }
     };
     
@@ -61,21 +58,10 @@ export default function ThemeSwitcher() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const updateFavicon = (newTheme: string) => {
-    // Get the favicon SVG
-    const favicon = document.getElementById('favicon') as HTMLLinkElement;
-    if (favicon) {
-      // Force reload the favicon with a cache-busting parameter
-      const faviconUrl = `/favicon.svg?theme=${newTheme}&t=${new Date().getTime()}`;
-      favicon.href = faviconUrl;
-    }
-  };
-
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
-    updateFavicon(newTheme);
     setIsOpen(false);
   };
 

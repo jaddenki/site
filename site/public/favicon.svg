@@ -5,12 +5,5 @@
     @media (prefers-color-scheme: dark) {
       :root { color: #a5f839; }
     }
-    [data-theme="light"] { color: #0000ff; }
-    [data-theme="dark"] { color: #a5f839; }
-    [data-theme="blue"] { color: #FC6736; }
-    [data-theme="green"] { color: #f5539e; }
-    [data-theme="pink"] { color: #667BC6; }
-    [data-theme="orange"] { color: #0C2D57; }
-    [data-theme="purple"] { color: #8062D6; }
   </style>
 </svg>

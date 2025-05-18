@@ -1,6 +1,13 @@
 ---
-// redirect /projects to /notebook
-export const prerender = false;
+// redirect /projects to /notebook with client-side redirection
+---
 
-return Astro.redirect('/notebook');
---- 
+<meta http-equiv="refresh" content="0;url=/notebook">
+<script>
+  window.location.href = "/notebook";
+</script>
+<style>
+  body {
+    display: none;
+  }
+</style> 
