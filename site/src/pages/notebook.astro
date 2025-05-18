@@ -9,33 +9,37 @@ const sortedPosts = [...posts].sort((a, b) =>
 );
 ---
 
-<Layout title="Notebook · Jadden Picardal">
-  <div class="mb-16">
-    <AnimatedName text="Notebook" size="7xl" client:load />
-    <p class="text-secondary mt-8 text-lg font-['Redaction-10']">
-      A collection of thoughts, experiments, and learnings.
-    </p>
-  </div>
+<Layout title="notebook - jadden picardal">
+  <section class="mb-32">
+    <div class="mb-16">
+      <AnimatedName text="Notebook" size="7xl" client:load />
+      <p class="text-secondary mt-8 text-lg font-['Redaction-10']">
+        thoughts, experiments, and learnings.
+      </p>
+    </div>
 
-  <div class="space-y-16">
-    {sortedPosts.map(post => (
-      <article class="group">
-        <a href={post.link} class="block">
-          <header class="mb-4">
-            <h2 class="font-['Redaction-10'] text-2xl group-hover:text-accent transition-colors">
-              {post.title}
-            </h2>
-            <div class="text-sm text-secondary mt-2 font-['Redaction-10']">
-              {post.date}
-            </div>
-          </header>
-          <p class="text-secondary font-['Redaction-10']">
-            {post.description}
-          </p>
-        </a>
-      </article>
-    ))}
-  </div>
+    <div class="prose prose-xl text-secondary max-w-none">
+      <div class="space-y-16">
+        {sortedPosts.map(post => (
+          <article class="group">
+            <a href={post.link} class="block">
+              <header class="mb-4">
+                <h2 class="font-['Redaction-10'] text-2xl group-hover:text-accent transition-colors">
+                  {post.title}
+                </h2>
+                <div class="text-sm text-secondary mt-2 font-['Redaction-10']">
+                  {post.date}
+                </div>
+              </header>
+              <p class="text-secondary font-['Redaction-10']">
+                {post.description}
+              </p>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -61,4 +65,4 @@ const sortedPosts = [...posts].sort((a, b) =>
     transform: scaleY(1);
     background: var(--accent);
   }
-</style> 
+</style>

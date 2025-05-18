@@ -6,61 +6,61 @@ import ResetButton from '../components/ResetButton';
 
 const projects = [
   {
+    title: 'procedural leaf venation',
+    description: 'a visualization of leaf venation patterns using various cellular automata algorithms',
+    tags: ['p5js', 'generative-art', 'graphics'],
+    link: 'https://leaf-psi.vercel.app/',
+    image: 'projects/leaf.png'
+  },
+
+  {
     title: 'BURST',
-    description: 'A showcase of student-made creative technical projects by Purdue Hackers.',
-    tags: ['frontend', 'react', 'typescript'],
+    description: 'a showcase of student-made creative technical projects by purdue hackers.',
+    tags: ['event-building'],
     link: 'https://burst.purduehackers.com',
-    image: '/projects/burst.png'
+    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743790359/ScreenRecording_04-04-2025_14-09-09_1_pcvdpj.mov'
   },
   {
-    title: 'ETea',
-    description: 'A video game about an alien bobarista.',
+    title: 'etea',
+    description: 'a video game where you\'re an alien bobarista pretending to be human.',
     tags: ['unity', 'game-dev', 'c#'],
-    link: 'https://github.com/jadenpicardal/etea',
-    image: '/projects/etea.png'
+    link: 'https://store.steampowered.com/app/3085040/ETea/',
+    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743719918/ETea_-_Reveal_Teaser_1080_ihqygh.mp4'
   },
   {
-    title: 'Game Dev NPC AI Sim',
-    description: 'AI-driven NPC simulations in Unreal Engine for architectural design testing.',
+    title: 'game dev npc ai sim',
+    description: 'ai-driven npc simulations in unreal engine for architectural design testing.',
     tags: ['unreal', 'game-dev', 'ai'],
-    link: '#',
-    image: '/projects/npc-sim.png'
+    link: 'https://www.youtube.com/watch?v=6aNsE8aDWFE',
+    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743735503/2025-04-03_22-52-27_ojdghr_8c6d24.mp4'
   },
   {
-    title: 'Venture n\' Vision',
-    description: 'Meta Quest 3 VR app where you pitch to robot investors.',
-    tags: ['unity', 'vr', 'ai'],
+    title: 'venture n vision',
+    description: 'meta quest 3 vr app where you pitch to robot investors.',
+    tags: ['unity', 'vr', 'ai', 'blender'],
     link: '#',
-    image: '/projects/vnv.png'
+    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743789735/asdfasdfsdfffdsadf_qadqin.mp4'
+  },
+  {
+    title: 'computing for community collaboratory',
+    description: 'a website for the past and future of computing for community collaboratory',
+    tags: ['web-dev', 'react', 'astro', 'event-building'],
+    link: 'https://c3.purdue.edu',
+    image: 'https://res.cloudinary.com/dghjime6m/video/upload'
   }
 ];
 
-const experiences = [
-  {
-    role: 'Software Developer',
-    company: 'Envision Center',
-    period: '2024 - Present',
-    description: 'Working on immersive VR/AR experiences and visualization tools.'
-  },
-  {
-    role: 'Student Lab Manager',
-    company: 'Computing for Community Collaboratory',
-    period: '2024 - Present',
-    description: 'Managing student projects and lab operations.'
-  },
-  {
-    role: 'Game Dev Marketing Intern',
-    company: 'DreamWorld',
-    period: '2023 - 2024',
-    description: 'Created marketing materials and game development tools.'
-  }
-];
 
 const bioText = [
-  "i'm a second year studying computer engineering at purdue university with an interest in web dev, visual computing, and hardware. i enjoy working at the crossroads of engineering and artistic expression-- combined, they reshape how we learn, play, and connect.",
-  //"currently pushing purdue's culture of creative tinkering as the head of communications at purdue hackers & making software for the envision center.",
-  "feel free to contact me at jaddenpicardal [at] gmail [dot] com!"
+  "i'm a second year studying computer engineering at [purdue university](https://www.purdue.edu) with an interest in the intersection of code, design, and hardware — especially in spaces like computational media, human computer interaction, and embedded tech",
+  "i like building things that are interactive, expressive, or just a little weird",
+  "currently a software programmer for the [rosen center for advanced computing](https://www.rcac.purdue.edu/) under the [envision center](https://www.rcac.purdue.edu/envision)",
+  "feel free to contact me at [jaddenpicardal at gmail dot com](mailto:jaddenpicardal@gmail.com)"
 ];
+
+const isVideo = (url: string) => {
+  return url.match(/\.(mp4|webm|mov)$/i) !== null;
+};
 ---
 
 <Layout title="Jadden Picardal">
@@ -74,8 +74,8 @@ const bioText = [
           <AnimatedText text={text} client:load />
         </p>
       ))}
-      <div class="text-right text-sm text-secondary/60 hover:text-accent transition-colors">
         <ResetButton client:load />
+      <div class="text-right text-sm text-secondary/60 hover:text-accent transition-colors">
       </div>
     </div>
   </section>
@@ -89,16 +89,27 @@ const bioText = [
       {projects.map(project => (
         <a
           href={project.link}
-          class="project-card p-6 block transition-all hover:scale-[1.02]"
+          class="block transition-all hover:scale-[1.02]"
         >
           {project.image && (
             <div class="aspect-video mb-6 bg-muted rounded-lg overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
+              {isVideo(project.image) ? (
+                <video
+                  src={project.image}
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
             </div>
           )}
           <h3 class="font-display text-xl mb-3 text-foreground group-hover:text-accent transition-colors">
@@ -119,57 +130,4 @@ const bioText = [
     </div>
   </section>
 
-  <section class="mb-32">
-    <h2 class="mb-8">
-      <AnimatedName text="Experience" size="3xl" client:load />
-    </h2>
-    <ul class="space-y-4">
-      {experiences.map(exp => (
-        <li class="group flex items-baseline gap-2">
-          <span class="w-1 h-1 rounded-full bg-muted group-hover:bg-accent shrink-0 mt-2"></span>
-          <div>
-            <div class="font-display text-lg group-hover:text-accent transition-colors">{exp.role}</div>
-            <div class="text-sm">
-              <span class="text-accent">{exp.company}</span>
-              <span class="text-muted mx-2">·</span>
-              <span class="text-secondary">{exp.period}</span>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <section class="mb-32">
-    <h2 class="mb-12">
-      <AnimatedName text="Writing" size="3xl" client:load />
-    </h2>
-    <div class="space-y-8">
-      {[
-        {
-          title: "Coming soon...",
-          description: "I'll be sharing my thoughts on tech, design, and creative coding here.",
-          date: "2024",
-          link: "#"
-        }
-      ].map(post => (
-        <a 
-          href={post.link}
-          class="block group"
-        >
-          <div class="flex items-start justify-between gap-8">
-            <div>
-              <h3 class="font-display text-xl mb-2 group-hover:text-accent transition-colors">
-                {post.title}
-              </h3>
-              <p class="text-secondary text-sm">{post.description}</p>
-            </div>
-            <div class="text-sm text-muted shrink-0">
-              {post.date}
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
 </Layout>

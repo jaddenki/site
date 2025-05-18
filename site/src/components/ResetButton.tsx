@@ -5,7 +5,6 @@ export default function ResetButton() {
 
   const handleReset = () => {
     setIsResetting(true);
-    // Force a re-render of all text components
     window.location.reload();
   };
 
@@ -13,7 +12,7 @@ export default function ResetButton() {
     <button
       onClick={handleReset}
       disabled={isResetting}
-      className="hover:text-accent transition-colors disabled:opacity-50"
+      className="hover:text-accent transition-colors disabled:opacity-50 border-0"
       aria-label="Reset text"
     >
       {isResetting ? '(×_×)' : '(°o°)'}

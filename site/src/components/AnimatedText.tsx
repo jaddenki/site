@@ -1,19 +1,14 @@
 import { useState, createContext, useContext } from 'react';
-
+import { Fragment } from 'react';
 const REDACTION_WEIGHTS = [10, 20, 35, 50, 70, 100];
 
 // Map of original words to their alternates
 const WORD_ALTERNATES: { [key: string]: string[] } = {
   "studying": ["suffering through", "conquering", "surviving", "speedrunning"],
-  "computer engineering": ["machine magic", "minecraft redstone"],
+  "computer engineering": ["machine feelings", "minecraft redstone"],
   "engineering": ["magic", "shenanigans"],
-  "hardware": ["circuit whispering", "metal bending", "electricity taming", "wire spaghetti"],
-  "web dev": ["ctrl+c ctrl+v", "bug creating", "internet magic", "keyboard mashing"],
-  "visual computing": ["pretty pixels", "shiny things", "computer whispering"],
-  "artistic expression": ["chaos creation", "vibes", "galaxy brain"],
-  "learn": ["stumble through", "galaxy brain", "level up"],
-  "play": ["vibe", "transcend", "ascend"],
-  "connect": ["vibe together", "merge minds", "share braincells"]
+  "the intersection of code, design, and hardware" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
+
 };
 
 // Create a context for resetting all words
@@ -88,7 +83,7 @@ function WordGroup({ text, onReset }: WordGroupProps) {
   return (
     <span
       className={`inline-block transition-all duration-150 ${
-        isChanged ? 'text-accent bg-accent/10 px-1 rounded' : ''
+        isChanged ? 'text-accent bg-accent/10 rounded' : ''
       } ${isTransitioning ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'}`}
       style={{
         fontFamily: `Redaction-${REDACTION_WEIGHTS[weightIndex]}`,
@@ -107,64 +102,108 @@ interface AnimatedTextProps {
   onReset?: () => void;
 }
 
-export default function AnimatedText({ text, onReset = () => {} }: AnimatedTextProps) {
-  // Find all possible phrases from WORD_ALTERNATES in the text
-  const phrases = Object.keys(WORD_ALTERNATES).sort((a, b) => b.length - a.length);
-  let segments: { text: string; isPhrase: boolean }[] = [];
+// Add this function before the AnimatedText component
+function parseText(text: string) {
+  const segments: { 
+    text: string; 
+    isPhrase: boolean;
+    href?: string;
+  }[] = [];
+  
   let remainingText = text;
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match;
 
-  while (remainingText.length > 0) {
+  while ((match = linkRegex.exec(text)) !== null) {
+    // Add text before the link
+    if (match.index > lastIndex) {
+      const beforeText = text.slice(lastIndex, match.index);
+      processTextSegment(beforeText, segments);
+    }
+
+    // Add the link text as a segment with href
+    const linkText = match[1];
+    const href = match[2];
+    segments.push({
+      text: linkText,
+      isPhrase: false,
+      href: href
+    });
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  // Add remaining text after last link
+  if (lastIndex < text.length) {
+    const remainingText = text.slice(lastIndex);
+    processTextSegment(remainingText, segments);
+  }
+
+  return segments;
+}
+
+// Helper function to process non-link text
+function processTextSegment(text: string, segments: any[]) {
+  let remaining = text;
+  const phrases = Object.keys(WORD_ALTERNATES).sort((a, b) => b.length - a.length);
+
+  while (remaining.length > 0) {
     let found = false;
     for (const phrase of phrases) {
-      const lowerRemaining = remainingText.toLowerCase();
+      const lowerRemaining = remaining.toLowerCase();
       if (lowerRemaining.startsWith(phrase)) {
-        // Add the phrase
         segments.push({
-          text: remainingText.slice(0, phrase.length),
+          text: remaining.slice(0, phrase.length),
           isPhrase: true
         });
-        remainingText = remainingText.slice(phrase.length);
+        remaining = remaining.slice(phrase.length);
         found = true;
         break;
       }
     }
     if (!found) {
-      // Find the next space or end of string
-      const nextSpace = remainingText.indexOf(' ');
-      const wordEnd = nextSpace === -1 ? remainingText.length : nextSpace;
+      const nextSpace = remaining.indexOf(' ');
+      const wordEnd = nextSpace === -1 ? remaining.length : nextSpace;
       segments.push({
-        text: remainingText.slice(0, wordEnd),
+        text: remaining.slice(0, wordEnd),
         isPhrase: false
       });
-      remainingText = remainingText.slice(wordEnd);
+      remaining = remaining.slice(wordEnd);
     }
-    // Skip spaces
-    remainingText = remainingText.replace(/^\s+/, '');
+    remaining = remaining.replace(/^\s+/, '');
   }
+}
+
+export default function AnimatedText({ text, onReset = () => {} }: AnimatedTextProps) {
+  const segments = parseText(text);
 
   return (
     <ResetContext.Provider value={onReset}>
       <span className="font-display">
         {segments.map((segment, index) => (
-          <>
-            {segment.isPhrase ? (
-              <WordGroup key={index} text={segment.text} onReset={onReset} />
-            ) : (
-              <span 
-                key={index}
-                style={{
-                  fontFamily: 'Redaction-10'
-                }}
+          <Fragment key={index}>
+            {segment.href ? (
+              <a 
+                href={segment.href}
+                className="text-accent no-underline hover:underline"
+                target={segment.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                style={{ fontFamily: 'Redaction-10' }}  // Add this line
               >
+                {segment.text}
+              </a>
+            ) : segment.isPhrase ? (
+              <WordGroup text={segment.text} onReset={onReset} />
+            ) : (
+              <span style={{ fontFamily: 'Redaction-10' }}>
                 {segment.text}
               </span>
             )}
-            {index < segments.length - 1 && (
-              <span className="inline-block" style={{ width: '0.25em' }}>&nbsp;</span>
-            )}
-          </>
+            {index < segments.length - 1 && !segment.text.endsWith(' ') && !segments[index + 1].text.startsWith(' ') && ' '}
+          </Fragment>
         ))}
       </span>
     </ResetContext.Provider>
   );
-} 
+}
