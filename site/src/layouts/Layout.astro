@@ -20,28 +20,34 @@ const navItems = [
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" id="favicon" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <!-- Prevent theme flash -->
     <script is:inline>
       const theme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', theme);
+      
+      // Update favicon with current theme
+      const favicon = document.getElementById('favicon');
+      if (favicon) {
+        favicon.href = `/favicon.svg?theme=${theme}&t=${new Date().getTime()}`;
+      }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="max-w-2xl mx-auto px-6">
-      <header class="mb-16 mt-12">
-        <nav>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-1">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+      <header class="py-8 sm:py-12">
+        <nav class="w-full">
+          <div class="flex items-center justify-between w-full flex-wrap">
+            <div class="flex items-center space-x-1 sm:space-x-2 flex-wrap">
               {navItems.map((item, index) => (
                 <>
                   <a
                     href={item.path}
-                    class="text-secondary hover:text-accent transition-all py-2 px-3 text-sm"
+                    class="text-secondary hover:text-accent transition-all py-2 px-2 sm:px-3 text-sm"
                   >
                     {item.name}
                   </a>
@@ -56,23 +62,17 @@ const navItems = [
         </nav>
       </header>
       
-      <main>
+      <main class="mt-6 sm:mt-8">
         <slot />
       </main>
 
-      <footer class="mt-32 border-t border-muted">
-        <div class="py-12 flex justify-between items-center">
-          <div class="text-secondary text-sm">
-            © {new Date().getFullYear()} Jadden Picardal
-          </div>
-          <div class="flex gap-4">
-            <a href="https://github.com/jadenpicardal" class="text-secondary hover:text-accent transition-all">
-              github
-            </a>
-            <a href="https://linkedin.com/in/jadenpicardal" class="text-secondary hover:text-accent transition-all">
-              linkedin
-            </a>
-          </div>
+      <footer class="mt-24 sm:mt-32 border-t border-muted">
+        <div class="py-8 sm:py-12 flex justify-center items-center text-left">
+          <p class="text-secondary text-xs sm:text-sm font-['Redaction-10']">
+            typeface is <a href="https://astro.build" target="_blank" rel="noopener" class="text-accent hover:underline">redaction</a>. made with 
+            <span class="text-accent">♥</span> and 
+            <a href="https://astro.build" target="_blank" rel="noopener" class="text-accent hover:underline">astro</a>  by jadden picardal.
+          </p>
         </div>
       </footer>
     </div>
@@ -82,6 +82,7 @@ const navItems = [
 <style is:global>
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -90,11 +91,17 @@ const navItems = [
     flex-direction: column;
     font-family: 'Inter', sans-serif;
     background-color: var(--background);
+    overflow-x: hidden;
   }
 
   main {
     flex: 1;
     position: relative;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 
   @keyframes fade-in {
@@ -109,5 +116,33 @@ const navItems = [
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+  }
+  
+  ::selection {
+    background-color: var(--accent);
+    color: var(--background);
+  }
+
+  a, button {
+    padding: 0.25rem;
+    margin: -0.25rem;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2rem !important;
+    }
+    
+    h2 {
+      font-size: 1.5rem !important;
+    }
+    
+    h3 {
+      font-size: 1.25rem !important;
+    }
+    
+    .prose {
+      font-size: 1rem !important;
+    }
   }
 </style> 

@@ -48,12 +48,10 @@
 }
 
 :root {
-  /* Base theme variables */
   --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Redaction', var(--font-sans);
 
-  /* Light theme (default) */
   --background: #FFFFFF;
   --foreground: #000000;
   --accent: #0000ff;
@@ -64,85 +62,105 @@
   --tag-bg: rgba(0, 0, 0, 0.05);
 }
 
-/* Dark theme */
 [data-theme="dark"] {
-  --background: #000000;
+  --background: #000;
   --foreground: #FFFFFF;
-  --accent: #ff00ff;
+  --accent: #a5f839;
   --accent-transparent: rgba(255, 0, 255, 0.1);
   --secondary: #CCCCCC;
-  --muted: #2D2D2D;
+  --muted: rgb(57, 129, 123);
   --card-bg: rgba(45, 45, 45, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
-/* Blue theme */
 [data-theme="blue"] {
-  --background: #113bb1;
+  --background: #1437aa;
   --foreground: #ffffff;
-  --accent: #ffffff;
+  --accent: #FC6736;
   --accent-transparent: rgba(255, 255, 255, 0.1);
-  --secondary: #7dd3fc;
-  --muted: #1e293b;
+  --secondary: #F6F8D5;
+  --muted: #FC6736;
   --card-bg: rgba(30, 41, 59, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
-/* Green theme */
 [data-theme="green"] {
-  --background: #022c22;
-  --foreground: #f0fdf4;
-  --accent: #4ade80;
-  --accent-transparent: rgba(74, 222, 128, 0.1);
-  --secondary: #86efac;
-  --muted: #064e3b;
-  --card-bg: rgba(6, 78, 59, 0.8);
-  --tag-bg: rgba(255, 255, 255, 0.1);
+  --background: #F5ECD5;
+  --foreground: #626F47;
+  --accent: #f5539e;
+  --accent-transparent: rgba(240, 187, 120, 0.1);
+  --secondary: #626F47;
+  --muted: #f5539e;
+  --tag-bg: #e9911f;
 }
 
-/* Pink theme */
 [data-theme="pink"] {
-  --background: #2d1b22;
-  --foreground: #fdf2f8;
-  --accent: #ec4899;
+  --background: #FDFFD2;
+  --foreground: #DA7297;
+  --accent: #667BC6;
   --accent-transparent: rgba(236, 72, 153, 0.1);
-  --secondary: #f472b6;
-  --muted: #831843;
+  --secondary: #DA7297;
+  --muted: #FFB4C2;
   --card-bg: rgba(131, 24, 67, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
-/* Orange theme */
 [data-theme="orange"] {
-  --background: #2e1907;
-  --foreground: #fff7ed;
-  --accent: #fb923c;
+  --background: #EFECEC;
+  --foreground: #0C2D57;
+  --accent: #0C2D57;
   --accent-transparent: rgba(251, 146, 60, 0.1);
-  --secondary: #fdba74;
-  --muted: #9a3412;
+  --secondary: #FC6736;
+  --muted: #0C2D57;
   --card-bg: rgba(154, 52, 18, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
-/* Purple theme */
 [data-theme="purple"] {
-  --background: #1e1b4b;
-  --foreground: #f5f3ff;
-  --accent: #a855f7;
+  --background: #322653;
+  --foreground: #FFD2D7;
+  --accent: #8062D6;
   --accent-transparent: rgba(168, 85, 247, 0.1);
-  --secondary: #c084fc;
-  --muted: #4c1d95;
+  --secondary: #FFD2D7;
+  --muted: #8062D6;
   --card-bg: rgba(76, 29, 149, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
-/* Global styles */
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+  border: 2px solid var(--background);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--background);
 }
 
 /* Typography scale */

@@ -2,144 +2,93 @@
 import Layout from '../layouts/Layout.astro';
 import AnimatedName from '../components/AnimatedName';
 
-const reviews = [
-  {
-    title: 'Ippodo Tea - Ummon',
-    location: 'Kyoto, Japan',
-    description: 'A rich and complex matcha with deep umami notes and a smooth finish. Perfect for both usucha and koicha preparation.',
-    rating: '5/5',
-    price: '$$$$',
-    tags: ['ceremonial-grade', 'umami', 'smooth']
-  },
-  {
-    title: 'Marukyu Koyamaen - Tsuji-en',
-    location: 'Uji, Japan',
-    description: 'Bright and vibrant with a balanced sweetness. Excellent for daily drinking.',
-    rating: '4.5/5',
-    price: '$$$',
-    tags: ['daily-drinker', 'sweet', 'vibrant']
-  }
-];
 
-const guides = [
+const matchaImages = [
   {
-    title: 'Usucha (薄茶)',
-    description: 'Thin matcha preparation:\n- 2g matcha\n- 70ml water at 80°C\n- Whisk vigorously in W motion',
-    tags: ['thin', 'everyday', 'beginner-friendly']
+    src: "https://i.imgur.com/HvtTUyX.png",
+    alt: "banana",
+    caption: "banana milk matcha!!!!"
   },
   {
-    title: 'Koicha (濃茶)',
-    description: 'Thick matcha preparation:\n- 4g matcha\n- 40ml water at 80°C\n- Knead slowly with chasen',
-    tags: ['thick', 'ceremonial', 'advanced']
+    src: "https://i.imgur.com/VPprq7k.png",
+    alt: "matcha at home",
+    caption: " "
   },
-  {
-    title: 'Essential Tools',
-    description: 'Required equipment:\n- Chawan (tea bowl)\n- Chasen (bamboo whisk)\n- Chashaku (tea scoop)\n- Fine-mesh sifter',
-    tags: ['equipment', 'traditional', 'essential']
-  }
-];
 
-const gallery = [
   {
-    image: '/matcha/example1.jpg',
-    title: 'Morning Usucha',
-    description: 'Perfect start to the day with a bowl of frothy usucha.',
-    date: '2024-03-15'
+    src: "https://i.imgur.com/YYueY7P.jpeg",
+    alt: "cafe maiko",
+    caption: "kuromitsu matcha @ cafe maiko in san francisco, ca"
   },
   {
-    image: '/matcha/example2.jpg',
-    title: 'Afternoon Koicha',
-    description: 'Rich and thick koicha prepared in my favorite chawan.',
-    date: '2024-03-10'
+    src: "https://i.imgur.com/3Oghznw.jpeg",
+    alt: "urban ice cream",
+    caption: "matcha ice cream @ urban matcha in las vegas, nv"
   },
-  // Add more photos here
+  {
+    src: "https://i.imgur.com/69Q5Vg3.jpeg",
+    alt: "black sesame",
+    caption: "black sesame matcha!!!"
+  },
+  {
+    src: "https://i.imgur.com/jfEs9cs.png",
+    alt: "foamy",
+    caption: "how i learned that foam emphasizes the bitterness of matcha"
+  },
+  {
+    src: "https://i.imgur.com/VS6UT8f.png",
+    alt: "heavy cream",
+    caption: "w/ heavy cream made by my roommate, thanks emily"
+  },
+  {
+    src: "https://i.imgur.com/FJVrqYC.png",
+    alt: "strawberry to go",
+    caption: "thanks again emily"
+  },
+  {
+    src: "https://i.imgur.com/KGV5GEz.jpeg",
+    alt: "strawberry matcha",
+    caption: "strawberry matcha @ tamper room in fremont, ca"
+  }
 ];
 ---
 
 <Layout title="matcha - jadden picardal">
-  <section class="mb-32">
-    <div class="mb-16">
+  <section class="mb-20 sm:mb-32">
+    <div class="mb-10 sm:mb-16">
       <AnimatedName text="Matcha" size="7xl" client:load />
     </div>
-    <div class="prose prose-lg text-secondary max-w-none mb-16">
+    
+    <div class="prose prose-lg text-secondary max-w-none mb-10 sm:mb-16">
       <p class="font-['Redaction-10']">
-        My journey exploring different matcha varieties from around the world.
-        Each review includes tasting notes, preparation methods, and personal experiences.
+        a collection of some matcha moments. hahaha i love you very matcha.
+      </p>
+      <p class="font-['Redaction-10'] mt-4">
+        current arsenal: <a href="https://naokimatcha.com/products/superior-blend-matcha" class="text-accent" target="_blank" rel="noopener">naoki superior blend</a>
       </p>
     </div>
 
-    <section class="mb-32">
-      <h2 class="font-['Redaction-10'] text-3xl mb-8">My Matcha Gallery</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {gallery.map(photo => (
-          <div class="group relative overflow-hidden rounded-lg bg-muted aspect-square">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+      {matchaImages.map(img => (
+        <div class="flex flex-col">
+          <div class="aspect-square overflow-hidden rounded-md mb-2">
             <img 
-              src={photo.image} 
-              alt={photo.title}
-              class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+              src={img.src} 
+              alt={img.alt}
+              width="600"
+              height="600"
+              loading="lazy"
+              class="w-full h-full object-cover"
             />
-            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-end">
-              <div class="p-4 text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <h3 class="font-['Redaction-10'] text-lg mb-1">{photo.title}</h3>
-                <p class="text-sm opacity-90 font-['Redaction-10']">{photo.description}</p>
-                <p class="text-xs opacity-75 mt-2 font-['Redaction-10']">{photo.date}</p>
-              </div>
-            </div>
           </div>
-        ))}
-      </div>
-    </section>
-
-    <div class="grid grid-cols-1 gap-16">
-      {reviews.map(review => (
-        <div class="space-y-6">
-          <div class="border border-muted rounded-lg p-6">
-            <div>
-              <div class="flex justify-between items-start mb-2">
-                <h2 class="font-['Redaction-10'] text-2xl">
-                  {review.title}
-                </h2>
-                <span class="text-accent font-['Redaction-10']">
-                  {review.price}
-                </span>
-              </div>
-              <p class="text-secondary text-sm mb-2 font-['Redaction-10']">{review.location}</p>
-              <p class="text-accent font-['Redaction-10'] mb-4">{review.rating}</p>
-              <p class="text-secondary mb-4 font-['Redaction-10']">
-                {review.description}
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {review.tags.map(tag => (
-                  <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['Redaction-10']">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <p class="text-secondary font-['Redaction-10'] text-sm sm:text-base">
+            {img.caption}
+          </p>
         </div>
       ))}
     </div>
+    
 
-    <section class="mt-32">
-      <h2 class="font-['Redaction-10'] text-3xl mb-8">
-        Preparation Guide
-      </h2>
-      <div class="grid grid-cols-1 gap-8">
-        {guides.map(guide => (
-          <div class="border border-muted rounded-lg p-6">
-            <h3 class="font-['Redaction-10'] text-xl mb-4">{guide.title}</h3>
-            <p class="text-secondary whitespace-pre-line mb-4 font-['Redaction-10']">{guide.description}</p>
-            <div class="flex flex-wrap gap-2">
-              {guide.tags.map(tag => (
-                <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['Redaction-10']">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
   </section>
-</Layout> 
+</Layout>
+

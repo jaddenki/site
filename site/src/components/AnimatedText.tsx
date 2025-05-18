@@ -7,7 +7,7 @@ const WORD_ALTERNATES: { [key: string]: string[] } = {
   "studying": ["suffering through", "conquering", "surviving", "speedrunning"],
   "computer engineering": ["machine feelings", "minecraft redstone"],
   "engineering": ["magic", "shenanigans"],
-  "the intersection of code, design, and hardware" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
+  "creative tech, motion, and the spaces in between" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
 
 };
 

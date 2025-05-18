@@ -8,17 +8,31 @@ export interface Post {
 
 export const posts: Post[] = [
   {
-    title: "Recommendations",
-    description: "A curated list of things I love — from software tools to music to snacks.",
-    date: "2024-03",
-    link: "/blog/recommendations",
+    title: "art and love are unglamorous",
+    description: "my review of the movie look back, adapted from my personal letterboxd",
+    date: "2024-10",
+    link: "/blog/look-back",
     published: true
   },
   {
-    title: "Coming soon...",
-    description: "I'll be sharing my thoughts on tech, design, and creative coding here.",
-    date: "2024",
-    link: "#",
+    title: "recommendations",
+    description: "things i love",
+    date: "2024-03",
+    link: "/blog/recommendations",
     published: false
+  },
+  {
+    title: "why i rationalize play",
+    description: "i'm thinking through what it means to build things that serve no purpose except joy",
+    date: "2023-11",
+    link: "/blog/why-i-rationalize-play",
+    published: true
+  },
+  {
+    title: "the barefoot child",
+    description: "thoughts on growing up between two worlds",
+    date: "2022-08",
+    link: "/blog/the-barefoot-child",
+    published: true
   }
 ]; 

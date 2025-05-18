@@ -3,67 +3,28 @@ import Layout from '../layouts/Layout.astro';
 import AnimatedText from '../components/AnimatedText';
 import AnimatedName from '../components/AnimatedName';
 import ResetButton from '../components/ResetButton';
-
-const projects = [
-  {
-    title: 'procedural leaf venation',
-    description: 'a visualization of leaf venation patterns using various cellular automata algorithms',
-    tags: ['p5js', 'generative-art', 'graphics'],
-    link: 'https://leaf-psi.vercel.app/',
-    image: 'projects/leaf.png'
-  },
-
-  {
-    title: 'BURST',
-    description: 'a showcase of student-made creative technical projects by purdue hackers.',
-    tags: ['event-building'],
-    link: 'https://burst.purduehackers.com',
-    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743790359/ScreenRecording_04-04-2025_14-09-09_1_pcvdpj.mov'
-  },
-  {
-    title: 'etea',
-    description: 'a video game where you\'re an alien bobarista pretending to be human.',
-    tags: ['unity', 'game-dev', 'c#'],
-    link: 'https://store.steampowered.com/app/3085040/ETea/',
-    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743719918/ETea_-_Reveal_Teaser_1080_ihqygh.mp4'
-  },
-  {
-    title: 'game dev npc ai sim',
-    description: 'ai-driven npc simulations in unreal engine for architectural design testing.',
-    tags: ['unreal', 'game-dev', 'ai'],
-    link: 'https://www.youtube.com/watch?v=6aNsE8aDWFE',
-    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743735503/2025-04-03_22-52-27_ojdghr_8c6d24.mp4'
-  },
-  {
-    title: 'venture n vision',
-    description: 'meta quest 3 vr app where you pitch to robot investors.',
-    tags: ['unity', 'vr', 'ai', 'blender'],
-    link: '#',
-    image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1743789735/asdfasdfsdfffdsadf_qadqin.mp4'
-  },
-  {
-    title: 'computing for community collaboratory',
-    description: 'a website for the past and future of computing for community collaboratory',
-    tags: ['web-dev', 'react', 'astro', 'event-building'],
-    link: 'https://c3.purdue.edu',
-    image: 'https://res.cloudinary.com/dghjime6m/video/upload'
-  }
-];
-
+import { projects } from '../data/projects';
 
 const bioText = [
-  "i'm a second year studying computer engineering at [purdue university](https://www.purdue.edu) with an interest in the intersection of code, design, and hardware — especially in spaces like computational media, human computer interaction, and embedded tech",
-  "i like building things that are interactive, expressive, or just a little weird",
-  "currently a software programmer for the [rosen center for advanced computing](https://www.rcac.purdue.edu/) under the [envision center](https://www.rcac.purdue.edu/envision)",
-  "feel free to contact me at [jaddenpicardal at gmail dot com](mailto:jaddenpicardal@gmail.com)"
+
+"hi, i'm jadden. i'm studying computer engineering at [purdue university](https://www.purdue.edu), and i'm interested in creative tech, motion, and the spaces in between",
+
+"i manage media for a [rocketry team](https://join.fivedyna.space/) and a [club that celebrates creative tinkering](https://www.purduehackers.com) & help run a [research generator](https://honors.purdue.edu/research/generators/c3.php) that explores computing for social good",
+
+"currently, i'm software programmer for the [rosen center for advanced computing](https://www.rcac.purdue.edu/) through the [envision center](https://www.rcac.purdue.edu/envision)"
+
 ];
+
+const sortedProjects = [...projects]
+  .filter(project => project.published)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const isVideo = (url: string) => {
   return url.match(/\.(mp4|webm|mov)$/i) !== null;
 };
 ---
 
-<Layout title="Jadden Picardal">
+<Layout title="jadden picardal">
   <section class="mb-32">
     <div class="mb-16">
       <AnimatedName text="Jadden Picardal" size="7xl" showAsterisk={true} client:load />
@@ -74,9 +35,7 @@ const isVideo = (url: string) => {
           <AnimatedText text={text} client:load />
         </p>
       ))}
-        <ResetButton client:load />
-      <div class="text-right text-sm text-secondary/60 hover:text-accent transition-colors">
-      </div>
+      <ResetButton client:load />
     </div>
   </section>
 
@@ -86,48 +45,75 @@ const isVideo = (url: string) => {
     </h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {projects.map(project => (
-        <a
-          href={project.link}
-          class="block transition-all hover:scale-[1.02]"
-        >
-          {project.image && (
-            <div class="aspect-video mb-6 bg-muted rounded-lg overflow-hidden">
-              {isVideo(project.image) ? (
-                <video
-                  src={project.image}
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  class="w-full h-full object-cover"
-                />
-              ) : (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              )}
+      {sortedProjects.map(project => (
+        <article class="group">
+          <a href={project.link} class="block">
+            {project.image && (
+              <div class="aspect-video mb-4 bg-muted rounded-lg overflow-hidden">
+                {isVideo(project.image) ? (
+                  <video
+                    src={project.image}
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                )}
+              </div>
+            )}
+            <header class="mb-3">
+              <h2 class="font-['Redaction-10'] text-xl group-hover:text-accent transition-colors">
+                {project.title}
+              </h2>
+              <div class="text-sm text-secondary mt-1 font-['Redaction-10']">
+                {project.date}
+              </div>
+            </header>
+            <p class="text-secondary font-['Redaction-10'] mb-3 text-sm">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {project.tags.map(tag => (
+                <span class="px-2 py-0.5 text-xs rounded-full bg-muted text-secondary font-['Redaction-10']">
+                  {tag}
+                </span>
+              ))}
             </div>
-          )}
-          <h3 class="font-display text-xl mb-3 text-foreground group-hover:text-accent transition-colors">
-            {project.title}
-          </h3>
-          <p class="text-secondary mb-6 text-sm">
-            {project.description}
-          </p>
-          <div class="flex flex-wrap gap-2">
-            {project.tags.map(tag => (
-              <span class="project-tag">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </a>
+          </a>
+        </article>
       ))}
     </div>
   </section>
-
 </Layout>
+
+<style>
+  article {
+    position: relative;
+  }
+  
+  article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    width: 2px;
+    height: 2rem;
+    background: var(--muted);
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 0.2s ease;
+  }
+  
+  article:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+    background: var(--accent);
+  }
+</style>

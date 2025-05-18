@@ -3,12 +3,18 @@ import Layout from './Layout.astro';
 import AnimatedName from '../components/AnimatedName';
 
 const { frontmatter } = Astro.props;
-// Format the date nicely
-const formattedDate = frontmatter.date ? frontmatter.date : '';
+const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString().split('T')[0] : '';
 ---
 
 <Layout title={`${frontmatter.title}`}>
-  <div class="mb-6 sm:mb-8">
+  <div class="mb-6 sm:mb-8 flex flex-wrap gap-4 sm:gap-6">
+    <a 
+      href="/" 
+      class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
+    >
+      <span>&lt;</span>
+      <span>back to home</span>
+    </a>
     <a 
       href="/notebook" 
       class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
@@ -29,9 +35,40 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
       <p class="text-secondary text-base sm:text-lg font-['Redaction-10']">
         {frontmatter.description}
       </p>
+      {frontmatter.tags && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {frontmatter.tags.map((tag: string) => (
+            <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['Redaction-10']">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </header>
 
-    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16">
+    {frontmatter.image && (
+      <div class="mb-10 sm:mb-16 aspect-video bg-muted rounded-lg overflow-hidden">
+        {frontmatter.image.match(/\.(mp4|webm|mov)$/i) ? (
+          <video
+            src={frontmatter.image}
+            autoplay
+            loop
+            muted
+            playsinline
+            class="w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src={frontmatter.image}
+            alt={frontmatter.title}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        )}
+      </div>
+    )}
+
+    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16 font-['Redaction-10']">
       <slot />
     </div>
 
@@ -48,7 +85,6 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 </Layout>
 
 <style is:global>
-  /* Style adjustments for markdown content */
   .prose {
     font-family: 'Redaction-10';
     font-size: 1.125rem;
@@ -93,39 +129,12 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     font-family: 'Redaction-10';
   }
 
-  .prose li::before {
-    content: '';
-    position: absolute;
-    left: -1rem;
-    top: 0.75rem;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
+  .prose pre {
     background-color: var(--muted);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
   }
-
-  .prose li:hover::before {
-    background-color: var(--accent);
-  }
-
-  .prose hr {
-    border: none;
-    border-top: 1px solid var(--muted);
-    margin: 2rem 0;
-  }
-
-  .prose em {
-    color: var(--secondary);
-    font-style: italic;
-    font-family: 'Redaction-10';
-  }
-
-  .prose strong {
-    color: var(--foreground);
-    font-weight: 500;
-    font-family: 'Redaction-10';
-  }
-
   .prose img {
     display: block;
     margin: 2.5rem auto;
@@ -139,18 +148,10 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose img:hover {
     transform: scale(1.01);
   }
-
-  .prose figure {
-    margin: 2.5rem auto;
-    text-align: center;
-  }
-
-  .prose figcaption {
-    margin-top: 0.75rem;
-    color: var(--secondary);
-    font-size: 0.875rem;
-    font-family: 'Redaction-10';
-    font-style: italic;
+  .prose code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    color: var(--accent);
   }
   
   /* Add highlighting with accent color */
@@ -158,36 +159,17 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     background-color: var(--accent);
     color: var(--background);
   }
-  
-  /* Mobile optimization */
+
+  /* Mobile optimization for code blocks */
   @media (max-width: 640px) {
-    .prose {
-      font-size: 1rem;
-    }
-    
-    .prose img {
-      margin: 1.5rem auto;
-    }
-    
-    .prose h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .prose h3 {
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-    }
-    
-    .prose li::before {
-      top: 0.6rem;
-    }
-    
     .prose pre {
       padding: 0.75rem;
       font-size: 0.875rem;
-      overflow-x: auto;
+    }
+    
+    .prose code {
+      font-size: 0.875em;
+      word-break: break-word;
     }
   }
 </style> 
