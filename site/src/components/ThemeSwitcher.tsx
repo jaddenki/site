@@ -5,7 +5,7 @@ const themes = [
   { name: 'dark', icon: '(¬_¬)' },
   { name: 'blue', icon: '(0_0)' },
   { name: 'green', icon: '(>_<)' },
-  { name: 'pink', icon: '(♥//♥)' },
+  { name: 'pink', icon: '(o//o)' },
   { name: 'orange', icon: '(3_3)' },
   { name: 'purple', icon: '(T_T)' }
 ];
