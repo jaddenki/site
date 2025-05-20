@@ -11,7 +11,7 @@ interface Project {
 export const projects: Project[] = [
   {
     title: 'procedural leaf venation',
-    description: 'a visualization of leaf venation patterns using various cellular automata algorithms',
+    description: 'a visualization of leaf venation patterns using various cellular automata algorithms.',
     date: '2025-05-05',
     tags: ['p5js', 'generative-art', 'graphics'],
     link: '/projects/leaf-venation',
