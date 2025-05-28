@@ -4,9 +4,8 @@ const REDACTION_WEIGHTS = [10, 20, 35, 50, 70, 100];
 
 // Map of original words to their alternates
 const WORD_ALTERNATES: { [key: string]: string[] } = {
-  "studying": ["suffering through", "conquering", "surviving", "speedrunning"],
-  "computer engineering": ["machine feelings", "minecraft redstone"],
-  "engineering": ["magic", "shenanigans"],
+  "studying": ["suffering through", "conquering", "surviving", "speedrunning", "frolicking through"],
+  "computer engineering": ["minecraft redstone", "cornfields"],
   "creative tech, motion, and the spaces in between" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
 
 };
