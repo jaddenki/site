@@ -38,8 +38,8 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'game dev npc ai sim',
-    description: 'ai-driven npc simulations in unreal engine for architectural design testing.',
+    title: 'crowd-aware multi-agent ai',
+    description: 'simulating NPC behavior with RVO and behavior trees to model realistic crowd interactions in virtual environments.',
     date: '2024-02-15',
     tags: ['unreal', 'game-dev', 'ai'],
     link: 'https://www.youtube.com/watch?v=6aNsE8aDWFE',
