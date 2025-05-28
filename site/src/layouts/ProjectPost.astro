@@ -90,6 +90,41 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     font-size: 1.125rem;
     line-height: 1.75;
   }
+  .prose strong {
+    color: var(--accent);
+
+  }
+
+    .prose ul {
+    list-style-type: none;
+    padding-left: 1rem;
+  }
+
+  .prose ol {
+    padding-left: 1.5rem;
+  }
+
+  .prose ul li {
+    position: relative;
+    margin-bottom: 0.75rem;
+    font-family: 'Redaction-10';
+  }
+
+  .prose ul li::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0.75rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+  }
+
+  .prose ol li {
+    margin-bottom: 0.75rem;
+    font-family: 'Redaction-10';
+  }
 
   .prose h2 {
     font-family: 'Redaction-50';

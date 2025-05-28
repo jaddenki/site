@@ -13,12 +13,8 @@ const themes = [
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      // Get stored theme or check system preference
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme) return storedTheme;
-      
-      // Check system preference
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      // yeah ignore system preference 0_0
+      return localStorage.getItem('theme') || 'light';
     }
     return 'light';
   });
@@ -27,35 +23,17 @@ export default function ThemeSwitcher() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Get stored theme or check system preference
     const storedTheme = localStorage.getItem('theme');
     
     if (storedTheme) {
-      if (theme !== storedTheme) {
-        setTheme(storedTheme);
-        document.documentElement.setAttribute('data-theme', storedTheme);
-      }
+      setTheme(storedTheme);
+      document.documentElement.setAttribute('data-theme', storedTheme);
     } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme = prefersDark ? 'dark' : 'light';
-      setTheme(systemTheme);
-      document.documentElement.setAttribute('data-theme', systemTheme);
+      // Set default theme to light instead of checking system preference
+      setTheme('light');
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
     }
-    
-    // Listen for system preference changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only apply if user hasn't set a preference
-      if (!localStorage.getItem('theme')) {
-        const newTheme = e.matches ? 'dark' : 'light';
-        setTheme(newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-      }
-    };
-    
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   const handleThemeChange = (newTheme: string) => {
@@ -93,4 +71,4 @@ export default function ThemeSwitcher() {
       )}
     </div>
   );
-} 
+}
