@@ -1,6 +1,5 @@
 ---
 import Layout from './Layout.astro';
-import AnimatedName from '../components/AnimatedName';
 
 const { frontmatter } = Astro.props;
 const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString().split('T')[0] : '';
@@ -127,7 +126,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   }
 
   .prose h2 {
-    font-family: 'Redaction-50';
+    font-family: 'Redaction-10';
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -193,6 +192,45 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   ::selection {
     background-color: var(--accent);
     color: var(--background);
+  }
+
+  /* Footnote styling */
+  .prose .footnote-ref {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.875em;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.125rem;
+    transition: all 0.2s ease;
+  }
+
+  .prose .footnote-ref:hover {
+    text-decoration: underline;
+  }
+
+  .prose .footnote-back {
+    color: var(--accent);
+    text-decoration: none;
+    margin-left: 0.25rem;
+    font-size: 0.875em;
+  }
+
+  .prose .footnote-back:hover {
+    text-decoration: underline;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Highlight target footnote when scrolled to */
+  .prose .footnote-item:target {
+    background-color: var(--accent-transparent, rgba(0, 0, 255, 0.1));
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
   }
 
   /* Mobile optimization for code blocks */
