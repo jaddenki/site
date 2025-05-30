@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     title: 'c3 game jam',
     description: 'a game jam focused on translating academic research into playable experiences.',
-    date: '2025-04-15',
+    date: '2025-03-15',
     tags: ['people', 'game-dev'],
     link: '/projects/game-jam',
     image: 'https://i.imgur.com/EgjmE20.jpeg',
@@ -67,7 +67,7 @@ export const projects: Project[] = [
   {
     title: 'computing for community collaboratory',
     description: 'a website for the past and future of computing for community collaboratory.',
-    date: '2025-04-15',
+    date: '2025-03-15',
     tags: ['web-dev', 'react', 'astro', 'people'],
     link: 'https://honors.purdue.edu/research/generators/c3.php',
     image: 'https://res.cloudinary.com/dghjime6m/video/upload/v1747588913/2025-05-17_22-30-57_d5rwif.mp4',
