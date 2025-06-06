@@ -4,6 +4,7 @@ import AnimatedText from '../components/AnimatedText';
 import AnimatedName from '../components/AnimatedName';
 import ResetButton from '../components/ResetButton';
 import { projects } from '../data/projects';
+import Tooltip from '../components/Tooltip';
 
 const bioText = [
 
@@ -48,7 +49,7 @@ const isVideo = (url: string) => {
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {sortedProjects.map(project => (
-        <article class="group">
+        <article class="group" data-title={project.title}>
           <a href={project.link} class="block">
             {project.image && (
               <div class="aspect-video mb-4 bg-muted rounded-lg overflow-hidden">
@@ -70,20 +71,12 @@ const isVideo = (url: string) => {
                 )}
               </div>
             )}
-            <header class="mb-3">
-              <h2 class="font-['Redaction-10'] text-xl group-hover:text-accent transition-colors">
-                {project.title}
-              </h2>
-              <div class="text-sm text-secondary mt-1 font-['Redaction-10']">
-                {project.date}
-              </div>
-            </header>
-            <p class="text-secondary font-['Redaction-10'] mb-3 text-sm">
+            <p class="text-secondary font-['PolySans-Neutral'] mb-3 text-sm">
               {project.description}
             </p>
             <div class="flex flex-wrap gap-1.5">
               {project.tags.map(tag => (
-                <span class="px-2 py-0.5 text-xs rounded-full bg-muted text-secondary font-['Redaction-10']">
+                <span class="px-2 py-0.5 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] tag">
                   {tag}
                 </span>
               ))}
@@ -92,12 +85,18 @@ const isVideo = (url: string) => {
         </article>
       ))}
     </div>
+    <Tooltip client:only="react" />
   </section>
 </Layout>
 
 <style>
   article {
     position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  article:hover {
+    transform: scale(1.02);
   }
   
   article::before {
@@ -117,5 +116,34 @@ const isVideo = (url: string) => {
     opacity: 1;
     transform: scaleY(1);
     background: var(--accent);
+  }
+
+  .tooltip {
+    background-color: var(--background);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    font-family: 'PolySans-Neutral';
+    font-size: 0.875rem;
+    transform: translate(-50%, -100%);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    opacity: 0;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .tooltip.visible {
+    opacity: 1;
+  }
+
+  /* Add hover effect for tags */
+  .tag {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  article:hover .tag {
+    background-color: var(--accent);
+    color: var(--background);
   }
 </style>

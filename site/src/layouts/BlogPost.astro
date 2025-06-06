@@ -11,7 +11,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   <div class="mb-6 sm:mb-8">
     <a 
       href="/notebook" 
-      class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
+      class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
     >
       <span>&lt;</span>
       <span>back to notebook</span>
@@ -20,13 +20,13 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 
   <article class="mb-20 sm:mb-32">
     <header class="mb-10 sm:mb-16">
-      <div class="text-sm text-accent mb-3 sm:mb-4 font-['Redaction-10']">
+      <div class="text-sm text-accent mb-3 sm:mb-4 font-['PolySans-Neutral']">
         {formattedDate}
       </div>
-      <h1 class="mb-6 sm:mb-8 font-['Redaction-10'] text-4xl sm:text-6xl">
+      <h1 class="mb-6 sm:mb-8 font-['PolySans-Neutral'] text-4xl sm:text-6xl">
         {frontmatter.title}
       </h1>
-      <p class="text-secondary text-base sm:text-lg font-['Redaction-10']">
+      <p class="text-secondary text-base sm:text-lg font-['PolySans-Neutral']">
         {frontmatter.description}
       </p>
     </header>
@@ -38,7 +38,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     <footer class="border-t border-muted pt-6 sm:pt-8">
       <a 
         href="#top" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
       >
         <span>^</span>
         <span>back to top</span>
@@ -122,13 +122,13 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose em {
     color: var(--secondary);
     font-style: italic;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose strong {
     color: var(--foreground);
     font-weight: 500;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose img {
@@ -154,7 +154,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     margin-top: 0.75rem;
     color: var(--secondary);
     font-size: 0.875rem;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
     font-style: italic;
   }
   

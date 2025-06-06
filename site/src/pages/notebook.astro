@@ -25,10 +25,10 @@ const formatDate = (date: string): string => {
       <AnimatedName text="Notebook" size="7xl" client:load />
     </div>
     <div class="prose prose-lg text-secondary max-w-none mb-10 sm:mb-16">
-      <p class="font-['Redaction-10']">
+      <p class="font-['PolySans-Neutral']">
         some of my thoughts and learnings. welcome to my brain
       </p>
-      <p class="font-['Redaction-10']">
+      <p class="font-['PolySans-Neutral']">
         also, here's a bit of <a href="/blog/recommendations" class="text-accent">what inspires me</a> ;).
       </p>
 
@@ -37,26 +37,26 @@ const formatDate = (date: string): string => {
     <div class="flex flex-wrap gap-3 mb-8">
       <button 
         id="show-all" 
-        class="px-4 py-2 rounded-full border-1 border-accent text-accent font-['Redaction-10'] text-sm transition-colors"
+        class="px-4 py-2 rounded-full border-1 border-accent text-accent font-['PolySans-Neutral'] text-sm transition-colors"
       >
         all
       </button>
       <button 
         id="show-blog" 
-        class="px-4 py-2 rounded-full border-1 border-muted text-secondary font-['Redaction-10'] text-sm hover:border-accent hover:text-accent transition-colors"
+        class="px-4 py-2 rounded-full border-1 border-muted text-secondary font-['PolySans-Neutral'] text-sm hover:border-accent hover:text-accent transition-colors"
       >
         blog only
       </button>
       <button 
         id="show-projects" 
-        class="px-4 py-2 rounded-full border-1 border-muted text-secondary font-['Redaction-10'] text-sm hover:border-accent hover:text-accent transition-colors"
+        class="px-4 py-2 rounded-full border-1 border-muted text-secondary font-['PolySans-Neutral'] text-sm hover:border-accent hover:text-accent transition-colors"
       >
         projects only
       </button>
     </div>
 
     <div id="blog-posts-section">
-      <h2 class="font-['Redaction-10'] text-2xl sm:text-3xl mb-6 sm:mb-8">
+      <h2 class="font-['PolySans-Neutral'] text-2xl sm:text-3xl mb-6 sm:mb-8">
         <AnimatedName text="Blog Posts" size="3xl" client:load />
       </h2>
       <div class="grid grid-cols-1 gap-6 sm:gap-8 mb-12 sm:mb-16">
@@ -64,14 +64,14 @@ const formatDate = (date: string): string => {
           <a href={post.link} class="block group">
             <div class="border border-muted rounded-lg p-4 sm:p-6 transition-all hover:border-accent">
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 sm:mb-3">
-                <h3 class="font-['Redaction-10'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
+                <h3 class="font-['PolySans-Neutral'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
                   {post.title}
                 </h3>
-                <span class="text-accent font-['Redaction-10'] text-sm whitespace-nowrap sm:ml-4">
+                <span class="text-accent font-['PolySans-Neutral'] text-sm whitespace-nowrap sm:ml-4">
                   {formatDate(post.date)}
                 </span>
               </div>
-              <p class="text-secondary font-['Redaction-10'] leading-relaxed">
+              <p class="text-secondary font-['PolySans-Neutral'] leading-relaxed">
                 {post.description}
               </p>
             </div>
@@ -81,7 +81,7 @@ const formatDate = (date: string): string => {
     </div>
     
     <div id="project-notes-section">
-      <h2 class="font-['Redaction-10'] text-2xl sm:text-3xl mb-6 sm:mb-8">
+      <h2 class="font-['PolySans-Neutral'] text-2xl sm:text-3xl mb-6 sm:mb-8">
         <AnimatedName text="Project Notes" size="3xl" client:load />
       </h2>
       <div class="grid grid-cols-1 gap-6 sm:gap-8">
@@ -89,20 +89,20 @@ const formatDate = (date: string): string => {
           <a href={project.link} class="block group">
             <div class="border border-muted rounded-lg p-4 sm:p-6 transition-all hover:border-accent">
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 sm:mb-3">
-                <h3 class="font-['Redaction-10'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
+                <h3 class="font-['PolySans-Neutral'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
                   {project.title}
                 </h3>
-                <span class="text-accent font-['Redaction-10'] text-sm whitespace-nowrap sm:ml-4">
+                <span class="text-accent font-['PolySans-Neutral'] text-sm whitespace-nowrap sm:ml-4">
                   {formatDate(project.date)}
                 </span>
               </div>
-              <p class="text-secondary font-['Redaction-10'] leading-relaxed">
+              <p class="text-secondary font-['PolySans-Neutral'] leading-relaxed">
                 {project.description}
               </p>
               {project.tags && (
                 <div class="flex flex-wrap gap-2 mt-3 sm:mt-4">
                   {project.tags.map((tag) => (
-                    <span class="px-2 py-1 text-xs sm:text-sm rounded-full bg-muted text-secondary font-['Redaction-10']">
+                    <span class="px-2 py-1 text-xs sm:text-sm rounded-full bg-muted text-secondary font-['PolySans-Neutral']">
                       {tag}
                     </span>
                   ))}
