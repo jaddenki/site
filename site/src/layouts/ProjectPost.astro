@@ -6,38 +6,39 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 ---
 
 <Layout title={`${frontmatter.title}`}>
-  <div class="mb-6 sm:mb-8 flex flex-wrap gap-4 sm:gap-6">
-    <a 
-      href="/" 
-      class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
-    >
-      <span>&lt;</span>
-      <span>back to home</span>
-    </a>
-    <a 
-      href="/notebook" 
-      class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
-    >
-      <span>&lt;</span>
-      <span>back to notebook</span>
-    </a>
-  </div>
+  <div class="max-w-lg mx-auto px-4 sm:px-6">
+    <div class="mb-6 sm:mb-8 flex flex-wrap gap-4 sm:gap-6">
+      <a 
+        href="/" 
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
+      >
+        <span>&lt;</span>
+        <span>back to home</span>
+      </a>
+      <a 
+        href="/notebook" 
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
+      >
+        <span>&lt;</span>
+        <span>back to notebook</span>
+      </a>
+    </div>
 
-  <article class="mb-20 sm:mb-32">
+    <article class="mb-20 sm:mb-32">
     <header class="mb-10 sm:mb-16">
-      <div class="text-sm text-accent mb-3 sm:mb-4 font-['Redaction-10']">
+      <div class="text-sm text-accent mb-3 sm:mb-4 font-['PolySans-Neutral']">
         {formattedDate}
       </div>
-      <h1 class="mb-6 sm:mb-8 font-['Redaction-10'] text-4xl sm:text-6xl">
+      <h1 class="mb-6 sm:mb-8 font-['PolySans-Neutral'] text-4xl sm:text-6xl">
         {frontmatter.title}
       </h1>
-      <p class="text-secondary text-base sm:text-lg font-['Redaction-10']">
+      <p class="text-secondary text-base sm:text-lg font-['PolySans-Neutral']">
         {frontmatter.description}
       </p>
       {frontmatter.tags && (
         <div class="flex flex-wrap gap-2 mt-4">
           {frontmatter.tags.map((tag: string) => (
-            <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['Redaction-10']">
+            <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['PolySans-Neutral']">
               {tag}
             </span>
           ))}
@@ -67,25 +68,26 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
       </div>
     )}
 
-    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16 font-['Redaction-10']">
+    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16 font-['PolySans-Neutral']">
       <slot />
     </div>
 
     <footer class="border-t border-muted pt-6 sm:pt-8">
       <a 
         href="#top" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['Redaction-10']"
+        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
       >
         <span>^</span>
         <span>back to top</span>
       </a>
     </footer>
-  </article>
+    </article>
+  </div>
 </Layout>
 
 <style is:global>
   .prose {
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -106,7 +108,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose ul li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose ul li::before {
@@ -122,11 +124,11 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
   .prose ol li {
     margin-bottom: 0.75rem;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose h2 {
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -134,7 +136,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   }
 
   .prose h3 {
-    font-family: 'Redaction-35';
+    font-family: 'PolySans-Neutral';
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -145,7 +147,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose a:hover {
@@ -160,7 +162,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'Redaction-10';
+    font-family: 'PolySans-Neutral';
   }
 
   .prose pre {
