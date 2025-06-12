@@ -6,118 +6,347 @@ import ResetButton from '../components/ResetButton';
 import { projects } from '../data/projects';
 import Tooltip from '../components/Tooltip';
 
-const bioText = [
-
-"hi, i'm jadden. i'm studying computer engineering at [purdue](https://www.purdue.edu) uni, and i'm interested in creative tech, motion, and the spaces in between",
-
-"i manage media for a [club that celebrates creative tinkering](https://www.purduehackers.com) & help run a [research generator](https://honors.purdue.edu/research/generators/c3.php) that explores computing for social good",
-
-"currently, i'm a full stack developer for the [rosen center for advanced computing](https://www.rcac.purdue.edu/)",
-
-"feel free to check out my [github](https://github.com/jaddenki) and [linkedin](https://linkedin.com/in/jadden-picardal) or contact me at [jaddenpicardal at gmail dot com](mailto:jaddenpicardal@gmail.com)"
-
-];
-
-const sortedProjects = [...projects]
+// Curated selection of top projects - you can adjust this later
+const featuredProjects = projects
   .filter(project => project.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 4); // Show only top 4 projects
 
 const isVideo = (url: string) => {
   return url.match(/\.(mp4|webm|mov)$/i) !== null;
 };
+
+  // Demo reel from motion page
+  const demoReel = {
+    title: 'demo reel 2025',
+    description: 'sneek peak into my experimental and client work',
+    videoUrl: 'https://www.youtube.com/embed/X4CYgSqLGf0?si=hetD0C9XLtZ3fOyA&loop=1&playlist=X4CYgSqLGf0&playsinline=1',
+    tags: ['after-effects', 'super-awesome', 'cool']
+  };
+
+
+const visualFeed = [
+  { type: 'video', src: 'vid/c2.mp4', alt: 'Design exploration 1', size: 'square' },
+  { type: 'image', src: 'https://i.imgur.com/iNpueeH.jpeg', alt: 'posterlad inspired photo', size: 'tall' },
+  { type: 'image', src: 'https://i.imgur.com/U7a02ck.png', alt: 'Motion study 1', size: 'tall' },
+  { type: 'image', src: 'https://i.imgur.com/fQRHoJr.png', alt: 'Brand work', size: 'square' },
+  // { type: 'image', src: 'https://i.imgur.com/Apd6boO.jpeg', alt: 'Typography study', size: 'wide' },
+  { type: 'video', src: 'vid/dropped.mp4', alt: 'Animation test', size: 'square' },
+  { type: 'video', src: 'vid/gyat.mp4', alt: 'Color exploration', size: 'square' },
+  { type: 'video', src: '/vid/respell.mp4', alt: 'Interaction demo', size: 'wide' },
+  { type: 'image', src: 'https://i.imgur.com/hAgWXUt.png', alt: 'Layout experiment', size: 'square' },
+//
+  // { type: 'image', src: 'https://i.imgur.com/HvtTUyX.png', alt: 'Banana Milk Matcha', size: 'square' },
+  { type: 'image', src: 'https://i.imgur.com/ktPErR6.png', alt: 'Design system', size: 'wide' },
+  { type: 'video', src: 'vid/mbayay_nm6kpg.mp4', alt: 'Prototype demo', size: 'square' },
+];
 ---
 
 <Layout title="jadden picardal">
-  <section class="mb-32">
-    <div class="mb-16">
-      <AnimatedName text="Jadden Picardal" size="7xl" showAsterisk={true} client:load />
-    </div>
-    <div class="prose prose-xl text-secondary max-w-none text-lg">
-      {bioText.map((text) => (
-        <p class="mb-6">
-          <AnimatedText text={text} client:load />
-        </p>
-      ))}
-      <ResetButton client:load />
-    </div>
-  </section>
+  <div class="max-w-lg mx-auto px-4 sm:px-6">
+    <!-- Hero Section -->
+    <section class="mb-24 sm:mb-32">
+      <div class="mb-8 sm:mb-12">
+        <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Jadden Picardal</h1>
+        <p class="text-secondary text-lg mt-2 font-['PolySans-Neutral']">jpicarda [at] purdue [dot] edu</p>
+      </div>
+      
+      <div class="max-w-none">
+        <div class="text-lg leading-relaxed text-secondary space-y-4 font-['PolySans-Neutral']">
+          <p>
+            <AnimatedText text="Hi there! I'm a [full stack developer](https://rcac.purdue.edu) studying computer engineering at [Purdue](https://www.purdue.edu)" client:load />
+          </p>
 
-  <section class="mb-32">
-    <h2 class="mb-12">
-      <AnimatedName text="Projects" size="3xl" client:load />
-    </h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {sortedProjects.map(project => (
-        <article class="group" data-title={project.title}>
-          <a href={project.link} class="block">
-            {project.image && (
-              <div class="aspect-video mb-4 bg-muted rounded-lg overflow-hidden">
-                {isVideo(project.image) ? (
-                  <video
-                    src={project.image}
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                )}
-              </div>
-            )}
-            <p class="text-secondary font-['PolySans-Neutral'] mb-3 text-sm">
-              {project.description}
-            </p>
-            <div class="flex flex-wrap gap-1.5">
-              {project.tags.map(tag => (
-                <span class="px-2 py-0.5 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] tag">
-                  {tag}
-                </span>
-              ))}
-            </div>
+          <p>
+            <AnimatedText text="I like creative tech, motion, and the spaces in between" client:load />
+          </p>
+          <p>
+            <AnimatedText text="I also like pushing forward the culture of [creative tinkering](https://www.purduehackers.com) and leveraging [computing for social good](https://honors.purdue.edu/research/generators/c3.php)" client:load />
+          </p>
+          <!-- <p>
+            <AnimatedText text="I manage media for [Purdue Hackers](https://www.purduehackers.com) and help run a [research generator](https://honors.purdue.edu/research/generators/c3.php) that explores computing for social good. Currently, I'm a full stack developer for the [Rosen Center for Advanced Computing](https://www.rcac.purdue.edu)" client:load />
+          </p> -->
+        </div>
+        
+        <div class="mt-8">
+
+        </div>
+        
+        <div class="flex gap-4 mt-6">
+          <ResetButton client:load />
+          <a href="https://github.com/jaddenki" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+            </svg>
           </a>
-        </article>
-      ))}
-    </div>
-    <Tooltip client:only="react" />
-  </section>
+          <a href="https://linkedin.com/in/jadden-picardal" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Reel Section -->
+    <section class="mb-24 sm:mb-32">
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold font-['PolySans-Neutral'] mb-4">Motion Reel</h1>
+      </div>
+      
+      <article class="demo-reel">
+        <div class="aspect-video mb-6 bg-muted rounded-xl overflow-hidden">
+          <iframe
+            src={demoReel.videoUrl}
+            title="YouTube video player"
+            frameborder="0"
+            class="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="demo-reel-content">
+          <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+            {demoReel.description}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {demoReel.tags.map(tag => (
+              <span class="px-3 py-1 text-xs rounded-full bg-accent text-background font-['PolySans-Neutral']">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Selected Work Section -->
+    <section class="mb-32">
+      <div class="mb-12">
+        <h2 class="text-lg font-medium text-primary mb-4 font-['PolySans-Neutral']">
+          <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Projects</h1>
+        </h2>
+        <!-- <p class="text-secondary text-lg font-['PolySans-Neutral']">
+          A curated selection of recent projects
+        </p> -->
+      </div>
+      
+      <div class="space-y-12 sm:space-y-16">
+        {featuredProjects.map((project, index) => (
+                     <article class="project-card group rounded-xl overflow-hidden" data-title={project.title}>
+            <a href={project.link} class="block">
+              {project.image && (
+                <div class="aspect-video project-media">
+                  {isVideo(project.image) ? (
+                    <video
+                      src={project.image}
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      class="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              )}
+              
+              <div class="project-content px-6 py-6">
+                <h3 class="text-lg font-medium text-primary mb-3 font-['PolySans-Neutral']">
+                  {project.title}
+                </h3>
+                
+                <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+                  {project.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2">
+                  {project.tags.slice(0, 4).map(tag => (
+                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] transition-all">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a 
+          href="/projects" 
+          class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['PolySans-Neutral'] text-lg group"
+        >
+          wanna see more? &gt
+        </a>
+      </div>
+      
+      <Tooltip client:only="react" />
+    </section>
+  </div>
+
+  </div>
 </Layout>
 
+<!-- Visual Feed Section - Full Window Width (Outside Layout component) -->
+<section class="mb-32 w-full">
+  <div class="max-w-lg mx-auto mb-12 px-4 sm:px-6">
+    <h2 class="text-lg font-medium text-primary mb-4 font-['PolySans-Neutral']">
+      <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Visual Feed</h1>
+    
+      <!-- <p class="text-secondary text-lg font-['PolySans-Neutral']">
+        Experiments, studies, and work in progress
+      </p>   -->
+    
+    </h2>
+  </div>
+  
+  <div class="visual-feed-grid px-8 sm:px-12 lg:px-16 xl:px-20">
+    {visualFeed.map((item, index) => (
+      <div class={`visual-feed-item visual-feed-item--${item.size} group`}>
+        {item.type === 'video' ? (
+          <video
+            src={item.src}
+            autoplay
+            loop
+            muted
+            playsinline
+            class="w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src={item.src}
+            alt={item.alt}
+            class="w-full h-full object-cover"
+          />
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
 <style>
-  article {
+  /* Project Card - With hover effects */
+  .project-card {
     position: relative;
-    transition: transform 0.3s ease-in-out;
+    background-color: var(--background);
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
   }
   
-  article:hover {
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Media styling with hover effects */
+  .project-media {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-card:hover .project-media {
     transform: scale(1.02);
   }
   
-  article::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -1rem;
-    width: 2px;
-    height: 2rem;
-    background: var(--muted);
-    opacity: 0;
-    transform: scaleY(0);
-    transition: all 0.2s ease;
+  /* Tags with hover effects */
+  .project-tag {
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
   }
   
-  article:hover::before {
-    opacity: 1;
-    transform: scaleY(1);
-    background: var(--accent);
+  .project-card:hover .project-tag {
+    background-color: var(--accent);
+    color: var(--background);
+    border-color: var(--accent);
+    transform: translateY(-1px);
   }
-
+  
+  /* Visual Feed Grid - True Masonry Layout */
+  .visual-feed-grid {
+    columns: 4;
+    column-gap: 1rem;
+    width: 100%;
+    max-width: none;
+  }
+  
+  .visual-feed-item {
+    background: var(--muted);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  /* Square items (1x1) */
+  .visual-feed-item--square {
+    aspect-ratio: 1;
+  }
+  
+  /* Wide items (2x1) - span 2 columns in masonry */
+  .visual-feed-item--wide {
+    aspect-ratio: 2;
+    column-span: 2;
+  }
+  
+  /* Tall items - same height as square, but narrower */
+  .visual-feed-item--tall {
+    aspect-ratio: 2/3.16;
+  }
+  
+  /* Responsive masonry adjustments */
+  @media (max-width: 1024px) {
+    .visual-feed-grid {
+      columns: 3;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .visual-feed-grid {
+      columns: 2;
+      column-gap: 0.75rem;
+    }
+    
+    .visual-feed-item {
+      margin-bottom: 0.75rem;
+    }
+    
+    /* On mobile, wide items still span 2 columns */
+    .visual-feed-item--wide {
+      column-span: 2;
+      aspect-ratio: 2;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .visual-feed-grid {
+      columns: 2;
+      column-gap: 0.5rem;
+    }
+    
+    .visual-feed-item {
+      margin-bottom: 0.5rem;
+    }
+    
+    .visual-feed-item--wide {
+      column-span: 2;
+      aspect-ratio: 1.8; /* Slightly less wide on very small screens */
+    }
+  }
+  
+  /* Tooltip styling */
   .tooltip {
     background-color: var(--background);
     border: 1px solid var(--accent);
@@ -130,20 +359,63 @@ const isVideo = (url: string) => {
     white-space: nowrap;
     transition: all 0.2s ease;
     opacity: 0;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
   }
 
   .tooltip.visible {
     opacity: 1;
   }
-
-  /* Add hover effect for tags */
-  .tag {
-    transition: background-color 0.2s ease, color 0.2s ease;
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .project-card::before {
+      left: -1rem;
+    }
+    
+    .project-card:hover .project-media {
+      transform: translateY(-2px);
+    }
   }
-
-  article:hover .tag {
-    background-color: var(--accent);
-    color: var(--background);
+  
+  /* Stagger animation for project cards */
+  .project-card:nth-child(1) { animation-delay: 0.1s; }
+  .project-card:nth-child(2) { animation-delay: 0.2s; }
+  .project-card:nth-child(3) { animation-delay: 0.3s; }
+  .project-card:nth-child(4) { animation-delay: 0.4s; }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+  
+  .project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  
+  /* Stagger animation for visual feed items */
+  .visual-feed-item {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  
+  .visual-feed-item:nth-child(1) { animation-delay: 0.1s; }
+  .visual-feed-item:nth-child(2) { animation-delay: 0.15s; }
+  .visual-feed-item:nth-child(3) { animation-delay: 0.2s; }
+  .visual-feed-item:nth-child(4) { animation-delay: 0.25s; }
+  .visual-feed-item:nth-child(5) { animation-delay: 0.3s; }
+  .visual-feed-item:nth-child(6) { animation-delay: 0.35s; }
+  .visual-feed-item:nth-child(7) { animation-delay: 0.4s; }
+  .visual-feed-item:nth-child(8) { animation-delay: 0.45s; }
+  .visual-feed-item:nth-child(9) { animation-delay: 0.5s; }
+  .visual-feed-item:nth-child(10) { animation-delay: 0.55s; }
+  .visual-feed-item:nth-child(11) { animation-delay: 0.6s; }
+  .visual-feed-item:nth-child(12) { animation-delay: 0.65s; }
 </style>

@@ -85,7 +85,7 @@
   --accent: #a5f839;
   --accent-transparent: rgba(255, 0, 255, 0.1);
   --secondary: #CCCCCC;
-  --muted: rgb(57, 129, 123);
+  --muted: #a5f839;
   --card-bg: rgba(45, 45, 45, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }

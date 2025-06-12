@@ -20,16 +20,19 @@ const formatDate = (date: string): string => {
 ---
 
 <Layout title="jadden's notes">
-  <section class="mb-20 sm:mb-32">
+  <div class="max-w-lg mx-auto px-4 sm:px-6">
+    <section class="mb-20 sm:mb-32">
     <div class="mb-10 sm:mb-16">
-      <AnimatedName text="Notebook" size="7xl" client:load />
+      <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Notebook</h1>
     </div>
-    <div class="prose prose-lg text-secondary max-w-none mb-10 sm:mb-16">
+    <div class="prose prose-lg text-secondary max-w-none mb-4 sm:mb-8">
       <p class="font-['PolySans-Neutral']">
-        some of my thoughts and learnings. welcome to my brain
+        some of my thoughts and learnings.
       </p>
       <p class="font-['PolySans-Neutral']">
-        also, here's a bit of <a href="/blog/recommendations" class="text-accent">what inspires me</a> ;).
+
+         curious about my  <a href="/blog/coursework" class="text-accent">coursework</a>? 
+         also, here's a bit of <a href="/blog/recommendations" class="text-accent">what inspires me</a> ;)
       </p>
 
     </div>
@@ -56,9 +59,7 @@ const formatDate = (date: string): string => {
     </div>
 
     <div id="blog-posts-section">
-      <h2 class="font-['PolySans-Neutral'] text-2xl sm:text-3xl mb-6 sm:mb-8">
-        <AnimatedName text="Blog Posts" size="3xl" client:load />
-      </h2>
+      <h1 class="text-3xl font-bold font-['PolySans-Neutral'] mb-12">Blog Posts</h1>
       <div class="grid grid-cols-1 gap-6 sm:gap-8 mb-12 sm:mb-16">
         {sortedPosts.map(post => (
           <a href={post.link} class="block group">
@@ -81,9 +82,7 @@ const formatDate = (date: string): string => {
     </div>
     
     <div id="project-notes-section">
-      <h2 class="font-['PolySans-Neutral'] text-2xl sm:text-3xl mb-6 sm:mb-8">
-        <AnimatedName text="Project Notes" size="3xl" client:load />
-      </h2>
+      <h1 class="text-3xl font-bold font-['PolySans-Neutral'] mb-12">Project Notes</h1> 
       <div class="grid grid-cols-1 gap-6 sm:gap-8">
         {projectNotes.map(project => (
           <a href={project.link} class="block group">
@@ -113,7 +112,8 @@ const formatDate = (date: string): string => {
         ))}
       </div>
     </div>
-  </section>
+    </section>
+  </div>
 </Layout>
 
 <script>

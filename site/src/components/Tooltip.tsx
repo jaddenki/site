@@ -55,7 +55,7 @@ export default function Tooltip() {
       article.addEventListener('mouseenter', handleMouseEnter);
       article.addEventListener('mouseleave', handleMouseLeave);
     });
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('scroll', handleScroll);
     window.addEventListener('scroll', handleScroll);
@@ -74,14 +74,13 @@ export default function Tooltip() {
   if (!tooltip.show) return null;
 
   return (
-    <div
+    <div 
       style={{
         position: 'fixed',
         left: tooltip.x,
         top: tooltip.y - 50,
         transform: `translateX(-50%) scale(${tooltip.show ? 1 : 0.8})`,
         transformOrigin: 'center bottom',
-        background: 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         color: 'var(--accent)',
