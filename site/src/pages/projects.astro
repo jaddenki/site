@@ -1,13 +1,144 @@
 ---
-// redirect /projects to /notebook with client-side redirection
+import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/projects';
+
+// Get all published projects, sorted by date
+const allProjects = projects
+  .filter(project => project.published)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const isVideo = (url: string) => {
+  return url.match(/\.(mp4|webm|mov)$/i) !== null;
+};
 ---
 
-<meta http-equiv="refresh" content="0;url=/notebook">
-<script>
-  window.location.href = "/notebook";
-</script>
+<Layout title="some more projects">
+  <div class="max-w-lg mx-auto px-4 sm:px-6">
+    <!-- Header -->
+    <section class="mb-16 sm:mb-20">
+      <div class="mb-8">
+        <a href="/" class="text-secondary hover:text-primary transition-colors font-['PolySans-Neutral'] text-sm mb-4 inline-block">
+          &lt back
+        </a>
+        <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Projects</h1>
+        <p class="text-secondary text-lg font-['PolySans-Neutral'] mt-4">
+          here's a bit more
+        </p>
+      </div>
+    </section>
+
+    <!-- All Projects -->
+    <section class="mb-32">
+      <div class="space-y-12 sm:space-y-16">
+        {allProjects.map((project, index) => (
+          <article class="project-card group rounded-xl overflow-hidden" data-title={project.title}>
+            <a href={project.link} class="block">
+              {project.image && (
+                <div class="aspect-video project-media">
+                  {isVideo(project.image) ? (
+                    <video
+                      src={project.image}
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      class="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              )}
+              
+              <div class="project-content px-6 py-6">
+                <h3 class="text-lg font-medium text-primary mb-3 font-['PolySans-Neutral']">
+                  {project.title}
+                </h3>
+                
+                <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+                  {project.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2">
+                  {project.tags.slice(0, 4).map(tag => (
+                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] transition-all">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
 <style>
-  body {
-    display: none;
+  /* Project Card - With hover effects */
+  .project-card {
+    position: relative;
+    background-color: var(--background);
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Media styling with hover effects */
+  .project-media {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-card:hover .project-media {
+    transform: scale(1.02);
+  }
+  
+  /* Tags with hover effects */
+  .project-tag {
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .project-card:hover .project-tag {
+    background-color: var(--accent);
+    color: var(--background);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  
+  /* Stagger animation for project cards */
+  .project-card:nth-child(1) { animation-delay: 0.1s; }
+  .project-card:nth-child(2) { animation-delay: 0.2s; }
+  .project-card:nth-child(3) { animation-delay: 0.3s; }
+  .project-card:nth-child(4) { animation-delay: 0.4s; }
+  .project-card:nth-child(5) { animation-delay: 0.5s; }
+  .project-card:nth-child(6) { animation-delay: 0.6s; }
+  .project-card:nth-child(7) { animation-delay: 0.7s; }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
   }
 </style> 

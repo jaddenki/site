@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 
 const themes = [
   { name: 'light', icon: '(^_^)' },
-  { name: 'dark', icon: '(¬_¬)' },
+  { name: 'dark', icon: '(T_T)' },
   { name: 'blue', icon: '(0_0)' },
   { name: 'green', icon: '(>_<)' },
-  { name: 'pink', icon: '(o//o)' },
-  { name: 'orange', icon: '(3_3)' },
-  { name: 'purple', icon: '(T_T)' }
+  // { name: 'pink', icon: '(o//o)' },
+  // { name: 'orange', icon: '(3_3)' },
+  // { name: 'purple', icon: '(T_T)' }
 ];
 
 export default function ThemeSwitcher() {
@@ -47,14 +47,14 @@ export default function ThemeSwitcher() {
     <div className="theme-switcher relative z-50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="theme-button p-2 text-secondary hover:text-accent transition-colors"
+        className="theme-button p-4 text-secondary hover:text-accent transition-colors rounded-full"
         aria-label="Theme switcher"
       >
         {themes.find(t => t.name === theme)?.icon}
       </button>
       
       {isOpen && (
-        <div className="theme-dropdown absolute right-0 top-full mt-2 pt-2 pb-2 border border-accent rounded-md bg-background/60 backdrop-blur-md min-w-[60px] w-auto z-50">
+        <div className="theme-dropdown absolute right-0 top-full mt-2 pt-2 pb-2 border border-accent rounded-3xl bg-background/60 backdrop-blur-md min-w-[60px] w-auto z-50">
           <div className="grid grid-cols-1">
             {themes.map((t) => (
               <button

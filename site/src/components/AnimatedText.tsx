@@ -5,8 +5,9 @@ const REDACTION_WEIGHTS = [10, 20, 35, 50, 70, 100];
 // Map of original words to their alternates
 const WORD_ALTERNATES: { [key: string]: string[] } = {
   "studying": ["suffering through", "conquering", "surviving", "speedrunning", "frolicking through"],
-  "computer engineering": ["minecraft redstone", "cornfields"],
-  "creative tech, motion, and the spaces in between" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
+  "computer": ["minecraft", "the"],
+  "engineering": ["redstone", "cornfields"],
+  // "creative tech, motion, and the spaces in between" : ["not blowing up my computer", "pretty math and spicy metal","googling until it works"],
 
 };
 
@@ -85,7 +86,7 @@ function WordGroup({ text, onReset }: WordGroupProps) {
         isChanged ? 'text-accent bg-accent/10 rounded' : ''
       } ${isTransitioning ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'}`}
       style={{
-        fontFamily: `Redaction-${REDACTION_WEIGHTS[weightIndex]}`,
+        fontFamily: `PolySans-Neutral, sans-serif`,
         transitionDuration: '150ms',
         transitionProperty: 'all'
       }}
@@ -188,14 +189,13 @@ export default function AnimatedText({ text, onReset = () => {} }: AnimatedTextP
                 className="text-accent no-underline hover:underline"
                 target={segment.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel="noopener noreferrer"
-                style={{ fontFamily: 'Redaction-10' }}  // Add this line
               >
                 {segment.text}
               </a>
             ) : segment.isPhrase ? (
               <WordGroup text={segment.text} onReset={onReset} />
             ) : (
-              <span style={{ fontFamily: 'Redaction-10' }}>
+              <span style={{ fontFamily: 'PolySans-Neutral' }}>
                 {segment.text}
               </span>
             )}
