@@ -6,7 +6,7 @@ import ResetButton from '../components/ResetButton';
 import { projects } from '../data/projects';
 import Tooltip from '../components/Tooltip';
 
-// Curated selection of top projects - you can adjust this later
+
 const featuredProjects = projects
   .filter(project => project.published)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -16,10 +16,10 @@ const isVideo = (url: string) => {
   return url.match(/\.(mp4|webm|mov)$/i) !== null;
 };
 
-  // Demo reel from motion page
+
   const demoReel = {
     title: 'demo reel 2025',
-    description: 'sneek peak into my experimental and client work',
+    description: 'a sneak peek into my experimental and client work',
     videoUrl: 'https://www.youtube.com/embed/X4CYgSqLGf0?si=hetD0C9XLtZ3fOyA&loop=1&playlist=X4CYgSqLGf0&playsinline=1',
     tags: ['after-effects', 'super-awesome', 'cool']
   };
