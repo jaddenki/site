@@ -9,7 +9,7 @@ export default function BioCard() {
       {/* Main Bio Content - Always Visible */}
       <div className="text-lg leading-relaxed text-secondary space-y-4 font-['PolySans-Neutral']">
         <p>
-          <AnimatedText text="Hi! I'm a [full stack developer](https://rcac.purdue.edu) studying computer engineering at [Purdue](https://www.purdue.edu) with a focus on systems and software" />
+          <AnimatedText text="Hi! I'm a [full stack developer](https://rcac.purdue.edu) studying computer engineering at [Purdue](https://www.purdue.edu)" />
         </p>
 
         <p className="text-lg leading-relaxed">
@@ -45,11 +45,12 @@ export default function BioCard() {
                        <div className="space-y-4 text-secondary font-['PolySans-Neutral']">
 
               <p className="text-lg leading-relaxed">
-               Oh wow... you pressed <span className="text-accent font-medium">read more</span>... Hello! I'll use this as an opportunity to tell you more about what I'm up to
+               Oh wow... you pressed <span className="text-accent font-medium">read more</span>... Hi, I'm Jadden! I like <span className="text-accent font-medium">making games</span> and <span className="text-accent font-medium">editing videos</span>. I'll use this as an opportunity to tell you more about what I'm up to:
               </p>
 
+
               <p className="text-lg leading-relaxed">
-                I'm concentrating in <span className="text-accent font-medium">computer systems and software engineering</span>, where I'm especially fascinated by embedded systems and signal processing architectures. I love working with the lower layers, real-time audio/visual processing, sensor input, microcontrollers... anything that makes physical spaces feel alive
+                I'm concentrating in <span className="text-accent font-medium">computer systems and software engineering</span> as a computer engineering major at Purdue, where I'm especially fascinated by embedded systems and signal processing architectures
               </p>
               
               <p className="text-lg leading-relaxed">
@@ -57,15 +58,15 @@ export default function BioCard() {
               </p>
 
               <p className="text-lg leading-relaxed">
-                I'm also a <span className="text-accent font-medium">student software developer</span> at the <a href="https://www.rcac.purdue.edu/envision" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Envision Center</a>, where I work on scientific visualization projects, virtual reality applications, and multimedia production. It's the perfect blend of my technical skills and creative interests, helping researchers communicate complex concepts through interactive visualizations and immersive experiences
+                I'm also a <span className="text-accent font-medium">student software developer</span> at the <a href="https://www.rcac.purdue.edu/envision" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Envision Center</a>, where I work on scientific visualization projects, virtual reality applications, and multimedia production. I help researchers communicate complex concepts through interactive visualizations
               </p>
               
               <p className="text-lg leading-relaxed">
-                At <a href="https://honors.purdue.edu/research/generators/c3.php" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">C3 (Computing for Community Collaboratory)</a>, I work as a <span className="text-accent font-medium">Student Lab Manager</span> supporting projects that leverage computing for social good. That means organizing student research, fostering inclusive collaboration, and building tech that's thoughtful, sustainable, and grounded in care. <a href="/projects/game-jam" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">We held a 48 hour research-oriented game jam!</a>
+                At <a href="https://honors.purdue.edu/research/generators/c3.php" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">C3 (Computing for Community Collaboratory)</a>, I work as a <span className="text-accent font-medium">Student Lab Manager</span> supporting projects that leverage computing for social good. That means organizing student research and fostering inclusive collaboration. <a href="/projects/game-jam" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">We held a 48 hour research-oriented game jam!</a>
               </p>
               
               <p className="text-lg leading-relaxed">
-                As <span className="text-accent font-medium">Communications Division Lead</span> at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Purdue Hackers</a>, I help run events and celebrate scrappy experimentation. Whether it's a game jam, art show, or hardware hack, I believe in making room for beginner joy and low-stakes failure
+                As the <span className="text-accent font-medium">Communications Division Lead</span> at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Purdue Hackers</a>, I help run events and celebrate scrappy experimentation. Whether it's a game jam, <a href="https://burst.purduehackers.com/" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">art show</a>, or hardware hack, I believe in making room for beginner joy and low-stakes failure
               </p>
               
               <p className="text-lg leading-relaxed">
@@ -78,11 +79,7 @@ export default function BioCard() {
               </p>
               
               <p className="text-lg leading-relaxed font-medium bg-accent/10 rounded-lg inline-block">
-                  Currently, I'm playing <a href="https://store.steampowered.com/app/1610440/Minds_Beneath_Us/" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Minds Beneath Us</a> and developing a <a href="https://store.steampowered.com/app/3852520/Spread_The_Love/" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">silly dating game</a>
-              </p>
-
-              <p className="text-lg leading-relaxed font-medium text-accent bg-accent/10 rounded-lg inline-block">
-                Tech is my toolkit, but storytelling is the point
+                  Currently, I'm playing <a href="https://store.steampowered.com/app/1610440/Minds_Beneath_Us/" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Minds Beneath Us</a> and making a <a href="https://store.steampowered.com/app/3852520/Spread_The_Love/" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">silly dating game about fruit jams</a>
               </p>
 
 
@@ -90,7 +87,7 @@ export default function BioCard() {
            <div className="w-full">
              <img 
                src="https://i.imgur.com/EZV3Boq.jpeg" 
-               alt="Jadden Picardal" 
+               alt="im sitting on rocks at a beach. i look so tiny here." 
                className="aspect-video w-full object-cover rounded-lg"
              />
            </div>
