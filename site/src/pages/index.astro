@@ -55,9 +55,9 @@ const visualFeed = [
             class="w-16 h-16 rounded-full"
           />
           <div>
-            <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Jadden Picardal</h1>
-            <!-- <p class="text-secondary text-lg mt-2 font-['PolySans-Neutral']">jpicarda [at] purdue [dot] edu</p> -->
-            <p class="text-secondary text-lg mt-2 font-['PolySans-Neutral']">jaddenpicardal [at] gmail [dot] com</p>
+            <h1 class="text-4xl font-semibold">Jadden Picardal</h1>
+            <!-- <p class="text-secondary text-lg mt-2">jpicarda [at] purdue [dot] edu</p> -->
+            <p class="text-secondary text-lg mt-2">jaddenpicardal [at] gmail [dot] com</p>
           </div>
         </div>
       </div>
@@ -67,12 +67,12 @@ const visualFeed = [
         
         <div class="flex justify-between items-center mt-6">
           <div class="flex gap-4">
-          <a href="https://ring.purduehackers.com/previous?host=https://jadden.xyz">
+          <a href="https://ring.purduehackers.com/previous?host=https://jadden.xyz" class="text-secondary hover:text-accent transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
           </a>
-          <a href="https://ring.purduehackers.com/">
+          <a href="https://ring.purduehackers.com/" class="text-secondary hover:text-accent transition-colors">
         <svg 
           class="w-6 h-6" 
           viewBox="0 0 2625 2625" 
@@ -96,7 +96,7 @@ const visualFeed = [
           />
         </svg>        
           </a>
-          <a href="https://ring.purduehackers.com/next?host=https://jadden.xyz">
+          <a href="https://ring.purduehackers.com/next?host=https://jadden.xyz" class="text-secondary hover:text-accent transition-colors">
             <svg class="w-6 h-6 mr-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>          
@@ -129,7 +129,7 @@ const visualFeed = [
     <!-- Demo Reel Section -->
     <section class="mb-24 sm:mb-32">
       <div class="mb-8">
-        <h1 class="text-4xl font-bold font-['PolySans-Neutral'] mb-4">Motion Reel</h1>
+        <h1 class="text-4xl font-semibold mb-4">Motion Reel</h1>
       </div>
       
       <article class="demo-reel">
@@ -145,12 +145,12 @@ const visualFeed = [
           ></iframe>
         </div>
         <div class="demo-reel-content">
-          <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+          <p class="text-secondary leading-relaxed mb-4 text-lg">
             {demoReel.description}
           </p>
           <div class="flex flex-wrap gap-2">
             {demoReel.tags.map(tag => (
-              <span class="px-3 py-1 text-xs rounded-full bg-accent text-background font-['PolySans-Neutral']">
+              <span class="px-3 py-1 text-xs rounded-full bg-accent text-background">
                 {tag}
               </span>
             ))}
@@ -161,8 +161,8 @@ const visualFeed = [
 
     <section class="mb-32">
       <div class="mb-12">
-        <h2 class="text-lg font-medium text-primary mb-4 font-['PolySans-Neutral']">
-          <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Projects</h1>
+        <h2 class="text-lg font-semibold text-primary mb-4">
+          <h1 class="text-4xl font-semibold">Projects</h1>
         </h2>
       </div>
       
@@ -192,17 +192,17 @@ const visualFeed = [
               )}
               
               <div class="project-content px-6 py-6">
-                <h3 class="text-lg font-medium text-primary mb-3 font-['PolySans-Neutral']">
+                <h3 class="text-lg font-semibold text-primary mb-3">
                   {project.title}
                 </h3>
                 
-                <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+                <p class="text-secondary leading-relaxed mb-4 text-lg">
                   {project.description}
                 </p>
                 
                 <div class="flex flex-wrap gap-2">
                   {project.tags.slice(0, 4).map(tag => (
-                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] transition-all">
+                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary transition-all">
                       {tag}
                     </span>
                   ))}
@@ -216,7 +216,7 @@ const visualFeed = [
       <div class="mt-12 text-center">
         <a 
           href="/projects" 
-          class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['PolySans-Neutral'] text-lg group"
+          class="inline-flex items-center text-secondary hover:text-accent transition-colors text-lg group"
         >
           wanna see more? &gt
         </a>
@@ -232,12 +232,12 @@ const visualFeed = [
 <!-- Visual Feed Section - Full Window Width (Outside Layout component) -->
 <section class="mb-32 w-full">
   <div class="max-w-lg mx-auto mb-12 px-4 sm:px-6">
-    <h2 class="text-lg font-medium text-primary mb-4 font-['PolySans-Neutral']">
-      <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Visual Feed</h1>
+    <h2 class="text-lg font-semibold text-primary mb-4">
+      <h1 class="text-4xl font-semibold">Visual Feed</h1>
     
-      <!-- <p class="text-secondary text-lg font-['PolySans-Neutral']">
-        Experiments, studies, and work in progress
-      </p>   -->
+      <p class="text-secondary text-lg mt-4">
+        Miscellaneous branding, motion, and design explorations
+      </p>  
     
     </h2>
   </div>
@@ -266,9 +266,15 @@ const visualFeed = [
   </div>
 </section>
 
+<p class="text-secondary text-lg ml-4 sm:ml-6 mb-8 ">
+  Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank" class="text-accent">Jadden</a> and <a href="https://astro.build" target="_blank" class="text-accent">Astro</a>. Typeface is <a href="https://fonts.google.com/specimen/Syne" target="_blank" class="text-accent">Syne</a>.
+</p>  
+
 
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
   /* Project Card - With hover effects */
   .project-card {
     position: relative;
@@ -387,7 +393,7 @@ const visualFeed = [
     color: var(--accent);
     padding: 0.75rem 1.25rem;
     border-radius: 2rem;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 0.875rem;
     transform: translate(-50%, -100%);
     white-space: nowrap;
@@ -399,6 +405,11 @@ const visualFeed = [
 
   .tooltip.visible {
     opacity: 1;
+  }
+  
+  /* Replace all font-['PolySans-Neutral'] references */
+  h1, h2, h3, p, span, a {
+    font-family: 'Syne', sans-serif !important;
   }
   
   /* Responsive adjustments */

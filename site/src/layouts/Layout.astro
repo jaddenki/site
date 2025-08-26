@@ -20,6 +20,9 @@ const navItems = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <!-- Prevent theme flash -->
@@ -27,7 +30,6 @@ const navItems = [
       const theme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', theme);
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="max-w-lg mx-auto">
@@ -39,7 +41,7 @@ const navItems = [
                 <>
                   <a
                     href={item.path}
-                    class="text-secondary hover:text-accent transition-all py-2 px-2 sm:px-3 text-sm font-['PolySans-Neutral']"
+                    class="text-secondary hover:text-accent transition-all py-2 px-2 sm:px-3 text-sm font-['Syne']"
                   >
                     {item.name}
                   </a>
@@ -71,7 +73,7 @@ const navItems = [
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'PolySans-Neutral', sans-serif;
+    font-family: 'Syne', sans-serif;
     background-color: var(--background);
     overflow-x: hidden;
   }

@@ -75,11 +75,9 @@ export default function Tooltip() {
 
   return (
     <div 
-      style={{
-        position: 'fixed',
-        left: tooltip.x,
-        top: tooltip.y - 50,
-        transform: `translateX(-50%) scale(${tooltip.show ? 1 : 0.8})`,
+      className={`tooltip fixed top-0 left-0 pointer-events-none font-['Syne'] ${tooltip.show ? 'visible' : ''}`} 
+      style={{ 
+        transform: `translate(${tooltip.x}px, ${tooltip.y - 50}px)`,
         transformOrigin: 'center bottom',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
@@ -88,10 +86,9 @@ export default function Tooltip() {
         borderRadius: '2rem',
         border: '1px solid var(--accent)',
         fontSize: '0.875rem',
-        pointerEvents: 'none',
         zIndex: 1000,
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-        fontFamily: 'PolySans-Neutral',
+        fontFamily: 'Syne, sans-serif',
         whiteSpace: 'nowrap',
         width: 'auto',
         minWidth: '80px',

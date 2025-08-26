@@ -12,10 +12,10 @@ export default function ResetButton() {
     <button
       onClick={handleReset}
       disabled={isResetting}
-      className="hover:text-accent transition-colors disabled:opacity-50 border-0"
+      className="hover:text-accent transition-colors disabled:opacity-50 border-0 font-semibold"
       aria-label="Reset text"
     >
       {isResetting ? '(×_×)' : 'Reset Text'}
     </button>
   );
-} 
+}

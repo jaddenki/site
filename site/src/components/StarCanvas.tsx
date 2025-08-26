@@ -179,10 +179,12 @@ export default function StarCanvas() {
   }, [])
 
   return (
-    <canvas 
-      ref={canvasRef}
-      className="w-full h-64"
-      style={{ background: 'transparent' }}
-    />
+    <div className="text-center text-lg font-['Syne'] font-semibold">
+      <canvas 
+        ref={canvasRef}
+        className="w-full h-64"
+        style={{ background: 'transparent' }}
+      />
+    </div>
   )
 }

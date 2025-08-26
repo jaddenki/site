@@ -16,12 +16,12 @@ const isVideo = (url: string) => {
   <div class="max-w-lg mx-auto px-4 sm:px-6">
     <!-- Header -->
     <section class="mb-16 sm:mb-20">
-      <div class="mb-8">
-        <a href="/" class="text-secondary hover:text-primary transition-colors font-['PolySans-Neutral'] text-sm mb-4 inline-block">
+      <div class="mb-8 sm:mb-12">
+        <a href="/" class="text-secondary hover:text-primary transition-colors font-['Syne'] text-sm mb-4 inline-block">
           &lt back
         </a>
-        <h1 class="text-4xl font-bold font-['PolySans-Neutral']">Projects</h1>
-        <p class="text-secondary text-lg font-['PolySans-Neutral'] mt-4">
+        <h1 class="text-4xl font-semibold font-['Syne']">Projects</h1>
+        <p class="text-secondary text-lg font-['Syne'] mt-4">
           here's a bit more
         </p>
       </div>
@@ -55,17 +55,17 @@ const isVideo = (url: string) => {
               )}
               
               <div class="project-content px-6 py-6">
-                <h3 class="text-lg font-medium text-primary mb-3 font-['PolySans-Neutral']">
+                <h3 class="text-lg font-semibold text-primary mb-3 font-['Syne']">
                   {project.title}
                 </h3>
                 
-                <p class="text-secondary leading-relaxed mb-4 text-lg font-['PolySans-Neutral']">
+                <p class="text-secondary leading-relaxed mb-4 text-lg font-['Syne']">
                   {project.description}
                 </p>
                 
                 <div class="flex flex-wrap gap-2">
                   {project.tags.slice(0, 4).map(tag => (
-                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary font-['PolySans-Neutral'] transition-all">
+                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary font-['Syne'] transition-all">
                       {tag}
                     </span>
                   ))}
@@ -141,4 +141,4 @@ const isVideo = (url: string) => {
     animation: fadeInUp 0.6s ease forwards;
     opacity: 0;
   }
-</style> 
+</style>

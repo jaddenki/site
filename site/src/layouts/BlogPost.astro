@@ -7,51 +7,23 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 ---
 
 <Layout title={`${frontmatter.title}`}>
-  <div class="max-w-lg mx-auto px-4 sm:px-6">
-    <div class="mb-6 sm:mb-8">
-      <a 
-        href="/notebook" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
-      >
-        <span>&lt;</span>
-        <span>back to notebook</span>
-      </a>
-    </div>
-
-    <article class="mb-20 sm:mb-32">
-    <header class="mb-10 sm:mb-16">
-      <div class="text-sm text-accent mb-3 sm:mb-4 font-['PolySans-Neutral']">
-        {formattedDate}
+  <article class="prose px-4 sm:px-6">
+    <header class="mb-8 sm:mb-12">
+      <h1 class="text-4xl font-semibold mb-4 font-['Syne']">{frontmatter.title}</h1>
+      <div class="text-secondary">
+        <time datetime={formattedDate} class="font-['Syne']">{formattedDate}</time>
       </div>
-      <h1 class="mb-6 sm:mb-8 font-['PolySans-Neutral'] text-4xl sm:text-6xl">
-        {frontmatter.title}
-      </h1>
-      <p class="text-secondary text-base sm:text-lg font-['PolySans-Neutral']">
-        {frontmatter.description}
-      </p>
     </header>
-
-    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16">
+    <div class="font-['Syne']">
       <slot />
     </div>
-
-    <footer class="border-t border-muted pt-6 sm:pt-8">
-      <a 
-        href="#top" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
-      >
-        <span>^</span>
-        <span>back to top</span>
-      </a>
-    </footer>
-    </article>
-  </div>
+  </article>
 </Layout>
 
 <style is:global>
   /* Style adjustments for markdown content */
   .prose {
-    font-family: 'PolySans-Neutral', sans-serif;
+    font-family: 'Syne', sans-serif;
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -62,7 +34,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 
 
   .prose h2 {
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -70,7 +42,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   }
 
   .prose h3 {
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -81,7 +53,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-    font-family: 'PolySans-Neutral', sans-serif;
+    font-family: 'Syne', sans-serif;
   }
 
   .prose a:hover {
@@ -96,7 +68,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'PolySans-Neutral', sans-serif;
+    font-family: 'Syne', sans-serif;
   }
 
   .prose li::before {
@@ -123,13 +95,13 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose em {
     color: var(--secondary);
     font-style: italic;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
   }
 
   .prose strong {
     color: var(--foreground);
-    font-weight: 500;
-    font-family: 'PolySans-Neutral';
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
   }
 
   .prose img {
@@ -155,7 +127,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     margin-top: 0.75rem;
     color: var(--secondary);
     font-size: 0.875rem;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-style: italic;
   }
   
@@ -196,4 +168,4 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
       overflow-x: auto;
     }
   }
-</style> 
+</style>

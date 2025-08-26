@@ -5,89 +5,33 @@ const { frontmatter } = Astro.props;
 const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString().split('T')[0] : '';
 ---
 
-<Layout title={`${frontmatter.title}`}>
-  <div class="max-w-lg mx-auto px-4 sm:px-6">
-    <div class="mb-6 sm:mb-8 flex flex-wrap gap-4 sm:gap-6">
-      <a 
-        href="/" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
-      >
-        <span>&lt;</span>
-        <span>back to home</span>
-      </a>
-      <a 
-        href="/notebook" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
-      >
-        <span>&lt;</span>
-        <span>back to notebook</span>
-      </a>
-    </div>
-
-    <article class="mb-20 sm:mb-32">
-    <header class="mb-10 sm:mb-16">
-      <div class="text-sm text-accent mb-3 sm:mb-4 font-['PolySans-Neutral']">
-        {formattedDate}
-      </div>
-      <h1 class="mb-6 sm:mb-8 font-['PolySans-Neutral'] text-4xl sm:text-6xl">
-        {frontmatter.title}
-      </h1>
-      <p class="text-secondary text-base sm:text-lg font-['PolySans-Neutral']">
+<Layout title={frontmatter.title}>
+  <article class="project-post px-4 sm:px-6">
+    <header class="mb-8 sm:mb-12">
+      <h1 class="text-4xl font-semibold mb-4 font-['Syne']">{frontmatter.title}</h1>
+      <div class="text-secondary font-['Syne']">
         {frontmatter.description}
-      </p>
-      {frontmatter.tags && (
-        <div class="flex flex-wrap gap-2 mt-4">
-          {frontmatter.tags.map((tag: string) => (
-            <span class="px-2 py-1 text-sm rounded-full bg-muted text-secondary font-['PolySans-Neutral']">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-    </header>
-
-    {frontmatter.image && (
-      <div class="mb-10 sm:mb-16 aspect-video bg-muted rounded-lg overflow-hidden">
-        {frontmatter.image.match(/\.(mp4|webm|mov)$/i) ? (
-          <video
-            src={frontmatter.image}
-            autoplay
-            loop
-            muted
-            playsinline
-            class="w-full h-full object-cover"
-          />
-        ) : (
-          <img
-            src={frontmatter.image}
-            alt={frontmatter.title}
-            loading="lazy"
-            class="w-full h-full object-cover"
-          />
-        )}
       </div>
-    )}
-
-    <div class="prose prose-lg sm:prose-xl text-secondary max-w-none mb-12 sm:mb-16 font-['PolySans-Neutral']">
+    </header>
+    <div class="prose font-['Syne']">
       <slot />
     </div>
-
-    <footer class="border-t border-muted pt-6 sm:pt-8">
-      <a 
-        href="#top" 
-        class="text-secondary hover:text-accent transition-colors inline-flex items-center gap-2 font-['PolySans-Neutral']"
-      >
-        <span>^</span>
-        <span>back to top</span>
-      </a>
-    </footer>
-    </article>
-  </div>
+  </article>
 </Layout>
+
+<style>
+  .project-post {
+    font-family: 'Syne', sans-serif;
+  }
+  
+  .prose {
+    font-family: 'Syne', sans-serif;
+  }
+</style>
 
 <style is:global>
   .prose {
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -96,7 +40,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
   }
 
-    .prose ul {
+  .prose ul {
     list-style-type: none;
     padding-left: 1rem;
   }
@@ -108,7 +52,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose ul li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
   }
 
   .prose ul li::before {
@@ -124,11 +68,11 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
   .prose ol li {
     margin-bottom: 0.75rem;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
   }
 
   .prose h2 {
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -136,7 +80,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   }
 
   .prose h3 {
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -147,7 +91,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
   }
 
   .prose a:hover {
@@ -162,7 +106,59 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'PolySans-Neutral';
+    font-family: 'Syne', sans-serif;
+  }
+
+  .prose pre {
+    background-color: var(--muted);
+    padding: 1rem;
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0.75rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+  }
+
+  .prose ol li {
+    margin-bottom: 0.75rem;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .prose h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+  }
+
+  .prose h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .prose ul {
+    list-style-type: none;
+    padding-left: 1rem;
+  }
+
+  .prose li {
+    position: relative;
+    margin-bottom: 0.75rem;
+    font-family: 'Syne', sans-serif;
   }
 
   .prose pre {
@@ -247,4 +243,4 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
       word-break: break-word;
     }
   }
-</style> 
+</style>
