@@ -9,7 +9,7 @@ export default function BioCard() {
       {/* Main Bio Content - Always Visible */}
       <div className="text-lg leading-relaxed text-secondary space-y-4 font-['PolySans-Neutral']">
         <p>
-          <AnimatedText text="Hi! I'm a [full stack developer](https://rcac.purdue.edu) studying computer engineering at [Purdue](https://www.purdue.edu)" />
+          <AnimatedText text="Hi! I'm a [full stack developer](https://rcac.purdue.edu) studying CompE at [Purdue](https://www.purdue.edu)" />
         </p>
 
         <p className="text-lg leading-relaxed">

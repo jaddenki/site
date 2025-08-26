@@ -15,7 +15,7 @@ export default function ResetButton() {
       className="hover:text-accent transition-colors disabled:opacity-50 border-0"
       aria-label="Reset text"
     >
-      {isResetting ? '(×_×)' : '(°o°)'}
+      {isResetting ? '(×_×)' : 'Reset Text'}
     </button>
   );
 } 
