@@ -33,6 +33,6 @@ export const posts: Post[] = [
     description: "thoughts on growing up between two worlds",
     date: "2022-08",
     link: "/blog/the-barefoot-child",
-    published: true
+    published: false
   }
 ]; 
