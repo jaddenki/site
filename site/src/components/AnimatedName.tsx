@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const REDACTION_WEIGHTS = [10, 20, 35, 50, 70, 100];
+const INTER_WEIGHTS = [400, 500, 600, 700, 800];
 const CYCLE_INTERVAL = 100; // faster cycling for title
 
 const TEXT_SIZE_CLASSES = {
@@ -43,7 +43,7 @@ interface TitleLetterProps {
 
 function TitleLetter({ letter, isAccent = false }: TitleLetterProps) {
   const [weightIndex, setWeightIndex] = useState(
-    Math.floor(Math.random() * REDACTION_WEIGHTS.length)
+    Math.floor(Math.random() * INTER_WEIGHTS.length)
   );
 
   // Only render a span if it's not a space
@@ -55,12 +55,13 @@ function TitleLetter({ letter, isAccent = false }: TitleLetterProps) {
     <span
       className={`inline-block transition-all ${isAccent ? 'text-accent' : ''}`}
       style={{
-        fontFamily: `Redaction-${REDACTION_WEIGHTS[weightIndex]}`,
+        fontFamily: 'Inter',
+        fontWeight: INTER_WEIGHTS[weightIndex],
         transitionDuration: '100ms'
       }}
       onMouseEnter={() => {
         // On hover, just pick a random new weight
-        const newIndex = Math.floor(Math.random() * REDACTION_WEIGHTS.length);
+        const newIndex = Math.floor(Math.random() * INTER_WEIGHTS.length);
         setWeightIndex(newIndex);
       }}
     >

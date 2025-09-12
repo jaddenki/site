@@ -85,7 +85,7 @@ function WordGroup({ text, onReset }: WordGroupProps) {
         isChanged ? 'text-accent bg-accent/10 rounded' : ''
       } ${isTransitioning ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'}`}
       style={{
-        fontFamily: `Syne, sans-serif`,
+  fontFamily: `Inter, sans-serif`,
         transitionDuration: '150ms',
         transitionProperty: 'all'
       }}
@@ -195,7 +195,7 @@ export default function AnimatedText({ text, onReset = () => {} }: AnimatedTextP
               <WordGroup text={segment.text} onReset={onReset} />
             ) : (
               <span 
-                className={`font-['Syne'] ${segment.href ? 'text-accent hover:underline font-semibold' : ''}`}
+                className={`font-['Inter'] ${segment.href ? 'text-accent hover:underline font-semibold' : ''}`}
               >
                 {segment.text}
               </span>

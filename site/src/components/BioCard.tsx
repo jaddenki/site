@@ -7,7 +7,7 @@ export default function BioCard() {
   return (
          <div className="bio-card bg-muted/30 rounded-xl transition-all duration-300 ease-out">
       {/* Main Bio Content - Always Visible */}
-      <div className="text-lg leading-relaxed text-secondary space-y-4 font-['Syne']">
+  <div className="text-lg leading-relaxed text-secondary space-y-4 font-['Inter']">
         <p>
           <AnimatedText text="Hi! I'm a third year undergrad studying CompE at [Purdue](https://www.purdue.edu)" />
         </p>
@@ -26,7 +26,7 @@ export default function BioCard() {
       {/* Expand/Collapse Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="mt-6 flex items-center gap-2 text-secondary hover:text-accent transition-colors font-['Syne'] text-sm group"
+  className="mt-6 flex items-center gap-2 text-secondary hover:text-accent transition-colors font-['Inter'] text-sm group"
       >
         <span>{isExpanded ? 'show less' : 'read more'}</span>
         <svg 
@@ -42,7 +42,7 @@ export default function BioCard() {
       <div className={`extended-bio overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-[2000px] opacity-100 mt-6' : 'max-h-0 opacity-0'}`}>
         <div className="space-y-6">
                      {/* Extended Text Content */}
-                       <div className="space-y-4 text-secondary font-['Syne']">
+                       <div className="space-y-4 text-secondary font-['Inter']">
 
               <p className="text-lg leading-relaxed">
                Oh wow... you pressed <span className="text-accent font-semibold">read more</span>... Hi, I'm Jadden! I like <span className="text-accent font-semibold">making games</span> and <span className="text-accent font-semibold">editing videos</span>. I'll use this as an opportunity to tell you more about what I'm up to:

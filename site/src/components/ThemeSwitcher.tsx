@@ -60,7 +60,7 @@ export default function ThemeSwitcher() {
               <button
                 key={t.name}
                 onClick={() => handleThemeChange(t.name)}
-                className={`border-0 text-center py-1 px-2 pt-3 pb-3 transition-colors font-['Syne'] font-semibold hover:bg-muted/30
+                className={`border-0 text-center py-1 px-2 pt-3 pb-3 transition-colors font-['Inter'] font-semibold hover:bg-muted/30
                   ${theme === t.name ? 'text-accent' : 'text-secondary'}`}
               >
                 {t.icon}

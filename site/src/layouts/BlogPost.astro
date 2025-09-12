@@ -9,12 +9,12 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 <Layout title={`${frontmatter.title}`}>
   <article class="prose px-4 sm:px-6">
     <header class="mb-8 sm:mb-12">
-      <h1 class="text-4xl font-semibold mb-4 font-['Syne']">{frontmatter.title}</h1>
+  <h1 class="text-4xl font-semibold mb-4 font-['Inter']">{frontmatter.title}</h1>
       <div class="text-secondary">
-        <time datetime={formattedDate} class="font-['Syne']">{formattedDate}</time>
+  <time datetime={formattedDate} class="font-['Inter']">{formattedDate}</time>
       </div>
     </header>
-    <div class="font-['Syne']">
+  <div class="font-['Inter']">
       <slot />
     </div>
   </article>
@@ -23,7 +23,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 <style is:global>
   /* Style adjustments for markdown content */
   .prose {
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -34,7 +34,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 
 
   .prose h2 {
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -42,7 +42,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   }
 
   .prose h3 {
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -53,7 +53,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   }
 
   .prose a:hover {
@@ -68,7 +68,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   }
 
   .prose li::before {
@@ -95,13 +95,13 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
   .prose em {
     color: var(--secondary);
     font-style: italic;
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   }
 
   .prose strong {
     color: var(--foreground);
     font-weight: 600;
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   }
 
   .prose img {
@@ -127,7 +127,7 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     margin-top: 0.75rem;
     color: var(--secondary);
     font-size: 0.875rem;
-    font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
     font-style: italic;
   }
   

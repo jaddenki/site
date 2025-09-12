@@ -5,8 +5,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        display: ['Cabinet Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['Inter', 'monospace'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: 'var(--background)',

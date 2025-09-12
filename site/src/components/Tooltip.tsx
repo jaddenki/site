@@ -75,7 +75,7 @@ export default function Tooltip() {
 
   return (
     <div 
-      className={`tooltip fixed top-0 left-0 pointer-events-none font-['Syne'] ${tooltip.show ? 'visible' : ''}`} 
+  className={`tooltip fixed top-0 left-0 pointer-events-none font-['Inter'] ${tooltip.show ? 'visible' : ''}`} 
       style={{ 
         transform: `translate(${tooltip.x}px, ${tooltip.y - 50}px)`,
         transformOrigin: 'center bottom',
@@ -88,7 +88,7 @@ export default function Tooltip() {
         fontSize: '0.875rem',
         zIndex: 1000,
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-        fontFamily: 'Syne, sans-serif',
+  fontFamily: 'Inter, sans-serif',
         whiteSpace: 'nowrap',
         width: 'auto',
         minWidth: '80px',
