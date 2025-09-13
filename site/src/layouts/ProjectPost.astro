@@ -8,12 +8,12 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 <Layout title={frontmatter.title}>
   <article class="project-post px-4 sm:px-6">
     <header class="mb-8 sm:mb-12">
-  <h1 class="text-4xl font-semibold mb-4 font-['Inter']">{frontmatter.title}</h1>
-  <div class="text-secondary font-['Inter']">
+  <h1 class="text-4xl font-semibold mb-4 font-['Opening Hours Sans']">{frontmatter.title}</h1>
+  <div class="text-secondary font-['Opening Hours Sans']">
         {frontmatter.description}
       </div>
     </header>
-  <div class="prose font-['Inter']">
+  <div class="prose font-['Opening Hours Sans']">
       <slot />
     </div>
   </article>
@@ -21,17 +21,17 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
 <style>
   .project-post {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
   
   .prose {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 </style>
 
 <style is:global>
   .prose {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -52,7 +52,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose ul li {
     position: relative;
     margin-bottom: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose ul li::before {
@@ -68,11 +68,11 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
   .prose ol li {
     margin-bottom: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose h2 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -80,7 +80,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   }
 
   .prose h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -91,7 +91,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose a:hover {
@@ -106,7 +106,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose pre {
@@ -124,11 +124,11 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
 
   .prose ol li {
     margin-bottom: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose h2 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
@@ -136,7 +136,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   }
 
   .prose h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.25rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -147,7 +147,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--accent);
     text-decoration: none;
     transition: all 0.2s ease;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose ul {
@@ -158,7 +158,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
   .prose li {
     position: relative;
     margin-bottom: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Opening Hours Sans', sans-serif;
   }
 
   .prose pre {
@@ -181,7 +181,7 @@ const formattedDate = frontmatter.date ? new Date(frontmatter.date).toISOString(
     transform: scale(1.01);
   }
   .prose code {
-    font-family: 'Inter', monospace;
+    font-family: 'Opening Hours Sans', monospace;
     font-size: 0.875em;
     color: var(--accent);
   }

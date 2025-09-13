@@ -267,13 +267,13 @@ const visualFeed = [
 </section>
 
 <p class="text-secondary text-lg ml-4 sm:ml-6 mb-8 ">
-  Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank" class="text-accent">Jadden</a> and <a href="https://astro.build" target="_blank" class="text-accent">Astro</a>. Typeface is <a href="https://fonts.google.com/specimen/Inter" target="_blank" class="text-accent">Inter</a>.
+  Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank" class="text-accent">Jadden</a> and <a href="https://astro.build" target="_blank" class="text-accent">Astro</a>. Typeface is <a href="https://github.com/opening-hours-studio/opening-hours-sans" target="_blank" class="text-accent">Opening Hours Sans</a>.
 </p>  
 
 
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  /* Opening Hours Sans font is loaded via @font-face in theme.css */
 
   /* Project Card - With hover effects */
   .project-card {
@@ -393,7 +393,7 @@ const visualFeed = [
     color: var(--accent);
     padding: 0.75rem 1.25rem;
     border-radius: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Opening Hours Sans', sans-serif;
     font-size: 0.875rem;
     transform: translate(-50%, -100%);
     white-space: nowrap;
@@ -407,9 +407,9 @@ const visualFeed = [
     opacity: 1;
   }
   
-  /* Replace all font references with Inter */
+  /* Replace all font references with Opening Hours Sans */
   h1, h2, h3, p, span, a {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Opening Hours Sans', sans-serif !important;
   }
   
   /* Responsive adjustments */

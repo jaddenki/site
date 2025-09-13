@@ -195,7 +195,7 @@ export default function AnimatedText({ text, onReset = () => {} }: AnimatedTextP
               <WordGroup text={segment.text} onReset={onReset} />
             ) : (
               <span 
-                className={`font-['Inter'] ${segment.href ? 'text-accent hover:underline font-semibold' : ''}`}
+                className={`font-['Opening Hours Sans'] ${segment.href ? 'text-accent hover:underline font-semibold' : ''}`}
               >
                 {segment.text}
               </span>

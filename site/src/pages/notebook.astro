@@ -23,11 +23,11 @@ const formatDate = (date: string): string => {
   <div class="max-w-lg mx-auto px-4 sm:px-6">
     <section class="mb-16 sm:mb-20">
       <div class="mb-8 sm:mb-12">
-  <a href="/" class="text-secondary hover:text-primary transition-colors font-['Inter'] text-sm mb-4 inline-block">
+  <a href="/" class="text-secondary hover:text-primary transition-colors font-['Opening Hours Sans'] text-sm mb-4 inline-block">
           &lt back
         </a>
-  <h1 class="text-4xl font-semibold font-['Inter']">Notebook</h1>
-  <p class="text-secondary text-lg font-['Inter'] mt-4">
+  <h1 class="text-4xl font-semibold font-['Opening Hours Sans']">Notebook</h1>
+  <p class="text-secondary text-lg font-['Opening Hours Sans'] mt-4">
           curious about my  <a href="/blog/coursework" class="text-accent">coursework</a>? 
           also, here's a bit of <a href="/blog/recommendations" class="text-accent">what inspires me</a> ;)
 
@@ -36,20 +36,20 @@ const formatDate = (date: string): string => {
     </section>
 
     <section class="mb-16">
-  <h1 class="text-3xl font-semibold font-['Inter'] mb-12">Blog Posts</h1>
+  <h1 class="text-3xl font-semibold font-['Opening Hours Sans'] mb-12">Blog Posts</h1>
       <div class="grid grid-cols-1 gap-6 sm:gap-8 mb-12 sm:mb-16">
         {sortedPosts.map(post => (
           <a href={post.link} class="block group">
             <div class="border border-muted rounded-lg p-4 sm:p-6 transition-all hover:border-accent">
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 sm:mb-3">
-                <h3 class="font-['Inter'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
+                <h3 class="font-['Opening Hours Sans'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
                   {post.title}
                 </h3>
-                <span class="text-accent font-['Inter'] text-sm whitespace-nowrap sm:ml-4">
+                <span class="text-accent font-['Opening Hours Sans'] text-sm whitespace-nowrap sm:ml-4">
                   {formatDate(post.date)}
                 </span>
               </div>
-              <p class="text-secondary font-['Inter'] leading-relaxed">
+              <p class="text-secondary font-['Opening Hours Sans'] leading-relaxed">
                 {post.description}
               </p>
             </div>
@@ -59,26 +59,26 @@ const formatDate = (date: string): string => {
     </section>
 
     <section class="mb-32">
-  <h1 class="text-3xl font-semibold font-['Inter'] mb-12">Project Notes</h1>
+  <h1 class="text-3xl font-semibold font-['Opening Hours Sans'] mb-12">Project Notes</h1>
       <div class="grid grid-cols-1 gap-6 sm:gap-8">
         {projectNotes.map(project => (
           <a href={project.link} class="block group">
             <div class="border border-muted rounded-lg p-4 sm:p-6 transition-all hover:border-accent">
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 sm:mb-3">
-                <h3 class="font-['Inter'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
+                <h3 class="font-['Opening Hours Sans'] text-xl sm:text-2xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
                   {project.title}
                 </h3>
-                <span class="text-accent font-['Inter'] text-sm whitespace-nowrap sm:ml-4">
+                <span class="text-accent font-['Opening Hours Sans'] text-sm whitespace-nowrap sm:ml-4">
                   {formatDate(project.date)}
                 </span>
               </div>
-              <p class="text-secondary font-['Inter'] leading-relaxed">
+              <p class="text-secondary font-['Opening Hours Sans'] leading-relaxed">
                 {project.description}
               </p>
               {project.tags && (
                 <div class="flex flex-wrap gap-2 mt-3 sm:mt-4">
                   {project.tags.map((tag) => (
-                    <span class="px-2 py-1 text-xs sm:text-sm rounded-full bg-muted text-secondary font-['Inter']">
+                    <span class="px-2 py-1 text-xs sm:text-sm rounded-full bg-muted text-secondary font-['Opening Hours Sans']">
                       {tag}
                     </span>
                   ))}

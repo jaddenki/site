@@ -75,7 +75,7 @@ export default function Tooltip() {
 
   return (
     <div 
-  className={`tooltip fixed top-0 left-0 pointer-events-none font-['Inter'] ${tooltip.show ? 'visible' : ''}`} 
+  className={`tooltip fixed top-0 left-0 pointer-events-none font-['Opening Hours Sans'] ${tooltip.show ? 'visible' : ''}`} 
       style={{ 
         transform: `translate(${tooltip.x}px, ${tooltip.y - 50}px)`,
         transformOrigin: 'center bottom',

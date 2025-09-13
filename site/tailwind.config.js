@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['Inter', 'monospace'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Opening Hours Sans', 'system-ui', 'sans-serif'],
+        mono: ['Opening Hours Sans', 'monospace'],
+        display: ['Opening Hours Sans', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: 'var(--background)',

@@ -55,7 +55,7 @@ function TitleLetter({ letter, isAccent = false }: TitleLetterProps) {
     <span
       className={`inline-block transition-all ${isAccent ? 'text-accent' : ''}`}
       style={{
-        fontFamily: 'Inter',
+        fontFamily: 'Opening Hours Sans',
         fontWeight: INTER_WEIGHTS[weightIndex],
         transitionDuration: '100ms'
       }}

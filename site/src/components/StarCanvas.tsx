@@ -179,7 +179,7 @@ export default function StarCanvas() {
   }, [])
 
   return (
-  <div className="text-center text-lg font-['Inter'] font-semibold">
+  <div className="text-center text-lg font-['Opening Hours Sans'] font-semibold">
       <canvas 
         ref={canvasRef}
         className="w-full h-64"
