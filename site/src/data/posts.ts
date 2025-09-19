@@ -15,11 +15,26 @@ export const posts: Post[] = [
     published: true
   },
   {
+    title: "building funny games about people",
+    description: "making worlds where people act like people",
+    date: "2025-08",
+    link: "/blog/games-about-people",
+    published: true
+  },
+  
+  {
     title: "recommendations",
-    description: "things i love",
-    date: "2024-03",
+    description: "things i'm enjoying",
+    date: "2025-05",
     link: "/blog/recommendations",
-    published: false
+    published: true
+  },
+  {
+    title: "coursework",
+    description: "updated to fall 2025",
+    date: "2025-08",
+    link: "/blog/coursework",
+    published: true
   },
   {
     title: "why i rationalize play",

@@ -240,3 +240,112 @@ button:hover, .button:hover {
   80% { transform: translate3d(2px, 2px, 0); }
   90% { transform: translate3d(-2px, 2px, 0); }
 }
+
+/* Code styling */
+code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Courier New', monospace;
+  font-size: 0.875em;
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--foreground);
+}
+
+/* Code blocks */
+pre {
+  background-color: var(--background);
+  border: 1px solid var(--foreground);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+/* Code inside pre blocks */
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+
+/* Syntax highlighting support */
+pre .token.comment,
+pre .token.prolog,
+pre .token.doctype,
+pre .token.cdata {
+  color: var(--secondary);
+  font-style: italic;
+}
+
+pre .token.punctuation {
+  color: var(--foreground);
+}
+
+pre .token.property,
+pre .token.tag,
+pre .token.boolean,
+pre .token.number,
+pre .token.constant,
+pre .token.symbol,
+pre .token.deleted {
+  color: var(--accent);
+}
+
+pre .token.selector,
+pre .token.attr-name,
+pre .token.string,
+pre .token.char,
+pre .token.builtin,
+pre .token.inserted {
+  color: var(--foreground);
+}
+
+pre .token.operator,
+pre .token.entity,
+pre .token.url,
+pre .language-css .token.string,
+pre .style .token.string {
+  color: var(--accent);
+}
+
+pre .token.atrule,
+pre .token.attr-value,
+pre .token.keyword {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+pre .token.function,
+pre .token.class-name {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+pre .token.regex,
+pre .token.important,
+pre .token.variable {
+  color: var(--accent);
+}
+
+/* Mobile code styling */
+@media (max-width: 640px) {
+  code {
+    font-size: 0.8em;
+    padding: 0.1rem 0.25rem;
+  }
+  
+  pre {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    margin: 1rem 0;
+  }
+}
