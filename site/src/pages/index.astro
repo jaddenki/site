@@ -65,6 +65,8 @@ const visualFeed = [
       <div class="max-w-none">
         <BioCard client:load />
         
+
+
         <div class="flex justify-between items-center mt-6">
           <div class="flex gap-4">
           <a href="https://ring.purduehackers.com/previous?host=https://jadden.xyz" class="text-secondary hover:text-accent transition-colors">
@@ -103,6 +105,10 @@ const visualFeed = [
           </a>
           </div>
 
+
+
+
+
           <div class="flex gap-4">
           <a href="https://github.com/jaddenki" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -120,6 +126,7 @@ const visualFeed = [
             </svg>
           </a>
           <ResetButton client:load />
+
 </div>
 
         </div>
@@ -159,75 +166,10 @@ const visualFeed = [
       </article>
     </section>
 
-    <section class="mb-32">
-      <div class="mb-12">
-        <h2 class="text-lg font-semibold text-primary mb-4">
-          <h1 class="text-4xl font-semibold">Projects</h1>
-        </h2>
-      </div>
-      
-      <div class="space-y-12 sm:space-y-16">
-        {featuredProjects.map((project, index) => (
-                     <article class="project-card group rounded-xl overflow-hidden" data-title={project.title}>
-            <a href={project.link} class="block">
-              {project.image && (
-                <div class="aspect-video project-media">
-                  {isVideo(project.image) ? (
-                    <video
-                      src={project.image}
-                      autoplay
-                      loop
-                      muted
-                      playsinline
-                      class="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      class="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              )}
-              
-              <div class="project-content px-6 py-6">
-                <h3 class="text-lg font-semibold text-primary mb-3">
-                  {project.title}
-                </h3>
-                
-                <p class="text-secondary leading-relaxed mb-4 text-lg">
-                  {project.description}
-                </p>
-                
-                <div class="flex flex-wrap gap-2">
-                  {project.tags.slice(0, 4).map(tag => (
-                    <span class="project-tag px-3 py-1 text-xs rounded-full bg-muted text-secondary transition-all">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </a>
-          </article>
-        ))}
-      </div>
-      
-      <div class="mt-12 text-center">
-        <a 
-          href="/projects" 
-          class="inline-flex items-center text-secondary hover:text-accent transition-colors text-lg group"
-        >
-          wanna see more? &gt
-        </a>
-      </div>
-      
-      <Tooltip client:only="react" />
-    </section>
-  </div>
-
+    </div>
   </div>
 </Layout>
+
 
 <!-- Visual Feed Section - Full Window Width (Outside Layout component) -->
 <section class="mb-32 w-full">
@@ -275,43 +217,8 @@ const visualFeed = [
 <style>
   /* Opening Hours Sans font is loaded via @font-face in theme.css */
 
-  /* Project Card - With hover effects */
-  .project-card {
-    position: relative;
-    background-color: var(--background);
-    transition: all 0.3s ease;
-    border-radius: 0.75rem;
-  }
   
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Media styling with hover effects */
-  .project-media {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .project-card:hover .project-media {
-    transform: scale(1.02);
-  }
-  
-  /* Tags with hover effects */
-  .project-tag {
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-  }
-  
-  .project-card:hover .project-tag {
-    background-color: var(--accent);
-    color: var(--background);
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-  
+
   /* Visual Feed Grid - True Masonry Layout */
   .visual-feed-grid {
     columns: 4;

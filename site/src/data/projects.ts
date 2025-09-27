@@ -13,9 +13,18 @@ export const projects: Project[] = [
     title: 'procedural leaf venation',
     description: 'a visualization of leaf venation patterns using various cellular automata algorithms.',
     date: '2025-05-05',
-    tags: ['p5js', 'generative-art', 'graphics'],
+    tags: ['p5js', 'webgl', 'graphics'],
     link: '/projects/leaf-venation',
     image: '/vid/plv.mp4',
+    published: true
+  },
+  {
+    title: 'spill',
+    description: 'because projects aren\'t sterile or perfect—they\'re made by people, late nights, spilled coffee, and lots of trial & error.',
+    date: '2025-09-27',
+    tags: ['react', 'design', 'graphics'],
+    link: 'https://spill.purduehackers.com',
+    image: '/vid/Comp 2_2.mp4',
     published: true
   },
 
@@ -35,6 +44,15 @@ export const projects: Project[] = [
     tags: ['unity', 'game-dev', 'c#'],
     link: '/projects/etea',
     image: 'https://i.imgur.com/EqrRkLm.jpeg',
+    published: true
+  },
+  {
+    title: 'spread the love',
+    description: 'a silly free dating game where your flavor decides your fate. free on steam and itch with continuous updates.',
+    date: '2025-09-22',
+    tags: ['unity', 'game-dev', 'c#'],
+    link: 'https://store.steampowered.com/app/3852520/Spread_The_Love/',
+    image: 'https://i.imgur.com/FJNgSEV.png',
     published: true
   },
   {
@@ -63,7 +81,26 @@ export const projects: Project[] = [
     link: '/projects/game-jam',
     image: 'https://i.imgur.com/EgjmE20.jpeg',
     published: true
+  },
+  {
+    title: 'c3 website',
+    description: 'a website for the past and future of computing for community collaboratory.',
+    date: '2025-03-15',
+    tags: ['react', 'web-dev', 'astro', 'people', 'design'],
+    link: 'https://www.c3atpurdue.org',
+    image: 'https://imgur.com/VAl9ncU.png',
+    published: true
+  },
+  {
+    title: 'five dynamics branding',
+    description: 'a branding project for five dynamics, a suborbital rocket club.',
+    date: '2024-03-15',
+    tags: ['branding', 'design', 'logo', 'style-guide', 'case-study'],
+    link: '/projects/5d',
+    image: 'https://i.imgur.com/ktPErR6.png',
+    published: true
   }
+
   // {
   //   title: 'computing for community collaboratory',
   //   description: 'a website for the past and future of computing for community collaboratory.',
