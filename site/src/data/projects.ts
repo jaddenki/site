@@ -27,7 +27,15 @@ export const projects: Project[] = [
     image: '/vid/Comp 2_2.mp4',
     published: true
   },
-
+  {
+    title: 'ACID-R',
+    description: 'software to help the air force visualize company data',
+    date: '2025-07-27',
+    tags: ['nodejs', 'react', 'sql', 'typescript'],
+    link: 'https://www.purdue.edu/newsroom/2025/Q3/quantum-research-sciences-developing-ai-platform-to-help-air-force-more-efficiently-connect-with-industry/',
+    image: 'https://www.purdue.edu/newsroom/wp-content/uploads/2025/08/QRS-feature.jpg',
+    published: true
+  },
   {
     title: 'BURST ✷',
     description: 'a showcase of student-made creative technical projects by purdue hackers.',
@@ -38,7 +46,7 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'etea',
+    title: 'ETea',
     description: 'a video game where you\'re an alien bobarista pretending to be human.',
     date: '2025-02-20',
     tags: ['unity', 'game-dev', 'c#'],
@@ -47,7 +55,7 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'spread the love',
+    title: 'Spread the Love',
     description: 'a silly free dating game where your flavor decides your fate. free on steam and itch with continuous updates.',
     date: '2025-09-22',
     tags: ['unity', 'game-dev', 'c#'],
@@ -56,7 +64,7 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'crowd-aware multi-agent ai',
+    title: 'Crowd-aware Multi-agent AI',
     description: 'simulating NPC behavior with RVO and behavior trees to model realistic crowd interactions in virtual environments.',
     date: '2024-02-15',
     tags: ['unreal', 'game-dev', 'ai'],
@@ -74,7 +82,7 @@ export const projects: Project[] = [
   //   published: true
   // },
   {
-    title: 'c3 game jam',
+    title: 'C3 Game Jam',
     description: 'a game jam focused on translating academic research into playable experiences.',
     date: '2025-03-15',
     tags: ['people', 'game-dev'],
@@ -83,7 +91,7 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'c3 website',
+    title: 'C3 Website',
     description: 'a website for the past and future of computing for community collaboratory.',
     date: '2025-03-15',
     tags: ['react', 'web-dev', 'astro', 'people', 'design'],
@@ -92,13 +100,13 @@ export const projects: Project[] = [
     published: true
   },
   {
-    title: 'five dynamics branding',
+    title: 'Five Dynamics Branding',
     description: 'a branding project for five dynamics, a suborbital rocket club.',
     date: '2024-03-15',
     tags: ['branding', 'design', 'logo', 'style-guide', 'case-study'],
     link: '/projects/5d',
     image: 'https://i.imgur.com/ktPErR6.png',
-    published: true
+    published: false
   }
 
   // {
