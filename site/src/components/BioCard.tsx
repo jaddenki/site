@@ -9,18 +9,14 @@ export default function BioCard() {
       {/* Main Bio Content - Always Visible */}
   <div className="text-lg leading-relaxed text-secondary space-y-4 font-['Opening Hours Sans']">
         <p>
-          <AnimatedText text="Hi! I'm a third year undergrad studying CompE at [Purdue](https://www.purdue.edu/) concentrating in computer systems and software engineering" />
+          <AnimatedText text="Hi! I'm a third year undergrad studying CompE at [Purdue](https://www.purdue.edu/) who loves building things that blend hardware and software" />
         </p>
 
         <p className="text-lg leading-relaxed">
-          I'm passionate about creative tech, motion, and the spaces in between, and I care deeply about building software that gets used by real people
+          I care deeply about building software that gets used by real people and making technology that feels tangible and purposeful
         </p>
         
-        {/* <p>
-          <AnimatedText text="Right now, I help grow a culture of joyful, chaotic tinkering as the Communications Lead for [Purdue Hackers](https://www.purduehackers.com) and support civic-minded tech projects as a Student Lab Manager at [C3](https://honors.purdue.edu/research/generators/c3.php)" />
-        </p> */}
-        
-        <p className="text-lg leading-relaxed">Talk to me about games, media trends, and editing</p>
+        <p className="text-lg leading-relaxed">Talk to me about games, video editing, and keyboards</p>
       </div>
 
       {/* Expand/Collapse Button */}
@@ -45,41 +41,23 @@ export default function BioCard() {
                        <div className="space-y-4 text-secondary font-['Opening Hours Sans']">
 
               <p className="text-lg leading-relaxed">
-               Hi, I'm Jadden! I like <span className="text-accent font-semibold">making software</span> and <span className="text-accent font-semibold">editing videos</span>. I'll use this as an opportunity to tell you more about what I'm up to:
-              </p>
-
-
-              {/* <p className="text-lg leading-relaxed">
-                I'm concentrating in <span className="text-accent font-semibold">computer systems and software engineering</span> as a computer engineering major at Purdue, where I'm especially fascinated by embedded systems and signal processing architectures
-              </p> */}
-              
-              <p className="text-lg leading-relaxed">
-  During Summer 2025, I worked as a <span className="text-accent font-semibold">software programmer</span> on a Purdue-affiliated research grant (<span className="text-accent font-semibold">SBIR Phase I</span>), helping prototype a platform for improving Air Force operations and decision workflows. It involved full-stack development, frontend UX design, and backend tooling focused on performance and usability, basically taking messy real-world data and making it actually useful for people who need to make important decisions. Read the article about it <a href="https://www.purdue.edu/newsroom/2025/Q3/quantum-research-sciences-developing-ai-platform-to-help-air-force-more-efficiently-connect-with-industry/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">here</a>!
-</p>
-
-              <p className="text-lg leading-relaxed">
-                I'm also a <span className="text-accent font-semibold">student software developer</span> at the <a href="https://envision.center" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Envision Center</a>, where I work on scientific visualization projects, virtual reality applications, and multimedia production. I help researchers communicate complex concepts through interactive visualizations
+                At the <a href="https://www.rcac.purdue.edu/envision" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Envision Center</a>, I work across the stack: designing an ESP32-powered photometric stereo rig for 3D artists and contributing to a <a href="https://envision.center/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">cross-platform MR classroom</a> for Meta Quest 3 and Vision Pro (used by 20+ departments).
               </p>
               
               <p className="text-lg leading-relaxed">
-                At <a href="https://www.c3atpurdue.org" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">C3 (Computing for Community Collaboratory)</a>, I work as a <span className="text-accent font-semibold">Student Lab Manager</span> supporting projects that leverage computing for social good. That means organizing student research and fostering inclusive collaboration. <a href="/projects/game-jam" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">We held a 48 hour research-oriented game jam!</a>
+                Last summer, I prototyped a data platform for the U.S. Air Force, working in tight sprint cycles to ship production-quality software fast. <a href="https://www.purdue.edu/newsroom/2025/Q3/quantum-research-sciences-developing-ai-platform-to-help-air-force-more-efficiently-connect-with-industry/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Read more here</a>
               </p>
-              
-              <p className="text-lg leading-relaxed">
-                As the <span className="text-accent font-semibold">Communications Division Lead</span> at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Purdue Hackers</a>, I help run events and celebrate scrappy experimentation. Whether it's a game jam, <a href="https://burst.purduehackers.com/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">art show</a>, or hardware hack, I believe in making room for beginner joy and low-stakes failure
-              </p>
-              
-              <p className="text-lg leading-relaxed">
-  I care deeply about <span className="text-accent font-semibold">accessibility in design and public media</span>, whether that's making sure a data visualization is readable by everyone or ensuring a game is playable regardless of ability. Good software should work for everyone, not just the people who built it
-</p>
 
               <p className="text-lg leading-relaxed">
-                Outside of all of that, you'll find me watching deep dive analyses of Reddit threads 
-                and horror games, developing <a href="https://fruitjamms.github.io/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">games</a> with friends, <a href= "https://www.instagram.com/igarakii/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">editing a video</a> that strains my own eyes, or logging my thoughts on <a href="https://letterboxd.com/jaddenki/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">movies</a>
+                As Communications Lead at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Purdue Hackers</a> (3K+ members), I help run creative tech events and celebrate scrappy experimentation. I thrive in environments full of curiosity, late-night debugging, and low-stakes failure. We're currently working on a showcase of student-made creative technical projects, <a href="https://spill.purduehackers.com" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">spill ≋</a>
+              </p>
+              
+              <p className="text-lg leading-relaxed">
+                Outside of that: making<a href="https://jam.ms" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline"> games</a>, editing<a href="https://www.instagram.com/igarakii/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline"> videos</a>, taking <a href="https://garden.jadden.xyz" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">photos</a>, and logging thoughts on <a href="https://letterboxd.com/jaddenki/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">movies</a>
               </p>
               
               <p className="text-lg leading-relaxed font-semibold bg-accent/10 rounded-lg inline-block">
-                  Currently, I'm playing <a href="https://store.steampowered.com/app/1610440/Minds_Beneath_Us/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Minds Beneath Us</a> and maintaining a <a href="https://store.steampowered.com/app/3852520/Spread_The_Love/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">silly dating game about fruit jams</a>
+                  Currently playing <a href="https://store.steampowered.com/app/1610440/Minds_Beneath_Us/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Minds Beneath Us</a> and maintaining a <a href="https://store.steampowered.com/app/3852520/Spread_The_Love/" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">silly dating game about fruit jams</a>
               </p>
 
 
