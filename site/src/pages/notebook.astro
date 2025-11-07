@@ -49,28 +49,6 @@ const formatDate = (date: string): string => {
       </div>
     </section>
 
-    <section id="blog-posts-section" class="mb-12">
-  <h1 class="text-2xl font-semibold font-['Opening Hours Sans'] mb-6">Blog Posts</h1>
-      <div class="grid grid-cols-1 gap-4 mb-8">
-        {sortedPosts.map(post => (
-          <a href={post.link} class="block group">
-            <div class="border border-muted rounded-lg p-3 sm:p-4 transition-all hover:border-accent">
-              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 sm:mb-2">
-                <h3 class="font-['Opening Hours Sans'] text-lg sm:text-xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
-                  {post.title}
-                </h3>
-                <span class="text-accent font-['Opening Hours Sans'] text-xs whitespace-nowrap sm:ml-4">
-                  {formatDate(post.date)}
-                </span>
-              </div>
-              <p class="text-secondary font-['Opening Hours Sans'] text-sm leading-relaxed">
-                {post.description}
-              </p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
 
     <section id="project-notes-section" class="mb-24">
   <h1 class="text-2xl font-semibold font-['Opening Hours Sans'] mb-6">Project Notes</h1>
@@ -103,6 +81,30 @@ const formatDate = (date: string): string => {
         ))}
       </div>
     </section>
+
+    <section id="blog-posts-section" class="mb-12">
+      <h1 class="text-2xl font-semibold font-['Opening Hours Sans'] mb-6">Blog Posts</h1>
+          <div class="grid grid-cols-1 gap-4 mb-8">
+            {sortedPosts.map(post => (
+              <a href={post.link} class="block group">
+                <div class="border border-muted rounded-lg p-3 sm:p-4 transition-all hover:border-accent">
+                  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 sm:mb-2">
+                    <h3 class="font-['Opening Hours Sans'] text-lg sm:text-xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
+                      {post.title}
+                    </h3>
+                    <span class="text-accent font-['Opening Hours Sans'] text-xs whitespace-nowrap sm:ml-4">
+                      {formatDate(post.date)}
+                    </span>
+                  </div>
+                  <p class="text-secondary font-['Opening Hours Sans'] text-sm leading-relaxed">
+                    {post.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+    
   </div>
 </Layout>
 

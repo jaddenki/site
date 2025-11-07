@@ -58,9 +58,9 @@ export const projects: Project[] = [
     title: 'Spread the Love',
     description: 'a silly free dating game where your flavor decides your fate. free on steam and itch with continuous updates.',
     date: '2025-09-22',
-    tags: ['unity', 'game-dev', 'c#'],
-    link: 'https://store.steampowered.com/app/3852520/Spread_The_Love/',
-    image: 'https://i.imgur.com/FJNgSEV.png',
+    tags: ['unity', 'game-dev', 'c#', 'ui-design'],
+    link: '/projects/spreading-the-love',
+    image: '/projects/stl/image4.jpg',
     published: true
   },
   {

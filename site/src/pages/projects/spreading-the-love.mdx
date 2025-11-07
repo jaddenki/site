@@ -1,0 +1,143 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: Spreading The Love To You
+description: a goofy dating sim where you match with characters based on your jam personality type
+date: 2025-08
+image: /projects/stl/image1.png
+tags: ['unity', 'game-dev', 'c#', 'ui-design']
+---
+
+![STL Banner](/projects/stl/image4.jpg)
+*This is my entry for [SIGHORSE](https://sig.horse) by [Kartavya Vashishtha](https://github.com/kartva)*
+
+**TL;DR**  
+I worked on a goofy dating sim with my friends where you match with one of six characters based on what fruit jam you get on a personality test. 
+
+**What even is STL...**  
+Spread the Love is a bite-sized dating sim built to feel familiar but off-kilter, dressed up inside a fake operating system called FruityOS. You boot up this strange computer, personalize your character, take a jam-flavored personality quiz, and get matched with one of six eccentric characters.  
+
+![Jam Types](/projects/stl/image1.png)  
+
+
+The team wanted to create something that felt polished and self-contained, a smaller project we could actually ship within a few months while still feeling creatively fulfilled. It started as a way to "finish something," but ended up becoming one of our most cohesive and charming side projects.
+
+![Character Customization](/projects/stl/image14.png)  
+
+
+Originally, the idea started out as a free character customization app to go along with our (still in development) game, [ETea](https://store.steampowered.com/app/3085040/ETea/). However, we kept deciding to add on details that we found interesting: we wanted to make a personality test, to develop our ETea NPCs more, and to figure out a way to get a complex dialogue system working. To say the least, we got that done… and way more…!
+
+That slow snowball of scope creep is what turned it into Spread the Love.
+
+The team consisted of my friends [Saahil](https://x.com/anullja), [Alicia](http://aliciazhou.xyz), and [Mason](https://x.com/randompossibly), alongside me. We've all worked together before, so this was both familiar and refreshing; a chance to test our creative chemistry in a smaller, more focused project.
+
+**The Cast**  
+Before going into anything else, I'd like to introduce you to the datetable characters in our game. Our characters are all exaggerated archetypes (and a little absurd in my opinion), but they're all written to feel endearing and funny in their own way. I drew the guys while Alicia drew the girls, and we both tried to match the styles so that everything felt unified. No character was scrapped, either; every character was a character from ETea, just given more depth and personality here.
+
+We have:  
+![Allen](/projects/stl/image7.png)
+
+- Allen, a child prodigy who has a masters in computer science from NIT. He was supposed to be coding the future, but now he stocks overpriced beans at the local grocery store. He's quiet, sharp, and devastatingly observant, especially when watching movies.
+
+![Jet](/projects/stl/image11.png)
+
+- Jet, a walking rave flyer who peaked during quarantine when Lingon Legends was at its high but refuses to admit it. He's charismatic, sexy, and most definitely a bit performative. Jet treats love like an Instajam story. He'll flirt, overshare, then disappear.
+
+![Cher](/projects/stl/image12.png)
+
+- Cher. They don't talk much. They don't need to. Currently working through unresolved parental issues via designing furniture and brooding. Emotionally resides in a foggy European arthouse film. You won't understand them, but you'll want to.
+
+![Milli](/projects/stl/image17.png)
+
+- Milli, an overly enthusiastic engineer who thinks every problem can (and should) be fixed by smacking it with a wrench. Aggressively affectionate mechanic who *literally* climbs walls for fun. She's touchy, loud, and way too excited to meet you.
+
+![Thea](/projects/stl/image13.png)
+
+- Thea, a sweet girl who runs the boba shop– and *you*. She's the one with a clipboard, a plan, and a backup clipboard in case the first one breaks. Warm, nurturing, and ever so slightly manipulative. Will absolutely gaslight you, but only to make you hydrate and succeed.
+
+![Melody](/projects/stl/image5.png)
+
+- Melody, everyone's favorite cozy *kitch.tv* streamer who accidentally makes you feel at home. Lives between three monitors and an avalanche of *Blooblet* plushies. She'll trip over cables, and then apologize to them.
+
+Every character has their own mini story and dialogue, tailored to each player by the likes and dislikes they have chosen. We wanted the players to laugh and also (maybe) care a little about these people made of pixels. Allen was my favorite to write because he types really similar to me; he's basically me if I were a nerdier and sadder guy. Jet was also hilarious to write because he's such an over-the-top "gamer guy," and I love it when people notice that.
+
+The team had their favorites too:
+
+- Saahil: Cher (originally Thea or Melody, but the dialogue sold him)  
+- Alicia: Cher or Melody (she designed both)  
+- Mason: Allen (because "the other guy is insufferable")
+
+Once you finish creating your profile, you're shown a lineup of potential matches within the cast. You match with a character based on your jam flavor type (which is secretly determined during the personality quiz), and you're then brought to a texting sequence where you get to know them and decide if you want to go on a date with them. During the actual date, each character has a corresponding minigame to keep the overall dating game experience lively. From trying not to die from bees to playing a game of Blooblets, all of the games are very fun.
+
+![Text Messaging](/projects/stl/image15.png)  
+
+![Blooblets Game](/projects/stl/image9.png)  
+
+**Working Process**  
+Technically, I was already comfortable with 2D Unity games, but this pushed me into new territory. I learned a lot about building a fake desktop OS, Unity's UI system, and optimizing performance across multiple minigames. For example, Cher's minigame originally spawned dozens of fish per second and tanked the framerate, so I implemented object pooling to recycle inactive instances instead of creating new ones every frame. Little fixes like that helped make the game playable even on lower-end machines.
+
+![Cher Minigame](/projects/stl/image8.png)  
+
+I also spent a lot of time balancing writing, design, and code so that everything, from the UI to the jokes, felt cohesive. My debugging process was… not glamorous. A lot of clicking through menus and rewatching the same scenes until they broke. I eventually built in debug shortcuts to skip time-based sequences so I could test things faster.
+
+![Idea Mockup](/projects/stl/image16.png)  
+
+
+**FruityOS**  
+The game starts with you booting up your PC into this custom retro operating system. The main part of the game–*Spread The Love*– starts up immediately, but the user is able to explore 7 other apps on the desktop computer, all parodies of real ones: Notes, LockedIn (LinkedIn), and Ribbit (Reddit). You might enjoy some of them as we used these apps as worldbuilding tools. Through these apps, you can see posts from the founder of Spread The Love or angry players ranting about in-game characters. It's a way of making the world feel lived-in without a ton of exposition.
+
+![FruityOS Apps](/projects/stl/image21.png)  
+
+
+**The Dating Flow**
+
+1. As you open up *Spread The Love*, the entry point is profile creation. We start this by asking for your name and your profile photo (which prompts a **character customization** sequence). We wanted people to be able to make *whatever* they want, so we made sure to include a lot of options (still in progress!).
+
+![Character Customization](/projects/stl/image3.png)  
+
+2. The user is then prompted to take a **personality test** to get one of 12 jam flavor types. This indicates which of the 6 characters (who will soon be introduced!) the user will match with.
+
+![Personality Test](/projects/stl/image22.png)  
+
+
+3. After the quiz, you're guided into creating a **dating profile**. This is where the off-kilter humor really shines. You are able to make your own bio, select (overly specific) likes and dislikes, and draw a beautiful signature. 
+
+![Player Profile](/projects/stl/image6.png)  
+
+
+4. After profile creation, you are able to go through some **potential dates** and see our cast of 6 charming characters. 
+
+![Character Profile](/projects/stl/image19.png)  
+
+
+5. If you choose to pursue a match, you'll text with them and eventually go on a date, each capped off with a **themed minigame** to keep the pacing playful.
+
+![Date Dialogue](/projects/stl/image18.png)  
+
+
+**What Didn't Make the Cut**  
+There were some fun cuts along the way.
+
+![Milli's Minigame](/projects/stl/image20.png)  
+
+- Milli's minigame was going to be a rock climbing game, but we couldn't make the perspective feel right, so it became an audio equalizer puzzle instead; this was actually inspired by my coursework as a computer engineering student.
+
+![Jet's Minigame](/projects/stl/image10.png)  
+
+- Jet's minigame started as a full League of Legends parody ("Lingon Legends") but we pivoted toward a simpler, Street Fighter-style dupe to keep it more accessible.
+
+![Dating Profile UI](/projects/stl/image2.png)  
+
+- Dating profiles were supposed to have three photos each, but I didn't want to draw that many, so I reworked the UI to highlight text details instead.
+
+**Playtesting and Feedback**  
+We had around 15–20 playtesters before release, mostly friends and people curious about our dev process. Watching them play was hilarious; everyone gravitated toward the character that matched their energy.
+
+When we released the game on Steam, it wasn't perfectly polished, so we had to release a few patches and hotfixes based on feedback. But seeing players laugh, screenshot their results, and talk about their favorite dates made all the late nights worth it. These are still ongoing, and we are working on future patches and content updates.
+
+**Quick Learnings**  
+Spending a summer on Spread the Love was like practicing "precise absurdity." We wanted the game to feel weird and self-aware, but also grounded enough to care about these pixel people.
+
+It taught us how to focus on charm and tone, trim down unnecessary complexity, and ship something people genuinely enjoy. It also reminded me that cohesion is about meticulous planning, shared humor, and constantly clicking through every fake desktop window until it feels right.  
+
+If you're interested, you can check out the game on Steam: [Spread The Love](https://store.steampowered.com/app/3250360/Spread_The_Love/)
+
