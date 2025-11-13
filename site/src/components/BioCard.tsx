@@ -9,11 +9,11 @@ export default function BioCard() {
       {/* Main Bio Content - Always Visible */}
   <div className="text-lg leading-relaxed text-secondary space-y-4 font-['Opening Hours Sans']">
         <p>
-          <AnimatedText text="Hi! I'm a third year undergrad studying CompE at [Purdue](https://www.purdue.edu/)" />
+          <AnimatedText text="Hi! I'm a third year undergrad student and motion artist studying CompE at [Purdue](https://www.purdue.edu/)" />
         </p>
 
         <p className="text-lg leading-relaxed">
-          I care deeply about building software that gets used by real people and making technology that feels tangible and purposeful
+          I create interfaces that move with purpose, spanning code, motion, and tangible design
         </p>
         
         <p className="text-lg leading-relaxed">Talk to me about games, video editing, and keyboards</p>
