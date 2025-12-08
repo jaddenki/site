@@ -1,0 +1,18 @@
+{
+  "name": "Jadden Picardal",
+  "short_name": "jadden",
+  "description": "Interactive experiences that move with purpose",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0000ff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+
+

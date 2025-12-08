@@ -5,20 +5,16 @@ const themes = [
   { name: 'dark', icon: '(T_T)' },
   { name: 'blue', icon: '(0_0)' },
   { name: 'green', icon: '(>_<)' },
-  // { name: 'pink', icon: '(o//o)' },
-  // { name: 'orange', icon: '(3_3)' },
-  // { name: 'purple', icon: '(T_T)' }
 ];
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      // yeah ignore system preference 0_0
       return localStorage.getItem('theme') || 'light';
     }
     return 'light';
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -28,47 +24,37 @@ export default function ThemeSwitcher() {
     if (storedTheme) {
       setTheme(storedTheme);
       document.documentElement.setAttribute('data-theme', storedTheme);
+      const idx = themes.findIndex(t => t.name === storedTheme);
+      if (idx !== -1) setCurrentIndex(idx);
     } else {
-      // Set default theme to light instead of checking system preference
       setTheme('light');
       document.documentElement.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
     }
   }, []);
 
-  const handleThemeChange = (newTheme: string) => {
+  const cycleTheme = () => {
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const newTheme = themes[nextIndex].name;
+    setCurrentIndex(nextIndex);
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
-    setIsOpen(false);
   };
 
+  const currentTheme = themes.find(t => t.name === theme) || themes[0];
+
   return (
-    <div className="theme-switcher relative z-50">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="theme-button p-4 text-secondary hover:text-accent transition-colors rounded-full"
-        aria-label="Theme switcher"
-      >
-        {themes.find(t => t.name === theme)?.icon}
-      </button>
-      
-      {isOpen && (
-        <div className="theme-dropdown absolute right-0 top-full mt-2 pt-2 pb-2 border border-accent rounded-3xl bg-background/60 backdrop-blur-md min-w-[60px] w-auto z-50">
-          <div className="grid grid-cols-1">
-            {themes.map((t) => (
-              <button
-                key={t.name}
-                onClick={() => handleThemeChange(t.name)}
-                className={`border-0 text-center py-1 px-2 pt-3 pb-3 transition-colors font-['Opening Hours Sans'] font-semibold hover:bg-muted/30
-                  ${theme === t.name ? 'text-accent' : 'text-secondary'}`}
-              >
-                {t.icon}
+      onClick={cycleTheme}
+      className="nav-item flex flex-col items-center text-secondary hover:text-accent transition-all duration-200 cursor-pointer"
+      aria-label={`Current theme: ${theme}. Click to change.`}
+      style={{ border: 'none', outline: 'none', background: 'transparent' }}
+    >
+      <span className="nav-icon">
+        {currentTheme.icon}
+      </span>
+      <span className="nav-label">{theme}</span>
               </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
   );
 }

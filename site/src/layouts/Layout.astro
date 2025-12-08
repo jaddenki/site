@@ -1,18 +1,32 @@
 ---
 import '../styles/theme.css';
+import { ViewTransitions } from 'astro:transitions';
 import ThemeSwitcher from '../components/ThemeSwitcher';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title, 
+  description = "Interactive experiences that move with purpose. Motion artist and computer engineering student at Purdue.",
+  image = "https://github.com/jaddenki.png"
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
 
 const navItems = [
-  { name: 'home', path: '/' },
-  { name: 'notebook', path: '/notebook' },
-  { name: 'projects', path: '/projects' },
+  { name: 'home', path: '/', icon: '(>_>)' },
+  { name: 'notebook', path: '/notebook', icon: '(o_o)' },
+  { name: 'projects', path: '/projects', icon: '(*_*)' },
 ];
+
+const isActive = (path: string) => {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+};
 ---
 
 <!DOCTYPE html>
@@ -21,50 +35,193 @@ const navItems = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Opening Hours Sans font is loaded via @font-face in theme.css -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0000ff" />
+    
+    <!-- Preload critical font -->
+    <link rel="preload" href="/fonts/OpeningHoursSans-Regular.woff" as="font" type="font/woff" crossorigin />
+    
+    <!-- Preconnect to external domains for faster resource loading -->
+    <link rel="preconnect" href="https://i.imgur.com" />
+    <link rel="preconnect" href="https://github.com" />
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="dns-prefetch" href="https://i.imgur.com" />
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+    
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={Astro.url.href} />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
     <title>{title}</title>
-    <!-- Prevent theme flash -->
+    
+    <!-- View Transitions for smooth page navigations -->
+    <ViewTransitions />
+    
+    <!-- Prevent theme flash + persist theme across view transitions -->
     <script is:inline>
       const theme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', theme);
+      
+      // Re-apply theme after view transitions
+      document.addEventListener('astro:after-swap', () => {
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      });
+    </script>
+    
+    <!-- Register Service Worker -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW registration failed:', err));
+        });
+      }
     </script>
   </head>
   <body>
-    <div class="max-w-lg mx-auto">
-      <header class="py-8 sm:py-12">
-        <nav class="w-full px-4 sm:px-6">
-          <div class="flex items-center justify-between w-full flex-wrap">
-            <div class="flex items-center space-x-1 sm:space-x-2 flex-wrap">
-              {navItems.map((item, index) => (
-                <>
-                  <a
-                    href={item.path}
-                    class="text-secondary hover:text-accent transition-all py-2 px-2 sm:px-3 text-sm font-['Opening Hours Sans']"
-                  >
-                    {item.name}
-                  </a>
-                  {index < navItems.length - 1 && (
-                    <span class="text-muted">/</span>
-                  )}
-                </>
-              ))}
-            </div>
-            <ThemeSwitcher client:only="react" />
-          </div>
-        </nav>
-      </header>
-      
-      <main class="mt-6 sm:mt-8">
-        <slot />
-      </main>
+    <!-- Mobile Hamburger Button -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+      <span class="hamburger-icon">(=_=)</span>
+    </button>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-btn" id="close-menu-btn" aria-label="Close menu">
+        <span class="close-icon">(x_x)</span>
+      </button>
+      <div class="mobile-nav-items">
+        {navItems.map((item) => (
+          <a href={item.path} class={`mobile-nav-item ${isActive(item.path) ? 'mobile-nav-item-active' : ''}`}>
+            <span class="mobile-nav-icon">{item.icon}</span>
+            <span>{item.name}</span>
+          </a>
+        ))}
+      </div>
+      <div class="mobile-nav-bottom">
+        <ThemeSwitcher client:only="react" />
+      </div>
     </div>
+
+    <!-- Desktop Vertical Nav -->
+    <nav class="vertical-nav">
+      <div class="nav-items">
+        {navItems.map((item) => (
+          <a href={item.path} class={`nav-item ${isActive(item.path) ? 'nav-item-active' : ''}`} title={item.name}>
+            <span class="nav-icon">{item.icon}</span>
+            <span class="nav-label">{item.name}</span>
+          </a>
+        ))}
+      </div>
+      <div class="nav-bottom">
+        <ThemeSwitcher client:only="react" />
+      </div>
+    </nav>
+    
+    <main>
+      <slot />
+    </main>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script is:inline>
+      function setupMobileMenu() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (hamburgerBtn && closeBtn && mobileMenu) {
+          hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          });
+          
+          closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+          });
+          
+          // Close menu when clicking a nav link
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.remove('open');
+              document.body.style.overflow = '';
+            });
+          });
+        }
+      }
+      
+      // Run on initial load
+      setupMobileMenu();
+      
+      // Re-run after view transitions
+      document.addEventListener('astro:after-swap', setupMobileMenu);
+    </script>
   </body>
 </html>
 
 <style is:global>
+  /* View Transition Animations */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes slide-down {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-20px); opacity: 0; }
+  }
+
+  ::view-transition-old(root) {
+    animation: fade-out 0.2s ease-out forwards;
+  }
+
+  ::view-transition-new(root) {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+
+  /* Smooth main content transitions */
+  main {
+    view-transition-name: main-content;
+  }
+
+  ::view-transition-old(main-content) {
+    animation: slide-down 0.2s ease-out forwards;
+  }
+
+  ::view-transition-new(main-content) {
+    animation: slide-up 0.3s ease-out forwards;
+  }
+
+  /* Exclude nav from view transitions entirely */
+  .vertical-nav,
+  .hamburger-btn,
+  .mobile-menu {
+    view-transition-name: none;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -72,15 +229,14 @@ const navItems = [
 
   body {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  font-family: 'Opening Hours Sans', sans-serif;
+    font-family: 'Opening Hours Sans', sans-serif;
     background-color: var(--background);
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   main {
-    flex: 1;
     position: relative;
   }
 
@@ -89,45 +245,196 @@ const navItems = [
     height: auto;
   }
 
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .fade-in {
-    animation: fade-in 0.5s ease-out;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  
   ::selection {
     background-color: var(--accent);
     color: var(--background);
   }
 
-  a, button {
-    padding: 0.25rem;
-    margin: -0.25rem;
+  /* Vertical Navigation */
+  .vertical-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0.75rem;
+    z-index: 1000;
   }
 
-  @media (max-width: 640px) {
-    h1 {
-      font-size: 2rem !important;
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .nav-item:hover {
+    color: var(--accent);
+  }
+
+  .nav-item-active {
+    color: var(--accent);
+  }
+
+  .nav-item-active .nav-icon {
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+  }
+
+  .nav-icon {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid var(--muted);
+  }
+
+  .nav-item:hover .nav-icon {
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+  }
+
+  .nav-label {
+    font-size: 0.625rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .nav-bottom {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Hamburger Button - Mobile Only */
+  .hamburger-btn {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: var(--background);
+    border: 1px solid var(--muted);
+    border-radius: 12px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .hamburger-btn:hover {
+    color: var(--accent);
+  }
+
+  .hamburger-icon {
+    font-size: 1rem;
+    color: var(--foreground);
+  }
+
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    z-index: 2000;
+    flex-direction: column;
+    padding: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  .close-btn {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--foreground);
+    transition: all 0.2s ease;
+  }
+
+  .close-btn:hover {
+    color: var(--accent);
+  }
+
+  .close-icon {
+    font-size: 1.5rem;
+  }
+
+  .mobile-nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--foreground);
+    text-decoration: none;
+    font-size: 1.25rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-item:hover {
+    color: var(--accent);
+  }
+
+  .mobile-nav-item-active {
+    color: var(--accent);
+  }
+
+  .mobile-nav-icon {
+    font-size: 1rem;
+  }
+
+  .mobile-nav-bottom {
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    .vertical-nav {
+      display: none;
     }
-    
-    h2 {
-      font-size: 1.5rem !important;
+
+    .hamburger-btn {
+      display: block;
     }
-    
-    h3 {
-      font-size: 1.25rem !important;
+
+    .mobile-menu {
+      display: flex;
     }
-    
-    .prose {
-      font-size: 1rem !important;
+  }
+
+  @media (min-width: 769px) {
+    .hamburger-btn,
+    .mobile-menu {
+      display: none !important;
     }
   }
 </style>
