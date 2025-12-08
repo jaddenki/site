@@ -12,43 +12,51 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
 ---
 
 <Layout title={`${frontmatter.title}`}>
-  <article class="prose px-4 sm:px-6">
-    <div class="mb-6">
-      {isBlogPost && (
-        <a href="/notebook" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          back to notebook
-        </a>
-      )}
-      <!-- {isProjectPost && (
-        <a href="/projects" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          see more projects
-        </a>
-      )} -->
-    </div>
-    <header class="mb-8 sm:mb-12">
-      <h1 class="text-4xl font-semibold mb-4 font-['Opening Hours Sans']">{frontmatter.title}</h1>
-      <div class="text-secondary">
+  <div class="post-container">
+    <article class="prose">
+      <div class="mb-6">
         {isBlogPost && (
-          <time datetime={formattedDate} class="font-['Opening Hours Sans']">{formattedDate}</time>
+          <a href="/notebook" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            back to notebook
+          </a>
         )}
-        {isProjectPost && (
-          <div class="font-['Opening Hours Sans'] color-foreground">{frontmatter.description}</div>
-        )}
+        <!-- {isProjectPost && (
+          <a href="/projects" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            see more projects
+          </a>
+        )} -->
       </div>
-    </header>
-    <div class="font-['Opening Hours Sans']">
-      <slot />
-    </div>
-  </article>
+      <header class="mb-8 sm:mb-12">
+        <h1 class="text-4xl font-semibold mb-4 font-['Opening Hours Sans']">{frontmatter.title}</h1>
+        <div class="text-secondary">
+          {isBlogPost && (
+            <time datetime={formattedDate} class="font-['Opening Hours Sans']">{formattedDate}</time>
+          )}
+          {isProjectPost && (
+            <div class="font-['Opening Hours Sans'] color-foreground">{frontmatter.description}</div>
+          )}
+        </div>
+      </header>
+      <div class="font-['Opening Hours Sans']">
+        <slot />
+      </div>
+    </article>
+  </div>
 </Layout>
 
 <style is:global>
+  .post-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
   .prose {
     font-family: 'Opening Hours Sans', sans-serif;
     font-size: 1.125rem;
@@ -225,6 +233,12 @@ const formattedDate = frontmatter.date ? frontmatter.date : '';
     transition: background-color 0.3s ease;
   }
   
+  @media (max-width: 768px) {
+    .post-container {
+      padding: 0 1rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .prose {
       font-size: 1rem;

@@ -1,206 +1,219 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AnimatedText from '../components/AnimatedText';
-import AnimatedName from '../components/AnimatedName';
-import ResetButton from '../components/ResetButton';
 import { projects } from '../data/projects';
-import Tooltip from '../components/Tooltip';
-import BioCard from '../components/BioCard';
-
 
 const featuredProjects = projects
   .filter(project => project.published)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 4); // Show only top 4 projects
+  .slice(0, 3); // Only show 3 projects
 
-const isVideo = (url: string) => {
-  return url.match(/\.(mp4|webm|mov)$/i) !== null;
+const demoReel = {
+  description: 'a sneak peek into my experimental and client work',
+  videoUrl: 'https://www.youtube.com/embed/X4CYgSqLGf0?si=hetD0C9XLtZ3fOyA&autoplay=1&mute=1&controls=0&loop=1&playlist=X4CYgSqLGf0&playsinline=1',
 };
-
-
-  const demoReel = {
-    title: 'demo reel 2025',
-    description: 'a sneak peek into my experimental and client work',
-    videoUrl: 'https://www.youtube.com/embed/X4CYgSqLGf0?si=hetD0C9XLtZ3fOyA&loop=1&playlist=X4CYgSqLGf0&playsinline=1',
-    tags: ['after-effects', 'touch-designer', 'p5.js']
-  };
-
 
 const visualFeed = [
   { type: 'video', src: 'vid/c2.mp4', alt: 'Design exploration 1', size: 'square' },
   { type: 'image', src: 'https://i.imgur.com/iNpueeH.jpeg', alt: 'posterlad inspired photo', size: 'tall' },
   { type: 'image', src: 'https://i.imgur.com/U7a02ck.png', alt: 'Motion study 1', size: 'tall' },
   { type: 'image', src: 'https://i.imgur.com/fQRHoJr.png', alt: 'Brand work', size: 'square' },
-  // { type: 'image', src: 'https://i.imgur.com/Apd6boO.jpeg', alt: 'Typography study', size: 'wide' },
   { type: 'video', src: 'vid/dropped.mp4', alt: 'Animation test', size: 'square' },
   { type: 'video', src: 'vid/gyat.mp4', alt: 'Color exploration', size: 'square' },
   { type: 'video', src: '/vid/respell.mp4', alt: 'Interaction demo', size: 'wide' },
   { type: 'image', src: 'https://i.imgur.com/hAgWXUt.png', alt: 'Layout experiment', size: 'square' },
-//
-  // { type: 'image', src: 'https://i.imgur.com/HvtTUyX.png', alt: 'Banana Milk Matcha', size: 'square' },
   { type: 'image', src: 'https://i.imgur.com/ktPErR6.png', alt: 'Design system', size: 'wide' },
   { type: 'video', src: 'vid/mbayay_nm6kpg.mp4', alt: 'Prototype demo', size: 'square' },
 ];
+
 ---
 
 <Layout title="jadden picardal">
-  <div class="max-w-lg mx-auto px-4 sm:px-6">
+  <div class="content-container">
+
+    <section class="section mt-16 mb-8">
+      <!-- <h2 class="section-title">Motion Reel</h2> -->
+      <!-- <p class="section-intro">{demoReel.description}</p> -->
+      
+      <div class="video-container">
+          <iframe
+            src={demoReel.videoUrl}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+    </section>
+    
     <!-- Hero Section -->
-    <section class="mb-24 sm:mb-32">
-      <div class="mb-8 sm:mb-12">
-        <div class="flex items-center gap-4">
+    <section class="hero-section">
+      <div class="hero-header">
           <img 
             src="https://github.com/jaddenki.png" 
             alt="Jadden Picardal" 
-            class="w-16 h-16 rounded-full"
-          />
-          <div>
-            <h1 class="text-4xl font-semibold">Jadden Picardal</h1>
-            <!-- <p class="text-secondary text-lg mt-2">jpicarda [at] purdue [dot] edu</p> -->
-            <p class="text-secondary text-lg mt-2">jaddenpicardal [at] gmail [dot] com</p>
-          </div>
+          class="profile-photo"
+        />
+        <div class="hero-text">
+          <h1 class="hero-title">Jadden Picardal</h1>
+          <p class="hero-subtitle">jaddenpicardal [at] gmail [dot] com</p>
         </div>
       </div>
-      
-      <div class="max-w-none">
-        <BioCard client:load />
-        
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <p class="body-large">
+        I design interactive experiences that move with purpose.
+      </p>
+
+      <div class="body-columns">
+        <p class="body-text">
+          I'm a computer engineering student at 
+          <a href="https://www.purdue.edu" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Purdue</a>, specializing in Computer Systems and Software Engineering. I work with interactive media, motion design, 
+          <a href="https://jam.ms" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">game development</a>, and creative coding, building tools and experiences that feel both playful and purposeful.
+        </p>
+
+        <p class="body-text">
+I'm currently a Research Software Engineer at the 
+<a href="https://envision.center/" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Envision Center</a>, working on Mixed Reality development. I also serve as Communications Lead at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Purdue Hackers</a>, helping run creative tech events and celebrate scrappy experimentation.
+        </p>
+      </div>
 
 
-        <div class="flex justify-between items-center mt-6">
-          <div class="flex gap-4">
-          <a href="https://ring.purduehackers.com/previous?host=https://jadden.xyz" class="text-secondary hover:text-accent transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
+      <!-- Contact & Links -->
+      <div class="links-section">
+        <div class="social-links">
+          <a href="https://github.com/jaddenki" target="_blank" rel="noopener noreferrer" class="social-link">
+            GitHub
           </a>
-          <a href="https://ring.purduehackers.com/" class="text-secondary hover:text-accent transition-colors">
-        <svg 
-          class="w-6 h-6" 
-          viewBox="0 0 2625 2625" 
-          fill="currentColor" 
-          aria-hidden="true"
-        >
-          <path 
-            fill-rule="evenodd" 
-            clip-rule="evenodd" 
-            d="M875.761 440L1312.5 694.648L1735.55 447.601L1736.81 940.419L1765.64 940.766L1767.14 433.986L2190.66 673.395L2193.53 1691.21L1767.53 1929.43L1767.14 1411.85L1312.5 1676.43V2199.09L873.683 2448.81L435.626 2194.42L437.227 1704.57L882.52 1959.95L895.707 1934.51L453.543 1677.53L876.3 1430.83L875.762 440H875.761Z"
-          />
-          <path 
-            fill-rule="evenodd" 
-            clip-rule="evenodd" 
-            d="M1325.94 1699.74L1738.95 1938.75L1325.94 1699.74ZM1737.67 1458.72C1737.86 1458.61 1738.09 1458.61 1738.28 1458.72C1738.47 1458.83 1738.58 1459.03 1738.58 1459.24L1738.95 1938.75L1737.37 1460.3L1325.94 1699.74L1738.28 1458.72L1738.95 1938.75L1325.94 1699.74"
-          />
-          <path 
-            fill-rule="evenodd" 
-            clip-rule="evenodd" 
-            d="M1312.5 664.268L889.076 417.383L1312.31 171.925L1735.55 417.221L1312.5 664.268Z"
-          />
-        </svg>        
+          <span class="link-separator">|</span>
+          <a href="https://linkedin.com/in/jadden-picardal" target="_blank" rel="noopener noreferrer" class="social-link">
+            LinkedIn
           </a>
-          <a href="https://ring.purduehackers.com/next?host=https://jadden.xyz" class="text-secondary hover:text-accent transition-colors">
-            <svg class="w-6 h-6 mr-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>          
+          <span class="link-separator">|</span>
+          <a href="https://curius.app/jadden-picardal" target="_blank" rel="noopener noreferrer" class="social-link">
+            Curius
           </a>
+          <span class="link-separator">|</span>
+          <a href="https://garden.jadden.xyz" target="_blank" rel="noopener noreferrer" class="social-link">
+            Garden
+          </a>
+          <span class="link-separator">|</span>
+          <!-- Purdue Hackers Webring -->
+          <div class="webring-inline">
+            <a href="https://ring.purduehackers.com/previous?host=https://jadden.xyz" class="webring-link" title="Previous site">
+              <svg class="webring-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </a>
+            <a href="https://ring.purduehackers.com/" class="webring-link webring-logo" title="Purdue Hackers Webring">
+              <svg class="webring-icon" viewBox="0 0 2625 2625" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M875.761 440L1312.5 694.648L1735.55 447.601L1736.81 940.419L1765.64 940.766L1767.14 433.986L2190.66 673.395L2193.53 1691.21L1767.53 1929.43L1767.14 1411.85L1312.5 1676.43V2199.09L873.683 2448.81L435.626 2194.42L437.227 1704.57L882.52 1959.95L895.707 1934.51L453.543 1677.53L876.3 1430.83L875.762 440H875.761Z"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1325.94 1699.74L1738.95 1938.75L1325.94 1699.74ZM1737.67 1458.72C1737.86 1458.61 1738.09 1458.61 1738.28 1458.72C1738.47 1458.83 1738.58 1459.03 1738.58 1459.24L1738.95 1938.75L1737.37 1460.3L1325.94 1699.74L1738.28 1458.72L1738.95 1938.75L1325.94 1699.74"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1312.5 664.268L889.076 417.383L1312.31 171.925L1735.55 417.221L1312.5 664.268Z"/>
+              </svg>
+            </a>
+            <a href="https://ring.purduehackers.com/next?host=https://jadden.xyz" class="webring-link" title="Next site">
+              <svg class="webring-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
           </div>
-
-
-
-
-
-          <div class="flex gap-4">
-          <a href="https://github.com/jaddenki" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-            </svg>
-          </a>
-          <a href="https://linkedin.com/in/jadden-picardal" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="https://curius.app/jadden-picardal" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 2C2.9 2 2 2.9 2 4v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm0 2h16v16H4V4zm2 2v12h12V6H6zm2 2h8v2H8V8zm0 3h8v2H8v-2zm0 3h6v2H8v-2z"/>
-            </svg>
-          </a>
-          <ResetButton client:load />
-
-</div>
-
         </div>
       </div>
     </section>
 
     <!-- Demo Reel Section -->
-    <section class="mb-24 sm:mb-32">
-      <div class="mb-8">
-        <h1 class="text-4xl font-semibold mb-4">Motion Reel</h1>
-      </div>
+    <!-- <section class="section">
+      <h2 class="section-title">Motion Reel</h2>
+      <p class="section-intro">{demoReel.description}</p>
       
-      <article class="demo-reel">
-        <div class="aspect-video mb-6 bg-muted rounded-xl overflow-hidden">
+      <div class="video-container">
           <iframe
             src={demoReel.videoUrl}
             title="YouTube video player"
             frameborder="0"
-            class="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
           ></iframe>
         </div>
-        <div class="demo-reel-content">
-          <p class="text-secondary leading-relaxed mb-4 text-lg">
-            {demoReel.description}
-          </p>
-          <div class="flex flex-wrap gap-2">
-            {demoReel.tags.map(tag => (
-              <span class="px-3 py-1 text-xs rounded-full bg-accent text-background">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </article>
-    </section>
-
-    </div>
+    </section> -->
   </div>
+
+  <!-- Projects Section - Wider than content -->
+  <section class="projects-section">
+    <div class="projects-container">
+      <div class="section-header">
+        <h2 class="section-title">Selected Projects</h2>
+        <a href="/projects" class="view-all-link">View all →</a>
+      </div>
+      
+      <div class="projects-grid">
+        {featuredProjects.map(project => (
+          <a href={project.link} class="project-card">
+            <div class="project-image">
+              {project.image && project.image.endsWith('.mp4') ? (
+                <video 
+                  autoplay
+                  loop 
+                  muted 
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src={project.image} type="video/mp4" />
+                </video>
+              ) : (
+                <img 
+                  src={project.image || 'https://via.placeholder.com/400x300'} 
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-description">{project.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
 </Layout>
 
-
-<!-- Visual Feed Section - Full Window Width (Outside Layout component) -->
-<section class="mb-32 w-full">
-  <div class="max-w-lg mx-auto mb-12 px-4 sm:px-6">
-    <h2 class="text-lg font-semibold text-primary mb-4">
-      <h1 class="text-4xl font-semibold">Visual Feed</h1>
-    
-      <p class="text-secondary text-lg mt-4">
-        Miscellaneous branding, motion, and design explorations
+<!-- Visual Feed Section - Full Width -->
+<section class="visual-feed-section">
+  
+  <div class="content-container">
+    <h2 class="section-title">Visual Feed</h2>
+    <p class="section-intro">
+        Aside from my software engineering work, I love motion design. Here are some of my personal and client projects.
       </p>  
-    
-    </h2>
   </div>
   
-  <div class="visual-feed-grid px-8 sm:px-12 lg:px-16 xl:px-20">
+  <div class="visual-feed-grid">
     {visualFeed.map((item, index) => (
-      <div class={`visual-feed-item visual-feed-item--${item.size} group`}>
+      <div class={`visual-feed-item visual-feed-item--${item.size}`}>
         {item.type === 'video' ? (
-          <video
-            src={item.src}
+          <video 
             autoplay
-            loop
-            muted
+            loop 
+            muted 
             playsinline
-            class="w-full h-full object-cover"
-          />
+            preload="metadata"
+          >
+            <source src={item.src} type="video/mp4" />
+          </video>
         ) : (
-          <img
-            src={item.src}
-            alt={item.alt}
-            class="w-full h-full object-cover"
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            loading="lazy"
+            decoding="async"
           />
         )}
       </div>
@@ -208,182 +221,398 @@ const visualFeed = [
   </div>
 </section>
 
-<p class="text-secondary text-lg ml-4 sm:ml-6 mb-8 ">
-  Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank" class="text-accent">Jadden</a> and <a href="https://astro.build" target="_blank" class="text-accent">Astro</a>. Typeface is <a href="https://github.com/opening-hours-studio/opening-hours-sans" target="_blank" class="text-accent">Opening Hours Sans</a>.
-</p>  
-
-
+<footer class="footer">
+  <div class="content-container">
+    <p class="footer-text">
+      Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank">Jadden</a> and <a href="https://astro.build" target="_blank">Astro</a>
+    </p>
+  </div>
+</footer>
 
 <style>
-  /* Opening Hours Sans font is loaded via @font-face in theme.css */
+  /* Content Container - Narrow centered column */
+  .content-container {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
 
-  
+  /* Hero Section */
+  .hero-section {
+    padding: 0 0 2rem;
+    margin-bottom: 3rem;
+  }
 
-  /* Visual Feed Grid - True Masonry Layout */
+  .hero-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .profile-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--secondary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* About Section */
+  .about-section {
+    margin-bottom: 6rem;
+  }
+
+  .body-large {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.5;
+    margin: 0 0 2rem 0;
+  }
+
+  .body-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--secondary);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .body-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .body-columns .body-text {
+    margin: 0;
+  }
+
+  /* Links Section */
+  .links-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--muted);
+  }
+
+  .contact-link {
+    display: inline-block;
+    font-size: 1.125rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--accent);
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+  }
+
+  .link-separator {
+    color: var(--muted);
+  }
+
+  /* Webring */
+  .webring-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .webring-link {
+    color: var(--secondary);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .webring-link:hover {
+    color: var(--accent);
+  }
+
+  .webring-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .webring-logo .webring-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Section Styles */
+  .section {
+    margin-bottom: 6rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+  }
+
+  .section-intro {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 2rem 0;
+  }
+
+  /* Video Container */
+  .video-container {
+    aspect-ratio: 16 / 9;
+    background: var(--muted);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Projects Section - Wider Container */
+  .projects-section {
+    margin: 6rem 0;
+  }
+
+  .projects-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+  }
+
+  .view-all-link {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .view-all-link:hover {
+    color: var(--accent);
+  }
+
+  /* Projects Grid - 3 Columns */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .project-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-image {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .project-image img,
+  .project-image video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .project-description {
+    font-size: 0.938rem;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Visual Feed Section */
+  .visual-feed-section {
+    margin: 6rem 0;
+  }
+
   .visual-feed-grid {
     columns: 4;
     column-gap: 1rem;
-    width: 100%;
-    max-width: none;
+    padding: 0 2rem;
+    margin-top: 2rem;
   }
   
   .visual-feed-item {
     background: var(--muted);
-    border-radius: 0.75rem;
+    border-radius: 8px;
     overflow: hidden;
     break-inside: avoid;
     margin-bottom: 1rem;
-    display: inline-block;
     width: 100%;
   }
   
-  /* Square items (1x1) */
+  .visual-feed-item img,
+  .visual-feed-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .visual-feed-item--square {
     aspect-ratio: 1;
   }
   
-  /* Wide items (2x1) - span 2 columns in masonry */
   .visual-feed-item--wide {
     aspect-ratio: 2;
-    column-span: 2;
   }
   
-  /* Tall items - same height as square, but narrower */
   .visual-feed-item--tall {
     aspect-ratio: 2/3.16;
   }
   
-  /* Responsive masonry adjustments */
+  /* Footer */
+  .footer {
+    padding: 3rem 0;
+    margin-top: 4rem;
+  }
+
+  .footer .content-container {
+    border-top: 1px solid var(--muted);
+    padding-top: 2rem;
+  }
+
+  .footer-text {
+    font-size: 0.938rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .footer-text a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer-text a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive Design */
   @media (max-width: 1024px) {
     .visual-feed-grid {
       columns: 3;
     }
   }
+
+  @media (max-width: 900px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   
   @media (max-width: 768px) {
+    .content-container,
+    .projects-container {
+      padding: 0 1rem;
+    }
+
+    .hero-section {
+      padding: 0 0 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-photo {
+      width: 64px;
+      height: 64px;
+    }
+
+    .about-section,
+    .section,
+    .projects-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .body-columns {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .body-columns .body-text {
+      margin: 0 0 1.5rem 0;
+    }
+
+    .body-columns .body-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
     .visual-feed-grid {
       columns: 2;
-      column-gap: 0.75rem;
+      padding: 0 1rem;
     }
-    
-    .visual-feed-item {
-      margin-bottom: 0.75rem;
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
     }
-    
-    /* On mobile, wide items still span 2 columns */
-    .visual-feed-item--wide {
-      column-span: 2;
-      aspect-ratio: 2;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .visual-feed-grid {
-      columns: 2;
-      column-gap: 0.5rem;
-    }
-    
-    .visual-feed-item {
-      margin-bottom: 0.5rem;
-    }
-    
-    .visual-feed-item--wide {
-      column-span: 2;
-      aspect-ratio: 1.8; /* Slightly less wide on very small screens */
-    }
-  }
-  
-  /* Tooltip styling */
-  .tooltip {
-    background-color: var(--background);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 0.75rem 1.25rem;
-    border-radius: 2rem;
-    font-family: 'Opening Hours Sans', sans-serif;
-    font-size: 0.875rem;
-    transform: translate(-50%, -100%);
-    white-space: nowrap;
-    transition: all 0.2s ease;
-    opacity: 0;
-    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
   }
 
-  .tooltip.visible {
-    opacity: 1;
-  }
-  
-  /* Replace all font references with Opening Hours Sans */
-  h1, h2, h3, p, span, a {
-    font-family: 'Opening Hours Sans', sans-serif !important;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .project-card::before {
-      left: -1rem;
+  @media (max-width: 480px) {
+    .hero-section {
+      padding: 1.5rem 0 1rem;
+      margin-bottom: 2rem;
     }
-    
-    .project-card:hover .project-media {
-      transform: translateY(-2px);
+
+    .hero-header {
+      gap: 1rem;
+    }
+
+    .profile-photo {
+      width: 56px;
+      height: 56px;
     }
   }
-  
-  /* Stagger animation for project cards */
-  .project-card:nth-child(1) { animation-delay: 0.1s; }
-  .project-card:nth-child(2) { animation-delay: 0.2s; }
-  .project-card:nth-child(3) { animation-delay: 0.3s; }
-  .project-card:nth-child(4) { animation-delay: 0.4s; }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .project-card {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-  }
-  
-  /* Bio Card Styling */
-  .bio-card {
-    border: 1px solid var(--muted);
-    transition: all 0.3s ease;
-  }
-  
-  .bio-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .extended-bio {
-    border-top: 1px solid var(--muted);
-    padding-top: 1.5rem;
-  }
-  
-  /* Stagger animation for visual feed items */
-  .visual-feed-item {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-  }
-  
-  .visual-feed-item:nth-child(1) { animation-delay: 0.1s; }
-  .visual-feed-item:nth-child(2) { animation-delay: 0.15s; }
-  .visual-feed-item:nth-child(3) { animation-delay: 0.2s; }
-  .visual-feed-item:nth-child(4) { animation-delay: 0.25s; }
-  .visual-feed-item:nth-child(5) { animation-delay: 0.3s; }
-  .visual-feed-item:nth-child(6) { animation-delay: 0.35s; }
-  .visual-feed-item:nth-child(7) { animation-delay: 0.4s; }
-  .visual-feed-item:nth-child(8) { animation-delay: 0.45s; }
-  .visual-feed-item:nth-child(9) { animation-delay: 0.5s; }
-  .visual-feed-item:nth-child(10) { animation-delay: 0.55s; }
-  .visual-feed-item:nth-child(11) { animation-delay: 0.6s; }
-  .visual-feed-item:nth-child(12) { animation-delay: 0.65s; }
 </style>
