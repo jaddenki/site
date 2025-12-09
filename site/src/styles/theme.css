@@ -28,12 +28,12 @@ html {
 }
 
 [data-theme="dark"] {
-  --background: #000;
-  --foreground: #FFFFFF;
-  --accent: #a5f839;
-  --accent-transparent: rgba(255, 0, 255, 0.1);
-  --secondary: #CCCCCC;
-  --muted: #a5f839;
+  --background: #070707;
+  --foreground: #ecdfca;
+  --accent: #dfac4e;
+  --accent-transparent: rgba(0, 0, 0, 0.1);
+  --secondary: #dbd0c3;
+  --muted: rgba(255, 255, 255, 0.1);
   --card-bg: rgba(45, 45, 45, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
@@ -41,10 +41,10 @@ html {
 [data-theme="blue"] {
   --background: #1437aa;
   --foreground: #ffffff;
-  --accent: #FC6736;
+  --accent: #6ca7f5;
   --accent-transparent: rgba(255, 255, 255, 0.1);
   --secondary: #F6F8D5;
-  --muted: #FC6736;
+  --muted: #3580e4;
   --card-bg: rgba(30, 41, 59, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
@@ -55,8 +55,8 @@ html {
   --accent: #f5539e;
   --accent-transparent: rgba(240, 187, 120, 0.1);
   --secondary: #626F47;
-  --muted: #f5539e;
-  --tag-bg: #e9911f;
+  --muted: #d1c299;
+  --tag-bg: #ccc3ab;
 }
 
 [data-theme="pink"] {

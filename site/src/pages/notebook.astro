@@ -105,7 +105,7 @@ const formatDate = (date: string): string => {
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', () => {
     const allButton = document.getElementById('show-all');
@@ -121,7 +121,7 @@ const formatDate = (date: string): string => {
     }
     
     // Set active button style
-    const setActiveButton = (activeButton: HTMLElement) => {
+    const setActiveButton = (activeButton) => {
       [allButton, blogButton, projectsButton].forEach(button => {
         if (button === activeButton) {
           button.classList.remove('border-muted', 'text-secondary');
