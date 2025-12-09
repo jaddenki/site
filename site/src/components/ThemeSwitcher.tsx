@@ -1,10 +1,20 @@
 import { useState, useEffect } from 'react';
 
 const themes = [
-  { name: 'light', icon: '(n_n)' },
-  { name: 'dark', icon: '(T_T)' },
-  { name: 'blue', icon: '(0_0)' },
-  { name: 'green', icon: '(>_<)' },
+  // { name: 'light', icon: '(n_n)' },
+  { name: 'slate', icon: '(=_=)' },
+  { name: 'black sheep', icon: '(T_T)' },
+  { name: 'ginkgo', icon: '(o_o)' },
+  { name: 'flower', icon: '(>_<)' },
+  { name: 'deep sea', icon: '(0_0)' },
+  
+  { name: 'rose', icon: '(u_u)' },
+
+  { name: 'evergreen', icon: '($_$)' },
+  { name: 'sunset', icon: '(*_*)' },
+  { name: 'sage', icon: '(-_-)' },
+  // { name: 'midnight', icon: '(._.)' },
+
 ];
 
 export default function ThemeSwitcher() {
