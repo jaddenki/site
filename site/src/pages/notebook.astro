@@ -1,15 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AnimatedName from '../components/AnimatedName';
 import { posts } from '../data/posts';
-import { projects } from '../data/projects';
 
 const sortedPosts = [...posts]
   .filter(post => post.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-const projectNotes = [...projects]
-  .filter(project => project.published && project.link.startsWith('/projects/'))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const formatDate = (date: string): string => {
@@ -23,135 +17,34 @@ const formatDate = (date: string): string => {
   <div class="max-w-lg mx-auto px-4 sm:px-6 mt-16">
     <section class="mb-16 sm:mb-20">
       <div class="mb-8 sm:mb-12">
-  <h1 class="text-4xl font-semibold font-['Opening Hours Sans']">Notebook</h1>
-  
-  <!-- filter -->
-  <div class="flex flex-wrap gap-2 mb-6 mt-6">
-    <button id="show-all" class="px-4 py-2 text-sm font-['Opening Hours Sans'] border border-accent text-accent rounded-lg transition-colors">
-      all
-    </button>
-    <button id="show-blog" class="px-4 py-2 text-sm font-['Opening Hours Sans'] border border-muted text-secondary rounded-lg transition-colors hover:border-accent hover:text-accent">
-      blog posts
-    </button>
-    <button id="show-projects" class="px-4 py-2 text-sm font-['Opening Hours Sans'] border border-muted text-secondary rounded-lg transition-colors hover:border-accent hover:text-accent">
-      project notes
-    </button>
-  </div>
-  
-  <!-- <p class="text-secondary text-lg font-['Opening Hours Sans'] mt-4">
-          curious about my  <a href="/blog/coursework" class="text-accent">coursework</a>? 
-          also, here's a bit of <a href="/blog/recommendations" class="text-accent">what inspires me</a> ;)
-
-        </p> -->
+        <h1 class="text-4xl font-normal font-['Opening Hours Sans']">Notebook</h1>
+        <p class="text-secondary text-lg font-['Opening Hours Sans'] mt-4">
+          What I'm thinking about. For project case studies, check out <a href="/projects" class="text-accent hover:underline">projects</a>.
+        </p>
       </div>
     </section>
 
-
-    <section id="project-notes-section" class="mb-24">
-  <h1 class="text-2xl font-semibold font-['Opening Hours Sans'] mb-6">Project Notes</h1>
-      <div class="grid grid-cols-1 gap-4">
-        {projectNotes.map(project => (
-          <a href={project.link} class="block group">
+    <section class="mb-12">
+      <div class="grid grid-cols-1 gap-4 mb-8">
+        {sortedPosts.map(post => (
+          <a href={post.link} class="block group">
             <div class="border border-muted rounded-lg p-3 sm:p-4 transition-all hover:border-accent">
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 sm:mb-2">
                 <h3 class="font-['Opening Hours Sans'] text-lg sm:text-xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
-                  {project.title}
+                  {post.title}
                 </h3>
                 <span class="text-accent font-['Opening Hours Sans'] text-xs whitespace-nowrap sm:ml-4">
-                  {formatDate(project.date)}
+                  {formatDate(post.date)}
                 </span>
               </div>
               <p class="text-secondary font-['Opening Hours Sans'] text-sm leading-relaxed">
-                {project.description}
+                {post.description}
               </p>
-              {project.tags && (
-                <div class="flex flex-wrap gap-1 mt-2">
-                  {project.tags.map((tag) => (
-                    <span class="px-2 py-1 text-xs rounded-full bg-accent text-background font-['Opening Hours Sans']">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           </a>
         ))}
       </div>
     </section>
-
-    <section id="blog-posts-section" class="mb-12">
-      <h1 class="text-2xl font-semibold font-['Opening Hours Sans'] mb-6">Blog Posts</h1>
-          <div class="grid grid-cols-1 gap-4 mb-8">
-            {sortedPosts.map(post => (
-              <a href={post.link} class="block group">
-                <div class="border border-muted rounded-lg p-3 sm:p-4 transition-all hover:border-accent">
-                  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 sm:mb-2">
-                    <h3 class="font-['Opening Hours Sans'] text-lg sm:text-xl text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-0">
-                      {post.title}
-                    </h3>
-                    <span class="text-accent font-['Opening Hours Sans'] text-xs whitespace-nowrap sm:ml-4">
-                      {formatDate(post.date)}
-                    </span>
-                  </div>
-                  <p class="text-secondary font-['Opening Hours Sans'] text-sm leading-relaxed">
-                    {post.description}
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
     
   </div>
 </Layout>
-
-<script>
-  // Wait for DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    const allButton = document.getElementById('show-all');
-    const blogButton = document.getElementById('show-blog');
-    const projectsButton = document.getElementById('show-projects');
-    
-    const blogSection = document.getElementById('blog-posts-section');
-    const projectsSection = document.getElementById('project-notes-section');
-    
-    if (!allButton || !blogButton || !projectsButton || !blogSection || !projectsSection) {
-      console.error('Could not find filter buttons or sections');
-      return;
-    }
-    
-    // Set active button style
-    const setActiveButton = (activeButton: HTMLElement) => {
-      [allButton, blogButton, projectsButton].forEach(button => {
-        if (button === activeButton) {
-          button.classList.remove('border-muted', 'text-secondary');
-          button.classList.add('border-accent', 'text-accent');
-        } else {
-          button.classList.remove('border-accent', 'text-accent');
-          button.classList.add('border-muted', 'text-secondary');
-        }
-      });
-    };
-    
-    // Show all content (default)
-    allButton.addEventListener('click', () => {
-      blogSection.style.display = 'block';
-      projectsSection.style.display = 'block';
-      setActiveButton(allButton);
-    });
-    
-    // Show only blog posts
-    blogButton.addEventListener('click', () => {
-      blogSection.style.display = 'block';
-      projectsSection.style.display = 'none';
-      setActiveButton(blogButton);
-    });
-    
-    // Show only project notes
-    projectsButton.addEventListener('click', () => {
-      blogSection.style.display = 'none';
-      projectsSection.style.display = 'block';
-      setActiveButton(projectsButton);
-    });
-  });
-</script>

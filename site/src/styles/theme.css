@@ -13,7 +13,7 @@
   --font-sans: 'Opening Hours Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Opening Hours Sans', var(--font-sans);
 
-  --background: #FFFFFF;
+  --background: #FCFCFC;
   --foreground: #1a1a1a;
   --accent: #0000ff;
   --accent-transparent: rgba(0, 0, 255, 0.1);
@@ -27,68 +27,14 @@ html {
   font-family: 'Opening Hours Sans', sans-serif;
 }
 
-[data-theme="dark"] {
-  --background: #000;
+[data-theme="black-sheep"] {
+  --background: #131313;
   --foreground: #FFFFFF;
-  --accent: #a5f839;
-  --accent-transparent: rgba(255, 0, 255, 0.1);
-  --secondary: #CCCCCC;
-  --muted: #a5f839;
+  --accent: rgb(237, 210, 55);
+  --accent-transparent: rgba(245, 216, 154, 0.1);
+  --secondary: #d4cdc5;
+  --muted: #2e2e2e;
   --card-bg: rgba(45, 45, 45, 0.8);
-  --tag-bg: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="blue"] {
-  --background: #1437aa;
-  --foreground: #ffffff;
-  --accent: #FC6736;
-  --accent-transparent: rgba(255, 255, 255, 0.1);
-  --secondary: #F6F8D5;
-  --muted: #FC6736;
-  --card-bg: rgba(30, 41, 59, 0.8);
-  --tag-bg: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="green"] {
-  --background: #F5ECD5;
-  --foreground: #626F47;
-  --accent: #f5539e;
-  --accent-transparent: rgba(240, 187, 120, 0.1);
-  --secondary: #626F47;
-  --muted: #f5539e;
-  --tag-bg: #e9911f;
-}
-
-[data-theme="pink"] {
-  --background: #FDFFD2;
-  --foreground: #DA7297;
-  --accent: #667BC6;
-  --accent-transparent: rgba(236, 72, 153, 0.1);
-  --secondary: #DA7297;
-  --muted: #fcc2cc;
-  --card-bg: rgba(131, 24, 67, 0.8);
-  --tag-bg: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="orange"] {
-  --background: #EFECEC;
-  --foreground: #0C2D57;
-  --accent: #0C2D57;
-  --accent-transparent: rgba(251, 146, 60, 0.1);
-  --secondary: #FC6736;
-  --muted: #0C2D57;
-  --card-bg: rgba(154, 52, 18, 0.8);
-  --tag-bg: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="purple"] {
-  --background: #322653;
-  --foreground: #FFD2D7;
-  --accent: #8062D6;
-  --accent-transparent: rgba(168, 85, 247, 0.1);
-  --secondary: #FFD2D7;
-  --muted: #8062D6;
-  --card-bg: rgba(76, 29, 149, 0.8);
   --tag-bg: rgba(255, 255, 255, 0.1);
 }
 
@@ -176,11 +122,6 @@ body {
 }
 
 .prose strong {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.prose strong {
   color: var(--foreground);
   font-weight: 600;
   font-family: 'Opening Hours Sans', sans-serif;
@@ -222,23 +163,6 @@ button:hover, .button:hover {
   color: var(--accent);
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes noise {
-  0%, 100% { transform: translateX(0) translateY(0) translateZ(0); }
-  10% { transform: translate3d(-2px, 2px, 0); }
-  20% { transform: translate3d(2px, -2px, 0); }
-  30% { transform: translate3d(-2px, -2px, 0); }
-  40% { transform: translate3d(2px, 2px, 0); }
-  50% { transform: translate3d(-2px, 2px, 0); }
-  60% { transform: translate3d(2px, -2px, 0); }
-  70% { transform: translate3d(-2px, -2px, 0); }
-  80% { transform: translate3d(2px, 2px, 0); }
-  90% { transform: translate3d(-2px, 2px, 0); }
-}
 
 /* Code styling */
 code {

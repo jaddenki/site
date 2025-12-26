@@ -12,25 +12,12 @@ const demoReel = {
   videoUrl: 'https://www.youtube.com/embed/X4CYgSqLGf0?si=hetD0C9XLtZ3fOyA&autoplay=1&mute=1&controls=0&loop=1&playlist=X4CYgSqLGf0&playsinline=1',
 };
 
-const visualFeed = [
-  { type: 'video', src: 'vid/c2.mp4', alt: 'Design exploration 1', size: 'square' },
-  { type: 'image', src: 'https://i.imgur.com/iNpueeH.jpeg', alt: 'posterlad inspired photo', size: 'tall' },
-  { type: 'image', src: 'https://i.imgur.com/U7a02ck.png', alt: 'Motion study 1', size: 'tall' },
-  { type: 'image', src: 'https://i.imgur.com/fQRHoJr.png', alt: 'Brand work', size: 'square' },
-  { type: 'video', src: 'vid/dropped.mp4', alt: 'Animation test', size: 'square' },
-  { type: 'video', src: 'vid/gyat.mp4', alt: 'Color exploration', size: 'square' },
-  { type: 'video', src: '/vid/respell.mp4', alt: 'Interaction demo', size: 'wide' },
-  { type: 'image', src: 'https://i.imgur.com/hAgWXUt.png', alt: 'Layout experiment', size: 'square' },
-  { type: 'image', src: 'https://i.imgur.com/ktPErR6.png', alt: 'Design system', size: 'wide' },
-  { type: 'video', src: 'vid/mbayay_nm6kpg.mp4', alt: 'Prototype demo', size: 'square' },
-];
-
 ---
 
 <Layout title="jadden picardal">
   <div class="content-container">
 
-    <section class="section mt-16 mb-8">
+    <section class="section mb-8">
       <!-- <h2 class="section-title">Motion Reel</h2> -->
       <!-- <p class="section-intro">{demoReel.description}</p> -->
       
@@ -42,7 +29,7 @@ const visualFeed = [
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
-            loading="lazy"
+            loading="eager"
           ></iframe>
         </div>
     </section>
@@ -65,7 +52,7 @@ const visualFeed = [
     <!-- About Section -->
     <section class="about-section">
       <p class="body-large">
-        I design interactive experiences that move with purpose.
+        I care about how things look & work.
       </p>
 
       <div class="body-columns">
@@ -182,52 +169,61 @@ I'm currently a Research Software Engineer at the
     </div>
   </section>
 
+  <!-- Are.na Visual Feed Section - Full Width -->
+  <section class="arena-section">
+    <div class="content-container">
+    <div class="section-header">
+      <h2 class="section-title">Visual Feed</h2>
+    </div>
+    <p class="section-intro mb-12">
+      I also love motion design. Here are some of my personal and client projects. Powered by 
+      <a href="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Are.na</a>.
+    </p>
+  </div>
+  
+  <div class="arena-embed-container">
+    <iframe 
+      id="arena-embed"
+      class="arena-embed"
+      src="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i/embed" 
+      title="Are.na channel"
+      loading="lazy"
+    ></iframe>
+  </div>
+  </section>
 
 </Layout>
 
-<!-- Visual Feed Section - Full Width -->
-<section class="visual-feed-section">
+<script>
+  // Sync Are.na embed theme with site theme
+  function updateArenaTheme() {
+    const iframe = document.getElementById('arena-embed') as HTMLIFrameElement | null;
+    if (!iframe) return;
+    
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const arenaTheme = currentTheme === 'black-sheep' ? 'dark' : 'light';
+    const baseUrl = 'https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i/embed';
+    
+    iframe.src = `${baseUrl}?theme=${arenaTheme}`;
+  }
   
-  <div class="content-container">
-    <h2 class="section-title">Visual Feed</h2>
-    <p class="section-intro">
-        Aside from my software engineering work, I love motion design. Here are some of my personal and client projects.
-      </p>  
-  </div>
+  // Update on page load
+  updateArenaTheme();
   
-  <div class="visual-feed-grid">
-    {visualFeed.map((item, index) => (
-      <div class={`visual-feed-item visual-feed-item--${item.size}`}>
-        {item.type === 'video' ? (
-          <video 
-            autoplay
-            loop 
-            muted 
-            playsinline
-            preload="metadata"
-          >
-            <source src={item.src} type="video/mp4" />
-          </video>
-        ) : (
-          <img 
-            src={item.src} 
-            alt={item.alt} 
-            loading="lazy"
-            decoding="async"
-          />
-        )}
-      </div>
-    ))}
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="content-container">
-    <p class="footer-text">
-      Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank">Jadden</a> and <a href="https://astro.build" target="_blank">Astro</a>
-    </p>
-  </div>
-</footer>
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        updateArenaTheme();
+      }
+    });
+  });
+  
+  observer.observe(document.documentElement, { attributes: true });
+  
+  // Also update after Astro view transitions
+  document.addEventListener('astro:after-swap', updateArenaTheme);
+</script>
 
 <style>
   /* Content Container - Narrow centered column */
@@ -383,7 +379,7 @@ I'm currently a Research Software Engineer at the
     font-size: 1.125rem;
     line-height: 1.6;
     color: var(--secondary);
-    margin: 0 0 2rem 0;
+    margin: 0 0 1rem 0;
   }
 
   /* Video Container */
@@ -468,80 +464,38 @@ I'm currently a Research Software Engineer at the
     line-height: 1.5;
   }
 
-  /* Visual Feed Section */
-  .visual-feed-section {
+  /* Are.na Section */
+  .arena-section {
     margin: 6rem 0;
   }
 
-  .visual-feed-grid {
-    columns: 4;
-    column-gap: 1rem;
-    padding: 0 2rem;
-    margin-top: 2rem;
+  .arena-section .section-title {
+    margin-bottom: 0.25rem;
   }
-  
-  .visual-feed-item {
-    background: var(--muted);
-    border-radius: 8px;
-    overflow: hidden;
-    break-inside: avoid;
+
+  .arena-section .section-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .arena-section .section-intro {
     margin-bottom: 1rem;
+  }
+
+  .arena-embed-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .arena-embed {
     width: 100%;
-  }
-  
-  .visual-feed-item img,
-  .visual-feed-item video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .visual-feed-item--square {
-    aspect-ratio: 1;
-  }
-  
-  .visual-feed-item--wide {
-    aspect-ratio: 2;
-  }
-  
-  .visual-feed-item--tall {
-    aspect-ratio: 2/3.16;
-  }
-  
-  /* Footer */
-  .footer {
-    padding: 3rem 0;
-    margin-top: 4rem;
-  }
-
-  .footer .content-container {
-    border-top: 1px solid var(--muted);
-    padding-top: 2rem;
-  }
-
-  .footer-text {
-    font-size: 0.938rem;
-    color: var(--secondary);
-    margin: 0;
-  }
-
-  .footer-text a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .footer-text a:hover {
-    text-decoration: underline;
+    height: 600px;
+    border: 1px solid var(--muted);
+    border-radius: 12px;
+    background: var(--background);
   }
 
   /* Responsive Design */
-  @media (max-width: 1024px) {
-    .visual-feed-grid {
-      columns: 3;
-    }
-  }
-
   @media (max-width: 900px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -566,8 +520,17 @@ I'm currently a Research Software Engineer at the
 
     .about-section,
     .section,
-    .projects-section {
+    .projects-section,
+    .arena-section {
       margin-bottom: 3.5rem;
+    }
+
+    .arena-embed-container {
+      padding: 0 1rem;
+    }
+
+    .arena-embed {
+      height: 500px;
     }
 
     .body-columns {
@@ -586,11 +549,6 @@ I'm currently a Research Software Engineer at the
     .projects-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
-    }
-
-    .visual-feed-grid {
-      columns: 2;
-      padding: 0 1rem;
     }
 
     .section-header {

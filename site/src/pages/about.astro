@@ -1,0 +1,362 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="about jadden">
+  <div class="content-container">
+    
+    <!-- Profile Header -->
+    <section class="about-hero">
+      <h1 class="about-title">More About Me</h1>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio-section">
+      <div class="bio-block">
+        <div class="about-photo-wrapper" id="tilt-photo">
+          <img 
+            id="jaja-photo"
+            src="/jadden/jaja.png" 
+            alt="Jadden Picardal" 
+            class="about-photo"
+          />
+          <a href="https://aliciazhou.xyz" target="_blank" rel="noopener noreferrer" class="credit-sticker">
+            drawn by alicia
+          </a>
+        </div>
+        <p class="bio-text">
+          I'm Jadden Picardal, a computer engineer and motion designer, studying at Purdue University. I grew up between the Philippines and Las Vegas, and fell in love with motion design, games, and building projects early on.
+        </p>
+        <p class="bio-text">
+          I love creating things and sharing them; you may know my work from <a href="https://tiktok.com/@okigarakii" target="_blank" rel="noopener noreferrer">my videos</a> or <a href="https://jam.ms" target="_blank" rel="noopener noreferrer">my games</a>.
+            </p>
+        <!-- <p class="bio-text">
+          I've always cared more about how something feels to use than how impressive it looks on paper. I like projects that reward attention; the ones where small details matter and intention shows through.
+        </p> -->
+        <p class="bio-text">
+          Outside the classroom and workplace, I spend a lot of time with 
+          
+          <a href="https://backloggd.com/u/jaddenki/" target="_blank" rel="noopener noreferrer">games</a> 
+          and 
+          <a href="https://letterboxd.com/jaddenki/" target="_blank" rel="noopener noreferrer">films</a>. I'm inspired by media that lingers, invites reflection, or makes familiar ideas feel strange again.
+        </p>
+        <p class="bio-text">
+          I love capturing memories and sharing them as well; you can find some of that in my <a href="https://garden.jadden.xyz" target="_blank" rel="noopener noreferrer">garden</a>. I also love seeing what other people make, it's part of why I help organize <a href="https://purduehackers.com" target="_blank" rel="noopener noreferrer">Purdue Hackers</a>, the biggest community of builders at Purdue. 
+          You can also find me lurking on <a href="https://www.are.na/jadden-picardal" target="_blank" rel="noopener noreferrer">Are.na</a> and <a href="https://curius.app/jadden-picardal" target="_blank" rel="noopener noreferrer">Curius</a>.
+        </p>
+        <p class="bio-text">
+          Anything resonates? I'm always <a href="https://cal.com/jadden" target="_blank" rel="noopener noreferrer">happy to chat</a>!
+        </p>
+      </div>
+
+
+    </section>
+
+    <section class="garden-section">
+      <img 
+        src="https://garden.jadden.xyz/_.webp" 
+        alt="Memories from my garden" 
+        class="garden-image"
+        loading="lazy"
+      />
+    </section>
+
+
+  </div>
+</Layout>
+
+<!-- Vanilla Tilt for 3D effect -->
+<script>
+  import VanillaTilt from 'vanilla-tilt';
+  
+  const jajaImages = ['/jadden/jaja.png', '/jadden/jaja1.png', '/jadden/jaja2.png'];
+  const secretImage = '/jadden/igarakiwi.png';
+  const secretWord = 'alicia';
+  let currentIndex = 0;
+  let typedKeys = '';
+  let easterEggActive = false;
+  
+  function initTilt() {
+    const element = document.getElementById('tilt-photo');
+    if (element) {
+      VanillaTilt.init(element, {
+        max: 15,
+        speed: 400,
+        glare: false,
+        scale: 1.05
+      });
+    }
+  }
+  
+  function initPhotoCycle() {
+    const photo = document.getElementById('jaja-photo') as HTMLImageElement;
+    if (photo) {
+      photo.addEventListener('click', () => {
+        if (easterEggActive) {
+          // Click to go back to normal
+          easterEggActive = false;
+          currentIndex = 0;
+          photo.src = jajaImages[currentIndex];
+          photo.style.width = '';
+        } else {
+          currentIndex = (currentIndex + 1) % jajaImages.length;
+          photo.src = jajaImages[currentIndex];
+        }
+      });
+    }
+  }
+  
+  function initEasterEgg() {
+    document.addEventListener('keydown', (e) => {
+      // Only track letter keys
+      if (e.key.length === 1 && e.key.match(/[a-z]/i)) {
+        typedKeys += e.key.toLowerCase();
+        // Keep only the last N characters (length of secret word)
+        if (typedKeys.length > secretWord.length) {
+          typedKeys = typedKeys.slice(-secretWord.length);
+        }
+        // Check if secret word was typed
+        if (typedKeys === secretWord && !easterEggActive) {
+          triggerEasterEgg();
+        }
+      }
+    });
+  }
+  
+  function triggerEasterEgg() {
+    const photo = document.getElementById('jaja-photo') as HTMLImageElement;
+    if (photo) {
+      easterEggActive = true;
+      photo.src = secretImage;
+      photo.style.width = '280px';
+      typedKeys = '';
+    }
+  }
+  
+  // Run on load
+  initTilt();
+  initPhotoCycle();
+  initEasterEgg();
+  
+  // Re-run after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    initTilt();
+    initPhotoCycle();
+    initEasterEgg();
+    currentIndex = 0;
+    typedKeys = '';
+    easterEggActive = false;
+  });
+</script>
+
+<style>
+  .content-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* About Hero */
+  .about-hero {
+    padding: 2rem 0 1rem;
+  }
+
+  .about-photo-wrapper {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  .about-photo {
+    width: 200px;
+    cursor: pointer;
+    height: auto;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .credit-sticker {
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0;
+    font-size: 0.65rem;
+    color: var(--secondary);
+    background: var(--muted);
+    padding: 0.2rem 0.4rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transform: rotate(-3deg);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .credit-sticker:hover {
+    color: var(--foreground);
+    transform: rotate(0deg) scale(1.05);
+  }
+
+  .about-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 400;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .about-tagline {
+    font-size: 1.25rem;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Bio Section */
+  .bio-section {
+    margin-bottom: 2rem;
+  }
+
+  /* Garden Section */
+  .garden-section {
+    margin-bottom: 4rem;
+    clear: both;
+  }
+
+  .garden-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+
+  .bio-block {
+    margin-bottom: 3rem;
+  }
+
+  .bio-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+    color: var(--foreground);
+  }
+
+  .bio-text {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--secondary);
+    margin: 0 0 1rem 0;
+  }
+
+  .bio-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .bio-text a {
+    color: var(--foreground);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .bio-text a:hover {
+    color: var(--accent);
+  }
+
+  /* Interests List */
+  .interests-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .interests-list li {
+    font-size: 1.125rem;
+    color: var(--secondary);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .interests-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding-top: 2rem;
+    border-top: 1px solid var(--muted);
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--muted);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: all 0.2s ease;
+  }
+
+  .social-card:hover {
+    background: var(--accent);
+    color: var(--background);
+    transform: translateY(-2px);
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .social-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .social-name {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .about-photo-wrapper {
+      float: none;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-photo {
+      width: 64px;
+    }
+
+    .interests-list {
+      grid-template-columns: 1fr;
+    }
+
+    .social-grid {
+      grid-template-columns: 1fr;
+    }
+
+  }
+</style>
+

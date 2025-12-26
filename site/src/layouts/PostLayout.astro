@@ -3,42 +3,34 @@ import Layout from './Layout.astro';
 
 const { frontmatter } = Astro.props;
 
-// blog post (has date); project post (has description)
-const isBlogPost = frontmatter.date;
-const isProjectPost = frontmatter.description;
-
-// format for blog posts
+// Format date if present
 const formattedDate = frontmatter.date ? frontmatter.date : '';
+
+// Determine if this is a notebook/blog post or a project post
+const currentPath = Astro.url.pathname;
+const isNotebookPost = currentPath.startsWith('/blog/');
+const backLink = isNotebookPost ? '/notebook' : '/projects';
+const backText = isNotebookPost ? 'back to notebook' : 'back to projects';
 ---
 
 <Layout title={`${frontmatter.title}`}>
   <div class="post-container">
     <article class="prose">
       <div class="mb-6">
-        {isBlogPost && (
-          <a href="/notebook" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            back to notebook
-          </a>
-        )}
-        <!-- {isProjectPost && (
-          <a href="/projects" class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            see more projects
-          </a>
-        )} -->
+        <a href={backLink} class="inline-flex items-center text-secondary hover:text-accent transition-colors font-['Opening Hours Sans'] text-sm">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          {backText}
+        </a>
       </div>
       <header class="mb-8 sm:mb-12">
         <h1 class="text-4xl font-semibold mb-4 font-['Opening Hours Sans']">{frontmatter.title}</h1>
         <div class="text-secondary">
-          {isBlogPost && (
-            <time datetime={formattedDate} class="font-['Opening Hours Sans']">{formattedDate}</time>
+          {formattedDate && (
+            <time datetime={formattedDate} class="font-['Opening Hours Sans'] block mb-2">{formattedDate}</time>
           )}
-          {isProjectPost && (
+          {frontmatter.description && (
             <div class="font-['Opening Hours Sans'] color-foreground">{frontmatter.description}</div>
           )}
         </div>

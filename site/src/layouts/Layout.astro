@@ -1,7 +1,6 @@
 ---
 import '../styles/theme.css';
 import { ViewTransitions } from 'astro:transitions';
-import ThemeSwitcher from '../components/ThemeSwitcher';
 
 interface Props {
   title: string;
@@ -18,9 +17,10 @@ const {
 const currentPath = Astro.url.pathname;
 
 const navItems = [
-  { name: 'home', path: '/', icon: '(>_>)' },
-  { name: 'notebook', path: '/notebook', icon: '(o_o)' },
-  { name: 'projects', path: '/projects', icon: '(*_*)' },
+  { name: 'home', path: '/', icon: 'home' },
+  { name: 'projects', path: '/projects', icon: 'bookmark' },
+  { name: 'about', path: '/about', icon: 'smiley' },
+  { name: 'notebook', path: '/notebook', icon: 'notebook' },
 ];
 
 const isActive = (path: string) => {
@@ -71,14 +71,37 @@ const isActive = (path: string) => {
     
     <!-- Prevent theme flash + persist theme across view transitions -->
     <script is:inline>
-      const theme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      
-      // Re-apply theme after view transitions
-      document.addEventListener('astro:after-swap', () => {
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
-      });
+      (function() {
+        function getEffectiveTheme(storedTheme) {
+          if (storedTheme === 'auto' || !storedTheme) {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'black-sheep' : 'light';
+          }
+          if (storedTheme === 'dark') return 'black-sheep';
+          return storedTheme;
+        }
+        
+        let storedTheme = localStorage.getItem('theme');
+        // Migrate old 'dark' value
+        if (storedTheme === 'dark') { 
+          localStorage.setItem('theme', 'black-sheep'); 
+          storedTheme = 'black-sheep'; 
+        }
+        
+        const effectiveTheme = getEffectiveTheme(storedTheme);
+        document.documentElement.setAttribute('data-theme', effectiveTheme);
+        
+        // Listen for system theme changes when in auto mode
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (localStorage.getItem('theme') === 'auto' || !localStorage.getItem('theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'black-sheep' : 'light');
+          }
+        });
+        
+        document.addEventListener('astro:after-swap', () => {
+          const stored = localStorage.getItem('theme');
+          document.documentElement.setAttribute('data-theme', getEffectiveTheme(stored));
+        });
+      })();
     </script>
     
     <!-- Register Service Worker -->
@@ -111,29 +134,64 @@ const isActive = (path: string) => {
           </a>
         ))}
       </div>
-      <div class="mobile-nav-bottom">
-        <ThemeSwitcher client:only="react" />
-      </div>
     </div>
 
-    <!-- Desktop Vertical Nav -->
-    <nav class="vertical-nav">
-      <div class="nav-items">
+    <!-- Desktop Horizontal Nav -->
+    <nav class="horizontal-nav nav-transitioning" id="horizontal-nav">
+      <div class="nav-pill">
         {navItems.map((item) => (
-          <a href={item.path} class={`nav-item ${isActive(item.path) ? 'nav-item-active' : ''}`} title={item.name}>
-            <span class="nav-icon">{item.icon}</span>
+          <a href={item.path} class={`nav-btn ${isActive(item.path) ? 'nav-btn-active' : ''}`} title={item.name}>
+            <span class="nav-icon-wrapper">
+              {item.icon === 'home' && (
+                <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              )}
+              {item.icon === 'notebook' && (
+                <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1.28 19.9467C1.28 19.2394 1.56095 18.5611 2.06104 18.061C2.56115 17.561 3.23943 17.28 3.94667 17.28H18.3467M1.28 19.9467C1.28 20.654 1.56095 21.3322 2.06104 21.8323C2.56115 22.3324 3.23943 22.6133 3.94667 22.6133H18.3467V1.27998H3.94667C3.23943 1.27998 2.56115 1.56093 2.06104 2.06102C1.56095 2.56113 1.28 3.23941 1.28 3.94665V19.9467Z"/>
+                </svg>
+              )}
+              {item.icon === 'smiley' && (
+                <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                  <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                  <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+              )}
+              {item.icon === 'bookmark' && (
+                <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+              )}
+            </span>
             <span class="nav-label">{item.name}</span>
           </a>
         ))}
-      </div>
-      <div class="nav-bottom">
-        <ThemeSwitcher client:only="react" />
       </div>
     </nav>
     
     <main>
       <slot />
     </main>
+
+    <footer class="footer">
+      <div class="content-container footer-content">
+        <p class="footer-text">
+          Made with ♡ by <a href="https://github.com/jaddenki/site" target="_blank">Jadden</a> and <a href="https://astro.build" target="_blank">Astro</a>
+        </p>
+        <div class="theme-toggle-footer">
+          <span class="theme-label">theme:</span>
+          <button id="theme-light" class="theme-option" data-theme="light">light</button>
+          <span class="theme-separator">/</span>
+          <button id="theme-dark" class="theme-option" data-theme="dark">dark</button>
+          <span class="theme-separator">/</span>
+          <button id="theme-auto" class="theme-option" data-theme="auto">auto</button>
+        </div>
+      </div>
+    </footer>
 
     <!-- Mobile Menu Toggle Script -->
     <script is:inline>
@@ -163,17 +221,112 @@ const isActive = (path: string) => {
         }
       }
       
+      // Theme toggle
+      function setupThemeToggle() {
+        function getEffectiveTheme(storedTheme) {
+          if (storedTheme === 'auto' || !storedTheme) {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'black-sheep' : 'light';
+          }
+          if (storedTheme === 'dark') return 'black-sheep';
+          return storedTheme;
+        }
+        
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', getEffectiveTheme(theme));
+          updateActiveButton(theme);
+        };
+        
+        const updateActiveButton = (activeTheme) => {
+          document.querySelectorAll('.theme-option').forEach(btn => {
+            const btnTheme = btn.getAttribute('data-theme');
+            if (btnTheme === activeTheme || (btnTheme === 'dark' && activeTheme === 'black-sheep')) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        };
+        
+        // Footer theme buttons
+        document.getElementById('theme-light')?.addEventListener('click', () => setTheme('light'));
+        document.getElementById('theme-dark')?.addEventListener('click', () => setTheme('black-sheep'));
+        document.getElementById('theme-auto')?.addEventListener('click', () => setTheme('auto'));
+        
+        // Set initial active state
+        const stored = localStorage.getItem('theme') || 'auto';
+        updateActiveButton(stored === 'black-sheep' ? 'dark' : stored);
+      }
+      
+      // Smooth navbar label transitions
+      function setupNavTransitions() {
+        const nav = document.querySelector('.horizontal-nav');
+        if (!nav) return;
+        
+        const navLinks = nav.querySelectorAll('.nav-btn');
+        
+        navLinks.forEach(link => {
+          link.addEventListener('click', async (e) => {
+            // Don't intercept if already on this page
+            if (link.classList.contains('nav-btn-active')) {
+              e.preventDefault();
+              return;
+            }
+            
+            // Prevent default navigation
+            e.preventDefault();
+            
+            const href = link.getAttribute('href');
+            
+            // Add transitioning class to close all labels
+            nav.classList.add('nav-transitioning');
+            
+            // Wait for close animation
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Create a temporary link and click it to trigger Astro's view transitions
+            const tempLink = document.createElement('a');
+            tempLink.href = href;
+            tempLink.style.display = 'none';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+          });
+        });
+      }
+      
+      // Animate label open on page load
+      function animateLabelOpen() {
+        const nav = document.querySelector('.horizontal-nav');
+        if (!nav) return;
+        
+        // Wait for browser to finish painting, then animate open
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            nav.classList.remove('nav-transitioning');
+          });
+        });
+      }
+      
       // Run on initial load
       setupMobileMenu();
+      setupThemeToggle();
+      setupNavTransitions();
+      animateLabelOpen();
       
       // Re-run after view transitions
-      document.addEventListener('astro:after-swap', setupMobileMenu);
+      document.addEventListener('astro:after-swap', () => {
+        setupMobileMenu();
+        setupThemeToggle();
+        setupNavTransitions();
+        animateLabelOpen();
+      });
     </script>
   </body>
 </html>
 
 <style is:global>
-  /* View Transition Animations */
+  /* View Transition Animations - only apply when fully supported */
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -194,32 +347,59 @@ const isActive = (path: string) => {
     to { transform: translateY(-20px); opacity: 0; }
   }
 
-  ::view-transition-old(root) {
-    animation: fade-out 0.2s ease-out forwards;
-  }
+  /* Only apply view transitions on browsers with full support (Chrome/Edge) */
+  @supports (view-transition-name: none) {
+    ::view-transition-old(root) {
+      animation: fade-out 0.2s ease-out forwards;
+    }
 
-  ::view-transition-new(root) {
-    animation: fade-in 0.3s ease-out forwards;
-  }
+    ::view-transition-new(root) {
+      animation: fade-in 0.3s ease-out forwards;
+    }
 
-  /* Smooth main content transitions */
-  main {
-    view-transition-name: main-content;
-  }
+    /* Smooth main content transitions */
+    main {
+      view-transition-name: main-content;
+    }
 
-  ::view-transition-old(main-content) {
-    animation: slide-down 0.2s ease-out forwards;
-  }
+    ::view-transition-old(main-content) {
+      animation: slide-down 0.2s ease-out forwards;
+    }
 
-  ::view-transition-new(main-content) {
-    animation: slide-up 0.3s ease-out forwards;
-  }
+    ::view-transition-new(main-content) {
+      animation: slide-up 0.3s ease-out forwards;
+    }
 
-  /* Exclude nav from view transitions entirely */
-  .vertical-nav,
-  .hamburger-btn,
-  .mobile-menu {
-    view-transition-name: none;
+    /* Give nav its own view transition that doesn't animate */
+    .horizontal-nav {
+      view-transition-name: navbar;
+    }
+
+    .hamburger-btn {
+      view-transition-name: hamburger;
+    }
+
+    .mobile-menu {
+      view-transition-name: mobile-menu;
+    }
+
+    /* Prevent navbar elements from animating during page transitions */
+    ::view-transition-old(navbar),
+    ::view-transition-old(hamburger),
+    ::view-transition-old(mobile-menu),
+    ::view-transition-new(navbar),
+    ::view-transition-new(hamburger),
+    ::view-transition-new(mobile-menu) {
+      animation: none !important;
+    }
+
+    /* Hide old state instantly */
+    ::view-transition-old(navbar),
+    ::view-transition-old(hamburger),
+    ::view-transition-old(mobile-menu),
+    ::view-transition-old(theme-toggle) {
+      opacity: 0 !important;
+    }
   }
 
   html {
@@ -250,72 +430,113 @@ const isActive = (path: string) => {
     color: var(--background);
   }
 
-  /* Vertical Navigation */
-  .vertical-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: auto;
+  .horizontal-nav {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem 0.75rem;
+    justify-content: center;
+    padding: 1.5rem 1rem;
     z-index: 1000;
   }
 
-  .nav-items {
+  /* Outer pill container */
+  .horizontal-nav .nav-pill {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .nav-item {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-    color: var(--secondary);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    padding: 0.5rem;
-    border-radius: 8px;
+    gap: 6px;                            /* Space between buttons */
+    padding: 8px;                        /* Inner padding */
+    background: var(--background);       /* Background color */
+    border: 1px solid var(--muted);      /* Border */
+    border-radius: 32px;                 /* Pill roundness */
   }
 
-  .nav-item:hover {
-    color: var(--accent);
-  }
-
-  .nav-item-active {
-    color: var(--accent);
-  }
-
-  .nav-item-active .nav-icon {
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-  }
-
-  .nav-icon {
-    font-size: 0.875rem;
-    padding: 0.5rem;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-    border: 1px solid var(--muted);
-  }
-
-  .nav-item:hover .nav-icon {
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-  }
-
-  .nav-label {
-    font-size: 0.625rem;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .nav-bottom {
+  /* Each nav button */
+  .horizontal-nav .nav-btn {
     display: flex;
+    align-items: center;
+    justify-content: center;             /* Center icon horizontally */
+    gap: 0;                              /* No gap when label hidden */
+    height: 48px;                        /* Button height */
+    min-width: 48px;                     /* Min button width */
+    padding: 0 12px;                     /* Left/right padding */
+    background: transparent;             /* Default: no background */
+    border: none;
+    border-radius: 16px;                 /* Button roundness */
+    color: var(--secondary);             /* Icon/text color */
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  /* Icon wrapper - ensures icon stays centered */
+  .horizontal-nav .nav-icon-wrapper {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Hover state */
+  .horizontal-nav .nav-btn:hover {
+    color: var(--foreground);
+    background: var(--muted);
+  }
+
+  /* Active state (current page) */
+  .horizontal-nav .nav-btn-active {
+    background: var(--muted);
+    color: var(--foreground);
+  }
+
+  /* Dark theme: subtle background on hover/active */
+  [data-theme="black-sheep"] .horizontal-nav .nav-btn:hover,
+  [data-theme="black-sheep"] .horizontal-nav .nav-btn-active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Icon size */
+  .horizontal-nav .nav-svg {
+    width: 24px;                         /* Icon width */
+    height: 24px;                        /* Icon height */
+    flex-shrink: 0;
+  }
+
+  /* Label text - hidden by default */
+  .horizontal-nav .nav-label {
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;                        /* Collapsed */
+    margin-left: 0;
+    line-height: 24px;                   /* Match icon height for vertical centering */
+    transition: max-width 0.4s ease, margin-left 0.4s ease;
+  }
+
+  /* Label shown when active */
+  .horizontal-nav .nav-btn-active .nav-label {
+    max-width: 100px;                    /* Expanded */
+    margin-left: 0.5rem;                 /* Gap between icon and label */
+  }
+
+  /* Add padding when active to accommodate label */
+  .horizontal-nav .nav-btn-active {
+    padding: 0 16px;
+  }
+
+  /* Force labels closed during page transitions */
+  .horizontal-nav.nav-transitioning .nav-label {
+    max-width: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* First button: extra round on left */
+  .horizontal-nav .nav-btn:first-child {
+    border-radius: 24px 20px 20px 24px;  /* left-top, right-top, right-bottom, left-bottom */
+  }
+
+  /* Last button: extra round on right */
+  .horizontal-nav .nav-btn:last-child {
+    border-radius: 20px 24px 24px 20px;
   }
 
   /* Hamburger Button - Mobile Only */
@@ -411,15 +632,10 @@ const isActive = (path: string) => {
     font-size: 1rem;
   }
 
-  .mobile-nav-bottom {
-    margin-top: auto;
-    padding-top: 2rem;
-    border-top: 1px solid var(--muted);
-  }
-
+  /* Responsive navigation */
   @media (max-width: 768px) {
-    .vertical-nav {
-      display: none;
+    nav.horizontal-nav {
+      display: none !important;
     }
 
     .hamburger-btn {
@@ -436,5 +652,80 @@ const isActive = (path: string) => {
     .mobile-menu {
       display: none !important;
     }
+  }
+
+  /* Footer Styles */
+  .footer {
+    padding: 3rem 0;
+    margin-top: 4rem;
+  }
+
+  .footer .content-container {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    border-top: 1px solid var(--muted);
+    padding-top: 2rem;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.938rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .footer-text a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer-text a:hover {
+    text-decoration: underline;
+  }
+
+  /* Theme Toggle in Footer */
+  .theme-toggle-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--secondary);
+  }
+
+  .theme-label {
+    margin-right: 0.25rem;
+  }
+
+  .theme-separator {
+    color: var(--muted);
+  }
+
+  .theme-option {
+    background: none;
+    border: none;
+    padding: 0.125rem 0.25rem;
+    color: var(--secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: color 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .theme-option:hover {
+    color: var(--foreground);
+  }
+
+  .theme-option.active {
+    color: var(--accent);
+    font-weight: 500;
   }
 </style>
