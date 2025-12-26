@@ -18,65 +18,65 @@ const isVideo = (url: string) => {
     <!-- Header -->
     <section class="mb-16 sm:mb-20">
       <div class="mb-8 sm:mb-12">
-        <h1 class="text-4xl font-semibold font-['Opening Hours Sans']">Projects</h1>
+        <h1 class="text-4xl font-normal font-['Opening Hours Sans']">Projects</h1>
         <p class="text-secondary text-lg font-['Opening Hours Sans'] mt-4">
           Here are some things I've worked on, ranging from case studies to simulations. 
         </p>
       </div>
     </section>
   </div>
-</Layout>
 
-<!-- Projects Grid - Full Window Width (Outside Layout component) -->
-<section class="mb-32 w-full">
-  <div class="projects-grid pl-24 pr-8 sm:pl-28 sm:pr-12 lg:pl-32 lg:pr-16 xl:pl-36 xl:pr-20">
-    {allProjects.map((project, index) => (
-      <a href={project.link} class="project-card" data-title={project.title}>
-        {project.image && (
-          <div class="project-image">
-            {isVideo(project.image) ? (
-              <video
-                src={project.image}
-                autoplay
-                loop
-                muted
-                playsinline
-                class="w-full h-full object-cover"
-                preload="metadata"
-              />
-            ) : (
-              <img
-                src={project.image}
-                alt={project.title}
-                class="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
+  <!-- Projects Grid - Full Window Width -->
+  <section class="mb-32 w-full">
+    <div class="projects-grid pl-24 pr-8 sm:pl-28 sm:pr-12 lg:pl-32 lg:pr-16 xl:pl-36 xl:pr-20">
+      {allProjects.map((project, index) => (
+        <a href={project.link} class="project-card" data-title={project.title}>
+          {project.image && (
+            <div class="project-image">
+              {isVideo(project.image) ? (
+                <video
+                  src={project.image}
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="w-full h-full object-cover"
+                  preload="metadata"
+                />
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+          )}
+          
+          <h3 class="project-title font-['Opening Hours Sans']">
+            {project.title}
+          </h3>
+          
+          <p class="project-description font-['Opening Hours Sans']">
+            {project.description}
+          </p>
+          
+          <div class="project-tags">
+            {project.tags.slice(0, 3).map(tag => (
+              <span class="project-tag font-['Opening Hours Sans']">
+                {tag}
+              </span>
+            ))}
           </div>
-        )}
-        
-        <h3 class="project-title font-['Opening Hours Sans']">
-          {project.title}
-        </h3>
-        
-        <p class="project-description font-['Opening Hours Sans']">
-          {project.description}
-        </p>
-        
-        <div class="project-tags">
-          {project.tags.slice(0, 3).map(tag => (
-            <span class="project-tag font-['Opening Hours Sans']">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </a>
-    ))}
-  </div>
-  
-  <Tooltip client:only="react" />
-</section>
+        </a>
+      ))}
+    </div>
+    
+    <Tooltip client:only="react" />
+  </section>
+</Layout>
 
 <style>
   /* Projects Grid - 4 Column Grid Layout */
@@ -116,7 +116,7 @@ const isVideo = (url: string) => {
   
   .project-title {
     font-size: 1.125rem;
-    font-weight: 500;
+    font-weight: 400;
     margin: 0 0 0.5rem 0;
     color: var(--foreground);
   }

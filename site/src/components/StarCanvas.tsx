@@ -14,7 +14,7 @@ export default function StarCanvas() {
     const config = {
       numLines: 8,
       lineLength: 100,
-      starColor: "#0000FF",
+      starColor: "#c1c1c1",
       pointSize: 3,
       gridSize: 5,
       lineWidth: 3,
