@@ -44,30 +44,26 @@ const demoReel = {
         />
         <div class="hero-text">
           <h1 class="hero-title">Jadden Picardal</h1>
-          <p class="hero-subtitle">jaddenpicardal [at] gmail [dot] com</p>
+          <p class="hero-subtitle">jadden [at] jam [dot] ms</p>
         </div>
       </div>
     </section>
 
     <!-- About Section -->
     <section class="about-section">
-      <p class="body-large">
+      <!-- <p class="body-large">
         I care about how things look & work.
+      </p> -->
+
+      <p class="body-text mt-4">
+        SWE & Designer, creating experimental work for tech companies @ <a href="https://lowercase.club" target="_blank" rel="noopener noreferrer">lowercase</a> and 
+       mixed reality simulations @ the <a href="https://envision.center/" target="_blank" rel="noopener noreferrer">Envision Center</a>.
       </p>
 
-      <div class="body-columns">
-        <p class="body-text">
-          I'm a computer engineering student at 
-          <a href="https://www.purdue.edu" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Purdue</a>, specializing in Computer Systems and Software Engineering. I work with interactive media, motion design, 
-          <a href="https://jam.ms" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">game development</a>, and creative coding, building tools and experiences that feel both playful and purposeful.
-        </p>
+      <!-- <p class="body-text">
+        I also make <a href="https://jam.ms" target="_blank" rel="noopener noreferrer">games</a> and study <a href="https://www.purdue.edu" target="_blank" rel="noopener noreferrer">computer engineering</a>.
 
-        <p class="body-text">
-I'm currently a Research Software Engineer at the 
-<a href="https://envision.center/" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Envision Center</a>, working on Mixed Reality development. I also serve as Communications Lead at <a href="https://www.purduehackers.com" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Purdue Hackers</a>, helping run creative tech events and celebrate scrappy experimentation.
-        </p>
-      </div>
-
+      </p> -->
 
       <!-- Contact & Links -->
       <div class="links-section">
@@ -80,12 +76,12 @@ I'm currently a Research Software Engineer at the
             LinkedIn
           </a>
           <span class="link-separator">|</span>
-          <a href="https://curius.app/jadden-picardal" target="_blank" rel="noopener noreferrer" class="social-link">
-            Curius
+          <a href="https://x.com/igarakii" target="_blank" rel="noopener noreferrer" class="social-link">
+            X
           </a>
           <span class="link-separator">|</span>
-          <a href="https://garden.jadden.xyz" target="_blank" rel="noopener noreferrer" class="social-link">
-            Garden
+          <a href="https://www.are.na/jadden-picardal" target="_blank" rel="noopener noreferrer" class="social-link">
+            Are.na
           </a>
           <span class="link-separator">|</span>
           <!-- Purdue Hackers Webring -->
@@ -130,8 +126,31 @@ I'm currently a Research Software Engineer at the
     </section> -->
   </div>
 
+  <!-- Are.na Visual Feed Section - Full Width -->
+  <section class="arena-section">
+    <div class="content-container">
+    <div class="section-header">
+      <h2 class="section-title">Visual Feed</h2>
+    </div>
+    <p class="section-intro mb-12">
+    Some of my personal and client projects. Powered by 
+      <a href="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Are.na</a>.
+    </p>
+  </div>
+  
+  <div class="arena-embed-container">
+    <iframe 
+      id="arena-embed"
+      class="arena-embed"
+      src="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i/embed" 
+      title="Are.na channel"
+      loading="lazy"
+    ></iframe>
+  </div>
+  </section>
+
   <!-- Projects Section - Wider than content -->
-  <section class="projects-section">
+  <!-- <section class="projects-section">
     <div class="projects-container">
       <div class="section-header">
         <h2 class="section-title">Selected Projects</h2>
@@ -167,30 +186,7 @@ I'm currently a Research Software Engineer at the
         ))}
       </div>
     </div>
-  </section>
-
-  <!-- Are.na Visual Feed Section - Full Width -->
-  <section class="arena-section">
-    <div class="content-container">
-    <div class="section-header">
-      <h2 class="section-title">Visual Feed</h2>
-    </div>
-    <p class="section-intro mb-12">
-      I also love motion design. Here are some of my personal and client projects. Powered by 
-      <a href="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i" target="_blank" rel="noopener noreferrer" class="text-foreground font-semibold hover:underline">Are.na</a>.
-    </p>
-  </div>
-  
-  <div class="arena-embed-container">
-    <iframe 
-      id="arena-embed"
-      class="arena-embed"
-      src="https://www.are.na/jadden-picardal/jadden-picardal-4h2pfujye8i/embed" 
-      title="Are.na channel"
-      loading="lazy"
-    ></iframe>
-  </div>
-  </section>
+  </section> -->
 
 </Layout>
 
@@ -236,7 +232,7 @@ I'm currently a Research Software Engineer at the
   /* Hero Section */
   .hero-section {
     padding: 0 0 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
 
   .hero-header {
@@ -283,6 +279,17 @@ I'm currently a Research Software Engineer at the
     line-height: 1.7;
     color: var(--secondary);
     margin: 0 0 1.5rem 0;
+  }
+
+  .body-text a {
+    color: var(--foreground);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .body-text a:hover {
+    color: var(--accent);
   }
 
   .body-columns {
