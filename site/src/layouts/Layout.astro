@@ -37,8 +37,8 @@ const isActive = (path: string) => {
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
         />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="alternate icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0000ff" />
 
@@ -52,11 +52,10 @@ const isActive = (path: string) => {
         />
 
         <!-- Preconnect to external domains for faster resource loading -->
-        <link rel="preconnect" href="https://i.imgur.com" />
-        <link rel="preconnect" href="https://github.com" />
-        <link rel="preconnect" href="https://www.youtube.com" />
-        <link rel="dns-prefetch" href="https://i.imgur.com" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://i.imgur.com" crossorigin />
+        <link rel="preconnect" href="https://github.com" crossorigin />
+        <link rel="preconnect" href="https://www.youtube.com" crossorigin />
+        <link rel="dns-prefetch" href="https://www.are.na" />
 
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
@@ -79,14 +78,14 @@ const isActive = (path: string) => {
         <!-- View Transitions for smooth page navigations -->
         <ViewTransitions />
 
-        <!-- Prevent theme flash + persist theme across view transitions -->
+        <!-- Combined inline scripts: Theme initialization + Service Worker -->
         <script is:inline>
             (function () {
+                // Theme initialization
                 function getEffectiveTheme(storedTheme) {
                     if (storedTheme === "dark" || storedTheme === "black-sheep") {
                         return "black-sheep";
                     }
-                    // If no stored theme, use user's system preference
                     if (!storedTheme) {
                         return window.matchMedia("(prefers-color-scheme: dark)")
                             .matches
@@ -97,46 +96,34 @@ const isActive = (path: string) => {
                 }
 
                 let storedTheme = localStorage.getItem("theme");
-                // Migrate old values
                 if (storedTheme === "dark") {
                     localStorage.setItem("theme", "black-sheep");
                     storedTheme = "black-sheep";
                 }
                 if (storedTheme === "auto") {
-                    // Migrate auto to user's preference
                     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
                     storedTheme = prefersDark ? "black-sheep" : "light";
                     localStorage.setItem("theme", storedTheme);
                 }
 
                 const effectiveTheme = getEffectiveTheme(storedTheme);
-                document.documentElement.setAttribute(
-                    "data-theme",
-                    effectiveTheme,
-                );
+                document.documentElement.setAttribute("data-theme", effectiveTheme);
 
                 document.addEventListener("astro:after-swap", () => {
                     const stored = localStorage.getItem("theme");
-                    document.documentElement.setAttribute(
-                        "data-theme",
-                        getEffectiveTheme(stored),
-                    );
+                    document.documentElement.setAttribute("data-theme", getEffectiveTheme(stored));
                 });
-            })();
-        </script>
 
-        <!-- Register Service Worker -->
-        <script is:inline>
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", () => {
-                    navigator.serviceWorker
-                        .register("/sw.js")
-                        .then((reg) => console.log("SW registered"))
-                        .catch((err) =>
-                            console.log("SW registration failed:", err),
-                        );
-                });
-            }
+                // Service Worker registration
+                if ("serviceWorker" in navigator) {
+                    window.addEventListener("load", () => {
+                        navigator.serviceWorker
+                            .register("/sw.js")
+                            .then((reg) => console.log("SW registered"))
+                            .catch((err) => console.log("SW registration failed:", err));
+                    });
+                }
+            })();
         </script>
     </head>
     <body>

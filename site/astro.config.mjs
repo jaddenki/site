@@ -27,8 +27,8 @@ export default defineConfig({
   
   vite: {
     build: {
-      // Enable CSS code splitting
-      cssCodeSplit: true,
+      // Disable CSS code splitting to combine CSS files into one
+      cssCodeSplit: false,
       // Minify output
       minify: 'esbuild',
       // Increase chunk size warning limit
