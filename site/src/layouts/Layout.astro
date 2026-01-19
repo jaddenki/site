@@ -10,7 +10,7 @@ interface Props {
 
 const {
     title,
-    description = "Interactive experiences that move with purpose. Motion artist and computer engineering student at Purdue.",
+    description = "jadden picardal: swe and designer",
     image = "https://github.com/jaddenki.png",
 } = Astro.props;
 
@@ -78,12 +78,19 @@ const isActive = (path: string) => {
         <!-- View Transitions for smooth page navigations -->
         <ViewTransitions />
 
+        <script
+            defer
+            src="https://umami.purduehackers.com/script.js"
+            data-website-id="4a435137-c59a-4315-8024-4259a3cf4731"></script>
         <!-- Combined inline scripts: Theme initialization + Service Worker -->
         <script is:inline>
             (function () {
                 // Theme initialization
                 function getEffectiveTheme(storedTheme) {
-                    if (storedTheme === "dark" || storedTheme === "black-sheep") {
+                    if (
+                        storedTheme === "dark" ||
+                        storedTheme === "black-sheep"
+                    ) {
                         return "black-sheep";
                     }
                     if (!storedTheme) {
@@ -101,17 +108,25 @@ const isActive = (path: string) => {
                     storedTheme = "black-sheep";
                 }
                 if (storedTheme === "auto") {
-                    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    const prefersDark = window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches;
                     storedTheme = prefersDark ? "black-sheep" : "light";
                     localStorage.setItem("theme", storedTheme);
                 }
 
                 const effectiveTheme = getEffectiveTheme(storedTheme);
-                document.documentElement.setAttribute("data-theme", effectiveTheme);
+                document.documentElement.setAttribute(
+                    "data-theme",
+                    effectiveTheme,
+                );
 
                 document.addEventListener("astro:after-swap", () => {
                     const stored = localStorage.getItem("theme");
-                    document.documentElement.setAttribute("data-theme", getEffectiveTheme(stored));
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        getEffectiveTheme(stored),
+                    );
                 });
 
                 // Service Worker registration
@@ -120,7 +135,9 @@ const isActive = (path: string) => {
                         navigator.serviceWorker
                             .register("/sw.js")
                             .then((reg) => console.log("SW registered"))
-                            .catch((err) => console.log("SW registration failed:", err));
+                            .catch((err) =>
+                                console.log("SW registration failed:", err),
+                            );
                     });
                 }
             })();
@@ -299,7 +316,10 @@ const isActive = (path: string) => {
             // Theme toggle
             function setupThemeToggle() {
                 function getEffectiveTheme(storedTheme) {
-                    if (storedTheme === "dark" || storedTheme === "black-sheep") {
+                    if (
+                        storedTheme === "dark" ||
+                        storedTheme === "black-sheep"
+                    ) {
                         return "black-sheep";
                     }
                     // If no stored theme, use user's system preference
@@ -314,7 +334,8 @@ const isActive = (path: string) => {
 
                 const setTheme = (theme) => {
                     // Store as "black-sheep" internally but use "dark" for the button
-                    const themeToStore = theme === "dark" ? "black-sheep" : theme;
+                    const themeToStore =
+                        theme === "dark" ? "black-sheep" : theme;
                     localStorage.setItem("theme", themeToStore);
                     document.documentElement.setAttribute(
                         "data-theme",
@@ -329,7 +350,10 @@ const isActive = (path: string) => {
                         .forEach((btn) => {
                             const btnTheme = btn.getAttribute("data-theme");
                             // Map "black-sheep" to "dark" for button matching
-                            const effectiveTheme = activeTheme === "black-sheep" ? "dark" : activeTheme;
+                            const effectiveTheme =
+                                activeTheme === "black-sheep"
+                                    ? "dark"
+                                    : activeTheme;
                             if (btnTheme === effectiveTheme) {
                                 btn.classList.add("active");
                             } else {
@@ -348,7 +372,11 @@ const isActive = (path: string) => {
 
                 // Set initial active state
                 const stored = localStorage.getItem("theme");
-                const effectiveTheme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "black-sheep" : "light");
+                const effectiveTheme =
+                    stored ||
+                    (window.matchMedia("(prefers-color-scheme: dark)").matches
+                        ? "black-sheep"
+                        : "light");
                 updateActiveButton(effectiveTheme);
             }
 
